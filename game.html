@@ -1,432 +1,154 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GAMEZONE - Juego</title>
 
 <style>
-
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html,
-body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#000;
-  font-family:Arial,Helvetica,sans-serif;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-  display:flex;
-  flex-direction:column;
-}
-
-/* BARRA */
-
-.topbar{
-
-  width:100%;
-  height:64px;
-  min-height:64px;
-
-  background:#151b25;
-
-  display:flex;
-  align-items:center;
-
-  gap:10px;
-
-  padding:9px 12px;
-
-  border-bottom:2px solid #2c3545;
-
-  color:white;
+    min-height:100vh;
+    background:#0b0f16;
+    color:white;
+    font-family:Arial,Helvetica,sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
 }
 
 .logo{
-
-  font-size:25px;
-  font-weight:900;
-  letter-spacing:2px;
-
-  margin-right:auto;
+    font-size:42px;
+    font-weight:900;
+    letter-spacing:3px;
+    margin-bottom:15px;
 }
 
-.title{
-
-  font-size:19px;
-  color:#d9e0eb;
-
-  margin-right:8px;
+h1{
+    font-size:32px;
+    margin-bottom:12px;
 }
 
-/* BOTONES */
-
-.button{
-
-  border:0;
-
-  background:#303949;
-  color:white;
-
-  padding:10px 14px;
-
-  border-radius:8px;
-
-  font-size:14px;
-  font-weight:bold;
-
-  cursor:pointer;
-}
-
-.button:hover{
-
-  background:#465166;
-
-}
-
-/* JUEGO */
-
-.game-area{
-
-  position:relative;
-
-  width:100%;
-  height:calc(100vh - 64px);
-
-  background:#000;
-}
-
-iframe{
-
-  width:100%;
-  height:100%;
-
-  border:0;
-
-  display:block;
-
-  background:#000;
-}
-
-/* MENSAJE */
-
-.message{
-
-  position:absolute;
-
-  inset:0;
-
-  display:none;
-
-  align-items:center;
-  justify-content:center;
-
-  flex-direction:column;
-
-  text-align:center;
-
-  padding:30px;
-
-  background:#0b0f16;
-
-  color:white;
-
-  z-index:5;
-}
-
-.message h2{
-
-  font-size:32px;
-
-  margin-bottom:15px;
-}
-
-.message p{
-
-  max-width:650px;
-
-  color:#aeb8c8;
-
-  line-height:1.5;
-
-  margin-bottom:20px;
-}
-
-.home-button{
-
-  border:0;
-
-  background:white;
-
-  color:#111;
-
-  padding:13px 22px;
-
-  border-radius:9px;
-
-  font-size:17px;
-
-  font-weight:bold;
-
-  cursor:pointer;
-}
-
-/* MÓVIL */
-
-@media(max-width:700px){
-
-  .logo{
-
+p{
+    color:#aeb8c8;
     font-size:18px;
-
-  }
-
-  .title{
-
-    display:none;
-
-  }
-
-  .button{
-
-    padding:8px 9px;
-
-    font-size:11px;
-
-  }
-
+    margin-bottom:30px;
 }
 
-</style>
+button{
+    border:0;
+    border-radius:10px;
+    padding:14px 25px;
+    margin:6px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
 
+.jugar{
+    background:white;
+    color:#111;
+}
+
+.volver{
+    background:#303949;
+    color:white;
+}
+
+button:hover{
+    transform:scale(1.04);
+}
+
+@media(max-width:600px){
+    .logo{
+        font-size:30px;
+    }
+
+    h1{
+        font-size:25px;
+    }
+}
+</style>
 </head>
 
 <body>
 
+<div class="logo">GAMEZONE</div>
 
-<!-- BARRA SUPERIOR -->
+<h1 id="titulo">Cargando juego...</h1>
 
-<header class="topbar">
+<p>
+Pulsa JUGAR para abrir el juego.
+</p>
 
-  <div class="logo">
-    GAMEZONE
-  </div>
-
-  <div
-    class="title"
-    id="gameTitle">
-    Cargando...
-  </div>
-
-  <button
-    class="button"
-    onclick="volver()">
-    ← VOLVER
-  </button>
-
-  <button
-    class="button"
-    onclick="reiniciar()">
-    ↻ REINICIAR
-  </button>
-
-  <button
-    class="button"
-    onclick="pantallaCompleta()">
-    ⛶ PANTALLA COMPLETA
-  </button>
-
-</header>
-
-
-<!-- ÁREA DEL JUEGO -->
-
-<main class="game-area" id="gameArea">
-
-  <iframe
-    id="gameFrame"
-    allow="fullscreen; autoplay; gamepad"
-    allowfullscreen>
-  </iframe>
-
-
-  <div
-    class="message"
-    id="message">
-
-    <h2 id="messageTitle">
-      Juego no encontrado
-    </h2>
-
-    <p id="messageText">
-      Regresa al menú de GAMEZONE y selecciona un juego.
-    </p>
-
-    <button
-      class="home-button"
-      onclick="volver()">
-      VOLVER A GAMEZONE
+<div>
+    <button class="jugar" onclick="abrirJuego()">
+        ▶ JUGAR
     </button>
 
-  </div>
-
-</main>
-
+    <button class="volver" onclick="volver()">
+        ← VOLVER
+    </button>
+</div>
 
 <script>
 
-/* JUEGOS */
-
 const juegos = {
 
-  traffic: {
+    traffic:{
+        nombre:"Traffic Racer",
+        url:"https://www.crazygames.com/es/game/racing-limits"
+    },
 
-    nombre:"Traffic Racer",
+    highway:{
+        nombre:"Highway Drive",
+        url:"https://www.crazygames.com/es/game/real-car-driving"
+    },
 
-    url:
-    "https://www.crazygames.com/es/game/racing-limits"
-
-  },
-
-  highway: {
-
-    nombre:"Highway Drive",
-
-    url:
-    "https://www.crazygames.com/es/game/real-car-driving"
-
-  },
-
-  drift: {
-
-    nombre:"Drift Challenge",
-
-    url:
-    "https://www.crazygames.com/es/game/xtreme-city-drifting"
-
-  }
+    drift:{
+        nombre:"Drift Challenge",
+        url:"https://www.crazygames.com/es/game/xtreme-city-drifting"
+    }
 
 };
 
+const parametros = new URLSearchParams(window.location.search);
 
-/* OBTENER JUEGO */
+const juego = parametros.get("game");
 
-const parametros =
-  new URLSearchParams(
-    window.location.search
-  );
+const datos = juegos[juego];
 
-const juegoSeleccionado =
-  parametros.get("game");
+if(datos){
 
-
-const frame =
-  document.getElementById(
-    "gameFrame"
-  );
-
-const titulo =
-  document.getElementById(
-    "gameTitle"
-  );
-
-const mensaje =
-  document.getElementById(
-    "message"
-  );
-
-
-/* CARGAR */
-
-if(
-  juegoSeleccionado &&
-  juegos[juegoSeleccionado]
-){
-
-  titulo.textContent =
-    juegos[juegoSeleccionado].nombre;
-
-  frame.src =
-    juegos[juegoSeleccionado].url;
+    document.getElementById("titulo").textContent = datos.nombre;
 
 }else{
 
-  frame.style.display="none";
-
-  mensaje.style.display="flex";
-
-  titulo.textContent="GAMEZONE";
+    document.getElementById("titulo").textContent =
+        "Juego no encontrado";
 
 }
 
+function abrirJuego(){
 
-/* VOLVER */
+    if(datos){
+
+        window.location.href = datos.url;
+
+    }
+
+}
 
 function volver(){
 
-  window.location.href =
-    "index.html";
-
-}
-
-
-/* REINICIAR */
-
-function reiniciar(){
-
-  if(
-    juegoSeleccionado &&
-    juegos[juegoSeleccionado]
-  ){
-
-    frame.src =
-      juegos[juegoSeleccionado].url;
-
-  }
-
-}
-
-
-/* PANTALLA COMPLETA */
-
-function pantallaCompleta(){
-
-  const area =
-    document.getElementById(
-      "gameArea"
-    );
-
-  if(
-    document.fullscreenElement
-  ){
-
-    document.exitFullscreen();
-
-  }else if(
-    area.requestFullscreen
-  ){
-
-    area.requestFullscreen();
-
-  }else if(
-    area.webkitRequestFullscreen
-  ){
-
-    area.webkitRequestFullscreen();
-
-  }
+    window.location.href = "index.html";
 
 }
 
