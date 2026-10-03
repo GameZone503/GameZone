@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,271 +8,119 @@
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#0b0f16;
-  color:white;
-  min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#0b0f16;
+    color:white;
+    min-height:100vh;
 }
 
 header{
-  background:#151b25;
-  padding:30px 20px;
-  text-align:center;
-  border-bottom:3px solid #2b3444;
+    background:#111827;
+    padding:25px 20px;
+    text-align:center;
+    border-bottom:2px solid #263246;
 }
 
-header h1{
-  font-size:55px;
-  letter-spacing:5px;
-  font-weight:900;
+.logo{
+    font-size:48px;
+    font-weight:900;
+    letter-spacing:4px;
 }
 
-header p{
-  margin-top:8px;
-  color:#aeb8c8;
-  font-size:19px;
+.subtitulo{
+    color:#9ca8b8;
+    margin-top:8px;
+    font-size:17px;
 }
 
-.container{
-  width:94%;
-  max-width:1450px;
-  margin:35px auto 60px;
+.contenedor{
+    width:min(1200px,94%);
+    margin:30px auto 50px;
 }
 
-.section{
-  margin-bottom:45px;
+.seccion{
+    margin-bottom:40px;
 }
 
-.section h2{
-  font-size:32px;
-  margin-bottom:22px;
+.seccion h2{
+    font-size:28px;
+    margin-bottom:18px;
 }
 
-.games{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:25px;
+.juegos{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
 }
 
-.card{
-  background:#171e29;
-  border:2px solid #2c3647;
-  border-radius:18px;
-  overflow:hidden;
-  transition:.2s;
+.tarjeta{
+    background:#151d2b;
+    border:1px solid #283449;
+    border-radius:16px;
+    overflow:hidden;
+    transition:.2s;
 }
 
-.card:hover{
-  transform:translateY(-6px);
-  border-color:#fff;
+.tarjeta:hover{
+    transform:translateY(-5px);
+    border-color:#667085;
 }
 
-.art{
-  height:230px;
-  position:relative;
-  overflow:hidden;
+.imagen{
+    height:150px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#202b3d,#101722);
+    font-size:60px;
 }
-
-/* TRAFFIC RACER */
-
-.traffic{
-  background:
-    linear-gradient(
-      90deg,
-      #303640 0 9%,
-      #22272f 9% 91%,
-      #303640 91%
-    );
-}
-
-.traffic:before{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:0;
-  transform:translateX(-50%);
-  width:8px;
-  height:100%;
-  background:repeating-linear-gradient(
-    to bottom,
-    white 0 35px,
-    transparent 35px 70px
-  );
-}
-
-.car-red{
-  position:absolute;
-  width:72px;
-  height:120px;
-  background:#e53935;
-  border-radius:16px;
-  left:50%;
-  bottom:18px;
-  transform:translateX(-50%);
-  border:5px solid #9d1919;
-}
-
-.car-red:before,
-.car-blue:before{
-  content:"";
-  position:absolute;
-  width:45px;
-  height:38px;
-  left:50%;
-  top:13px;
-  transform:translateX(-50%);
-  background:#9fd3ec;
-  border-radius:8px;
-}
-
-/* HIGHWAY */
-
-.highway{
-  background:
-    linear-gradient(
-      90deg,
-      #252a31 0 12%,
-      #363b42 12% 88%,
-      #252a31 88%
-    );
-}
-
-.highway:before{
-  content:"";
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  width:8px;
-  height:100%;
-  background:repeating-linear-gradient(
-    to bottom,
-    #fff 0 32px,
-    transparent 32px 65px
-  );
-}
-
-.car-blue{
-  position:absolute;
-  width:82px;
-  height:120px;
-  background:#1976d2;
-  border-radius:18px;
-  left:50%;
-  bottom:20px;
-  transform:translateX(-50%);
-  border:5px solid #0d47a1;
-}
-
-/* DRIFT */
-
-.drift{
-  background:
-    radial-gradient(
-      ellipse at center,
-      #555 0 20%,
-      #3d3d3d 21% 45%,
-      #262626 46% 100%
-    );
-}
-
-.drift:before{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:90px;
-  border:4px solid #777;
-  border-radius:50%;
-  left:20px;
-  top:55px;
-  transform:rotate(-20deg);
-}
-
-.drift-car{
-  position:absolute;
-  width:125px;
-  height:65px;
-  background:#ff9800;
-  border-radius:17px;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%) rotate(-18deg);
-  border:5px solid #a85e00;
-}
-
-.drift-car:before{
-  content:"";
-  position:absolute;
-  width:52px;
-  height:32px;
-  background:#8ed0e8;
-  border-radius:8px;
-  left:34px;
-  top:8px;
-}
-
-/* CARD */
 
 .info{
-  padding:20px;
+    padding:16px;
 }
 
 .info h3{
-  font-size:27px;
-  margin-bottom:9px;
+    font-size:19px;
+    margin-bottom:12px;
 }
 
-.info p{
-  color:#aeb8c8;
-  min-height:44px;
-  line-height:1.4;
-  margin-bottom:18px;
+.jugar{
+    width:100%;
+    border:0;
+    border-radius:10px;
+    padding:12px;
+    background:white;
+    color:#111;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.play{
-  width:100%;
-  border:0;
-  padding:15px;
-  border-radius:10px;
-  background:white;
-  color:#101010;
-  font-size:20px;
-  font-weight:bold;
-  cursor:pointer;
+.jugar:hover{
+    background:#dce3ec;
+    transform:scale(1.02);
 }
-
-.play:hover{
-  background:#dfe5ed;
-}
-
-footer{
-  text-align:center;
-  color:#707b8d;
-  padding:25px;
-  border-top:1px solid #252d3a;
-}
-
-/* RESPONSIVE */
 
 @media(max-width:900px){
-  .games{
-    grid-template-columns:1fr;
-  }
-
-  header h1{
-    font-size:42px;
-  }
+    .juegos{
+        grid-template-columns:repeat(2,1fr);
+    }
 }
 
-@media(min-width:901px) and (max-width:1150px){
-  .games{
-    grid-template-columns:repeat(2,1fr);
-  }
+@media(max-width:550px){
+    .logo{
+        font-size:34px;
+    }
+
+    .juegos{
+        grid-template-columns:1fr;
+    }
 }
 </style>
 </head>
@@ -279,112 +128,155 @@ footer{
 <body>
 
 <header>
-  <h1>GAMEZONE</h1>
-  <p>Todos tus juegos en un solo lugar</p>
+    <div class="logo">GAMEZONE</div>
+    <div class="subtitulo">Todos tus juegos en un solo lugar</div>
 </header>
 
-<main class="container">
+<main class="contenedor">
 
-  <section class="section">
+<!-- MOTOS -->
+<section class="seccion">
+<h2>🏍️ MOTOS</h2>
 
-    <h2>🚗 JUEGOS DE CARROS</h2>
+<div class="juegos">
 
-    <div class="games">
+<div class="tarjeta">
+<div class="imagen">🏁</div>
+<div class="info">
+<h3>Racing Limits</h3>
+<button class="jugar" onclick="abrir('racing-limits.html')">▶ JUGAR</button>
+</div>
+</div>
 
-      <!-- TRAFFIC RACER -->
-      <article class="card">
+<div class="tarjeta">
+<div class="imagen">🏍️</div>
+<div class="info">
+<h3>Moto Racing</h3>
+<button class="jugar" onclick="abrir('moto-racing.html')">▶ JUGAR</button>
+</div>
+</div>
 
-        <div class="art traffic">
-          <div class="car-red"></div>
-        </div>
+<div class="tarjeta">
+<div class="imagen">🏍️</div>
+<div class="info">
+<h3>Motorbike</h3>
+<button class="jugar" onclick="abrir('motorbike.html')">▶ JUGAR</button>
+</div>
+</div>
 
-        <div class="info">
+<div class="tarjeta">
+<div class="imagen">🏆</div>
+<div class="info">
+<h3>GP Moto Racing 2</h3>
+<button class="jugar" onclick="abrir('gp-moto-racing-2.html')">▶ JUGAR</button>
+</div>
+</div>
 
-          <h3>Traffic Racer</h3>
+<div class="tarjeta">
+<div class="imagen">🏍️</div>
+<div class="info">
+<h3>2 Player Moto Racing</h3>
+<button class="jugar" onclick="abrir('2-player-moto-racing.html')">▶ JUGAR</button>
+</div>
+</div>
 
-          <p>
-            Conduce por la carretera y evita el tráfico.
-          </p>
-
-          <button
-            class="play"
-            onclick="abrirJuego('traffic')">
-            JUGAR
-          </button>
-
-        </div>
-      </article>
-
-
-      <!-- HIGHWAY DRIVE -->
-      <article class="card">
-
-        <div class="art highway">
-          <div class="car-blue"></div>
-        </div>
-
-        <div class="info">
-
-          <h3>Highway Drive</h3>
-
-          <p>
-            Conduce por diferentes carreteras.
-          </p>
-
-          <button
-            class="play"
-            onclick="abrirJuego('highway')">
-            JUGAR
-          </button>
-
-        </div>
-      </article>
+</div>
+</section>
 
 
-      <!-- DRIFT CHALLENGE -->
-      <article class="card">
+<!-- CARROS -->
+<section class="seccion">
+<h2>🚗 CARROS</h2>
 
-        <div class="art drift">
-          <div class="drift-car"></div>
-        </div>
+<div class="juegos">
 
-        <div class="info">
+<div class="tarjeta">
+<div class="imagen">🚚</div>
+<div class="info">
+<h3>Monster Truck Sky Racing</h3>
+<button class="jugar" onclick="abrir('monster-truck-sky-racing.html')">▶ JUGAR</button>
+</div>
+</div>
 
-          <h3>Drift Challenge</h3>
+<div class="tarjeta">
+<div class="imagen">🏎️</div>
+<div class="info">
+<h3>Nitro Speed Car Racing</h3>
+<button class="jugar" onclick="abrir('nitro-speed-car-racing.html')">▶ JUGAR</button>
+</div>
+</div>
 
-          <p>
-            Haz derrapes y demuestra tus habilidades.
-          </p>
+</div>
+</section>
 
-          <button
-            class="play"
-            onclick="abrirJuego('drift')">
-            JUGAR
-          </button>
 
-        </div>
-      </article>
+<!-- FUTBOL -->
+<section class="seccion">
+<h2>⚽ FÚTBOL</h2>
 
-    </div>
+<div class="juegos">
 
-  </section>
+<div class="tarjeta">
+<div class="imagen">⚽</div>
+<div class="info">
+<h3>Football Legends 2026</h3>
+<button class="jugar" onclick="abrir('football-legends.html')">▶ JUGAR</button>
+</div>
+</div>
+
+<div class="tarjeta">
+<div class="imagen">⚽</div>
+<div class="info">
+<h3>World Soccer</h3>
+<button class="jugar" onclick="abrir('world-soccer.html')">▶ JUGAR</button>
+</div>
+</div>
+
+<div class="tarjeta">
+<div class="imagen">🥅</div>
+<div class="info">
+<h3>Penalty Shootout</h3>
+<button class="jugar" onclick="abrir('penalty-shootout.html')">▶ JUGAR</button>
+</div>
+</div>
+
+<div class="tarjeta">
+<div class="imagen">⚽</div>
+<div class="info">
+<h3>3D Soccer Champions</h3>
+<button class="jugar" onclick="abrir('3d-soccer-champions.html')">▶ JUGAR</button>
+</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- PLATAFORMAS -->
+<section class="seccion">
+<h2>🟦 PLATAFORMAS</h2>
+
+<div class="juegos">
+
+<div class="tarjeta">
+<div class="imagen">⬛</div>
+<div class="info">
+<h3>Geometry Dash</h3>
+<button class="jugar" onclick="abrir('geometry-dash.html')">▶ JUGAR</button>
+</div>
+</div>
+
+</div>
+</section>
 
 </main>
 
-<footer>
-  GAMEZONE © 2026
-</footer>
-
 <script>
-
-function abrirJuego(nombre){
-
-  window.location.href =
-    "game.html?game=" + encodeURIComponent(nombre);
-
+function abrir(pagina){
+    window.location.href = pagina;
 }
-
 </script>
 
 </body>
 </html>
+```
