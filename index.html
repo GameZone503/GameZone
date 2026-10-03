@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMEZONE</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#0b0f16;
+  color:white;
+  min-height:100vh;
+}
+
+header{
+  background:#151b25;
+  padding:30px 20px;
+  text-align:center;
+  border-bottom:3px solid #2b3444;
+}
+
+header h1{
+  font-size:55px;
+  letter-spacing:5px;
+  font-weight:900;
+}
+
+header p{
+  margin-top:8px;
+  color:#aeb8c8;
+  font-size:19px;
+}
+
+.container{
+  width:94%;
+  max-width:1450px;
+  margin:35px auto 60px;
+}
+
+.section{
+  margin-bottom:45px;
+}
+
+.section h2{
+  font-size:32px;
+  margin-bottom:22px;
+}
+
+.games{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.card{
+  background:#171e29;
+  border:2px solid #2c3647;
+  border-radius:18px;
+  overflow:hidden;
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  border-color:#fff;
+}
+
+.art{
+  height:230px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* TRAFFIC RACER */
+
+.traffic{
+  background:
+    linear-gradient(
+      90deg,
+      #303640 0 9%,
+      #22272f 9% 91%,
+      #303640 91%
+    );
+}
+
+.traffic:before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  transform:translateX(-50%);
+  width:8px;
+  height:100%;
+  background:repeating-linear-gradient(
+    to bottom,
+    white 0 35px,
+    transparent 35px 70px
+  );
+}
+
+.car-red{
+  position:absolute;
+  width:72px;
+  height:120px;
+  background:#e53935;
+  border-radius:16px;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  border:5px solid #9d1919;
+}
+
+.car-red:before,
+.car-blue:before{
+  content:"";
+  position:absolute;
+  width:45px;
+  height:38px;
+  left:50%;
+  top:13px;
+  transform:translateX(-50%);
+  background:#9fd3ec;
+  border-radius:8px;
+}
+
+/* HIGHWAY */
+
+.highway{
+  background:
+    linear-gradient(
+      90deg,
+      #252a31 0 12%,
+      #363b42 12% 88%,
+      #252a31 88%
+    );
+}
+
+.highway:before{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:8px;
+  height:100%;
+  background:repeating-linear-gradient(
+    to bottom,
+    #fff 0 32px,
+    transparent 32px 65px
+  );
+}
+
+.car-blue{
+  position:absolute;
+  width:82px;
+  height:120px;
+  background:#1976d2;
+  border-radius:18px;
+  left:50%;
+  bottom:20px;
+  transform:translateX(-50%);
+  border:5px solid #0d47a1;
+}
+
+/* DRIFT */
+
+.drift{
+  background:
+    radial-gradient(
+      ellipse at center,
+      #555 0 20%,
+      #3d3d3d 21% 45%,
+      #262626 46% 100%
+    );
+}
+
+.drift:before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:90px;
+  border:4px solid #777;
+  border-radius:50%;
+  left:20px;
+  top:55px;
+  transform:rotate(-20deg);
+}
+
+.drift-car{
+  position:absolute;
+  width:125px;
+  height:65px;
+  background:#ff9800;
+  border-radius:17px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) rotate(-18deg);
+  border:5px solid #a85e00;
+}
+
+.drift-car:before{
+  content:"";
+  position:absolute;
+  width:52px;
+  height:32px;
+  background:#8ed0e8;
+  border-radius:8px;
+  left:34px;
+  top:8px;
+}
+
+/* CARD */
+
+.info{
+  padding:20px;
+}
+
+.info h3{
+  font-size:27px;
+  margin-bottom:9px;
+}
+
+.info p{
+  color:#aeb8c8;
+  min-height:44px;
+  line-height:1.4;
+  margin-bottom:18px;
+}
+
+.play{
+  width:100%;
+  border:0;
+  padding:15px;
+  border-radius:10px;
+  background:white;
+  color:#101010;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.play:hover{
+  background:#dfe5ed;
+}
+
+footer{
+  text-align:center;
+  color:#707b8d;
+  padding:25px;
+  border-top:1px solid #252d3a;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+  .games{
+    grid-template-columns:1fr;
+  }
+
+  header h1{
+    font-size:42px;
+  }
+}
+
+@media(min-width:901px) and (max-width:1150px){
+  .games{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>GAMEZONE</h1>
+  <p>Todos tus juegos en un solo lugar</p>
+</header>
+
+<main class="container">
+
+  <section class="section">
+
+    <h2>🚗 JUEGOS DE CARROS</h2>
+
+    <div class="games">
+
+      <!-- TRAFFIC RACER -->
+      <article class="card">
+
+        <div class="art traffic">
+          <div class="car-red"></div>
+        </div>
+
+        <div class="info">
+
+          <h3>Traffic Racer</h3>
+
+          <p>
+            Conduce por la carretera y evita el tráfico.
+          </p>
+
+          <button
+            class="play"
+            onclick="abrirJuego('traffic')">
+            JUGAR
+          </button>
+
+        </div>
+      </article>
+
+
+      <!-- HIGHWAY DRIVE -->
+      <article class="card">
+
+        <div class="art highway">
+          <div class="car-blue"></div>
+        </div>
+
+        <div class="info">
+
+          <h3>Highway Drive</h3>
+
+          <p>
+            Conduce por diferentes carreteras.
+          </p>
+
+          <button
+            class="play"
+            onclick="abrirJuego('highway')">
+            JUGAR
+          </button>
+
+        </div>
+      </article>
+
+
+      <!-- DRIFT CHALLENGE -->
+      <article class="card">
+
+        <div class="art drift">
+          <div class="drift-car"></div>
+        </div>
+
+        <div class="info">
+
+          <h3>Drift Challenge</h3>
+
+          <p>
+            Haz derrapes y demuestra tus habilidades.
+          </p>
+
+          <button
+            class="play"
+            onclick="abrirJuego('drift')">
+            JUGAR
+          </button>
+
+        </div>
+      </article>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  GAMEZONE © 2026
+</footer>
+
+<script>
+
+function abrirJuego(nombre){
+
+  window.location.href =
+    "game.html?game=" + encodeURIComponent(nombre);
+
+}
+
+</script>
+
+</body>
+</html>
