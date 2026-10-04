@@ -90,6 +90,7 @@ header{
 }
 
 .jugar{
+    display:block;
     width:100%;
     border:0;
     border-radius:10px;
@@ -99,6 +100,8 @@ header{
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
+    text-align:center;
+    text-decoration:none;
 }
 
 .jugar:hover{
@@ -143,7 +146,7 @@ header{
 <div class="imagen">🏁</div>
 <div class="info">
 <h3>Racing Limits</h3>
-<button class="jugar" onclick="abrir('racing-limits.html')">▶ JUGAR</button>
+<a class="jugar" href="racing-limits.html">▶ JUGAR</a>
 </div>
 </div>
 
@@ -151,7 +154,7 @@ header{
 <div class="imagen">🏍️</div>
 <div class="info">
 <h3>Moto Racing</h3>
-<button class="jugar" onclick="abrir('moto-racing.html')">▶ JUGAR</button>
+<a class="jugar" href="moto-racing.html">▶ JUGAR</a>
 </div>
 </div>
 
@@ -159,7 +162,7 @@ header{
 <div class="imagen">🏍️</div>
 <div class="info">
 <h3>Motorbike</h3>
-<button class="jugar" onclick="abrir('motorbike.html')">▶ JUGAR</button>
+<a class="jugar" href="motorbike.html">▶ JUGAR</a>
 </div>
 </div>
 
@@ -167,7 +170,7 @@ header{
 <div class="imagen">🏆</div>
 <div class="info">
 <h3>GP Moto Racing 2</h3>
-<button class="jugar" onclick="abrir('gp-moto-racing-2.html')">▶ JUGAR</button>
+<a class="jugar" href="gp-moto-racing-2.html">▶ JUGAR</a>
 </div>
 </div>
 
@@ -175,13 +178,12 @@ header{
 <div class="imagen">🏍️</div>
 <div class="info">
 <h3>2 Player Moto Racing</h3>
-<button class="jugar" onclick="abrir('2-player-moto-racing.html')">▶ JUGAR</button>
+<a class="jugar" href="2-player-moto-racing.html">▶ JUGAR</a>
 </div>
 </div>
 
 </div>
 </section>
-
 
 <!-- FUTBOL -->
 <section class="seccion">
@@ -193,7 +195,7 @@ header{
 <div class="imagen">⚽</div>
 <div class="info">
 <h3>Football Legends 2026</h3>
-<button class="jugar" onclick="abrir('football-legends.html')">▶ JUGAR</button>
+<a class="jugar" href="football-legends.html">▶ JUGAR</a>
 </div>
 </div>
 
@@ -201,7 +203,7 @@ header{
 <div class="imagen">⚽</div>
 <div class="info">
 <h3>World Soccer</h3>
-<button class="jugar" onclick="abrir('world-soccer.html')">▶ JUGAR</button>
+<a class="jugar" href="world-soccer.html">▶ JUGAR</a>
 </div>
 </div>
 
@@ -209,7 +211,7 @@ header{
 <div class="imagen">🥅</div>
 <div class="info">
 <h3>Penalty Shootout</h3>
-<button class="jugar" onclick="abrir('penalty-shootout.html')">▶ JUGAR</button>
+<a class="jugar" href="penalty-shootout.html">▶ JUGAR</a>
 </div>
 </div>
 
@@ -217,13 +219,12 @@ header{
 <div class="imagen">⚽</div>
 <div class="info">
 <h3>3D Soccer Champions</h3>
-<button class="jugar" onclick="abrir('3d-soccer-champions.html')">▶ JUGAR</button>
+<a class="jugar" href="3d-soccer-champions.html">▶ JUGAR</a>
 </div>
 </div>
 
 </div>
 </section>
-
 
 <!-- OTROS JUEGOS -->
 <section class="seccion">
@@ -231,26 +232,18 @@ header{
 
 <div class="juegos">
 
-<<div class="tarjeta">
-
-    <div class="imagen">
-        🌌
-    </div>
-
-    <div class="info">
-
-        <h3>Wave Road</h3>
-
-        <button
-            class="jugar"
-            onclick="abrir('wave-road.html')">
-            ▶ JUGAR
-        </button>
-
-    </div>
+<div class="tarjeta">
+<div class="imagen">🌌</div>
+<div class="info">
+<h3>Wave Road</h3>
+<a class="jugar" href="wave-road.html">▶ JUGAR</a>
+</div>
+</div>
 
 </div>
-</script>
+</section>
+
+</main>
 
 </body>
 </html>
