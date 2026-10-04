@@ -1,428 +1,86 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GAMEZONE</title>
+    <title>Wave Road - GameZone</title>
 
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#0b0f16;
-    color:white;
-    min-height:100vh;
-}
+        body {
+            margin: 0;
+            background: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
 
-header{
-    background:#050505;
-    padding:25px 20px;
-    text-align:center;
-    border-bottom:2px solid #ff9800;
-}
+        .gamezone {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            padding: 18px;
+            background: #000;
+        }
 
-.logo{
-    color:#ff9800;
-    font-size:48px;
-    font-weight:900;
-    letter-spacing:5px;
-}
+        .titulo {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            padding: 15px;
+        }
 
-.subtitulo{
-    color:#aaa;
-    margin-top:8px;
-    font-size:17px;
-}
+        .juego {
+            width: 100%;
+            height: calc(100vh - 130px);
+            min-height: 500px;
+            border: none;
+            display: block;
+            background: #000;
+        }
 
-.contenedor{
-    width:min(1200px,94%);
-    margin:30px auto 50px;
-}
+        .volver {
+            display: block;
+            width: fit-content;
+            margin: 15px auto;
+            padding: 10px 22px;
+            background: #222;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
 
-.seccion{
-    margin-bottom:45px;
-}
-
-.seccion h2{
-    color:#ff9800;
-    font-size:30px;
-    margin-bottom:20px;
-    border-left:5px solid #ff9800;
-    padding-left:12px;
-}
-
-.juegos{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-}
-
-.tarjeta{
-    background:#151d2b;
-    border:1px solid #283449;
-    border-radius:16px;
-    overflow:hidden;
-    transition:.2s;
-}
-
-.tarjeta:hover{
-    transform:translateY(-5px);
-    border-color:#ff9800;
-}
-
-.imagen{
-    height:150px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:
-        linear-gradient(135deg,#202b3d,#101722);
-    font-size:65px;
-}
-
-.info{
-    padding:16px;
-}
-
-.info h3{
-    font-size:19px;
-    margin-bottom:12px;
-}
-
-.jugar{
-    width:100%;
-    border:0;
-    border-radius:10px;
-    padding:12px;
-    background:#ff9800;
-    color:#111;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.15s;
-}
-
-.jugar:hover{
-    background:#ffb52e;
-    transform:scale(1.02);
-}
-
-.jugar:active{
-    transform:scale(.98);
-}
-
-@media(max-width:900px){
-
-    .juegos{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-}
-
-@media(max-width:550px){
-
-    .logo{
-        font-size:34px;
-    }
-
-    .juegos{
-        grid-template-columns:1fr;
-    }
-
-}
-</style>
+        .volver:hover {
+            background: #333;
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-
-    <div class="logo">
-        GAMEZONE
+    <div class="gamezone">
+        🎮 GAMEZONE
     </div>
 
-    <div class="subtitulo">
-        Todos tus juegos en un solo lugar
+    <div class="titulo">
+        🌌 Wave Road
     </div>
 
-</header>
-
-
-<main class="contenedor">
-
-
-    <!-- ================= MOTOS ================= -->
-
-    <section class="seccion">
-
-        <h2>🏍️ MOTOS</h2>
-
-        <div class="juegos">
-
-
-            <div class="tarjeta">
-
-                <div class="imagen">
-                    🏎️
-                </div>
-
-                <div class="info">
-
-                    <h3>Racing Limits</h3>
-
-                    <button
-                        class="jugar"
-                        onclick="abrir('racing-limits.html')">
-                        JUGAR
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="tarjeta">
-
-                <div class="imagen">
-                    🏍️
-                </div>
-
-                <div class="info">
-
-                    <h3>Moto Racing</h3>
-
-                    <button
-                        class="jugar"
-                        onclick="abrir('moto-racing.html')">
-                        JUGAR
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="tarjeta">
-
-                <div class="imagen">
-                    🏍️
-                </div>
-
-                <div class="info">
-
-                    <h3>Motorbike</h3>
-
-                    <button
-                        class="jugar"
-                        onclick="abrir('motorbike.html')">
-                        JUGAR
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="tarjeta">
-
-                <div class="imagen">
-                    🏁
-                </div>
-
-                <div class="info">
-
-                    <h3>GP Moto Racing 2</h3>
-
-                    <button
-                        class="jugar"
-                        onclick="abrir('gp-moto-racing-2.html')">
-                        JUGAR
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="tarjeta">
-
-                <div class="imagen">
-                    🏍️
-                </div>
-
-                <div class="info">
-
-                    <h3>2 Player Moto Racing</h3>
-
-                    <button
-                        class="jugar"
-                        onclick="abrir('2-player-moto-racing.html')">
-                        JUGAR
-                    </button>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ================= FÚTBOL ================= -->
-
-    <section class="seccion">
-
-        <h2>⚽ FÚTBOL</h2>
-
-        <div class="juegos">
-
-
-            <div class="tarjeta">
-
-                <div class="imagen">
-                    ⚽
-                </div>
-
-                <div class="info">
-
-                    <h3>Football Legends</h3>
-
-                    <button
-                        class="jugar"
-                        onclick="abrir('football-legends.html')">
-                        JUGAR
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="tarjeta">
-
-                <div class="imagen">
-                    ⚽
-                </div>
-
-                <div class="info">
-
-                    <h3>World Soccer</h3>
-
-                    <button
-                        class="jugar"
-                        onclick="abrir('world-soccer.html')">
-                        JUGAR
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="tarjeta">
-
-                <div class="imagen">
-                    🥅
-                </div>
-
-                <div class="info">
-
-                    <h3>Penalty Shootout</h3>
-
-                    <button
-                        class="jugar"
-                        onclick="abrir('penalty-shootout.html')">
-                        JUGAR
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="tarjeta">
-
-                <div class="imagen">
-                    ⚽
-                </div>
-
-                <div class="info">
-
-                    <h3>3D Soccer Champions</h3>
-
-                    <button
-                        class="jugar"
-                        onclick="abrir('3d-soccer-champions.html')">
-                        JUGAR
-                    </button>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ================= OTROS ================= -->
-
-    <section class="seccion">
-
-        <h2>🎮 OTROS JUEGOS</h2>
-
-        <div class="juegos">
-
-
-            <div class="tarjeta">
-
-                <div class="imagen">
-                    🌌
-                </div>
-
-                <div class="info">
-
-                    <h3>Wave Road</h3>
-
-                    <button
-                        class="jugar"
-                        onclick="abrir('wave-road.html')">
-                        JUGAR
-                    </button>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-</main>
-
-
-<script>
-
-function abrir(pagina){
-
-    window.location.href = pagina;
-
-}
-
-</script>
+    <iframe
+        class="juego"
+        src="https://electrondash.vip/wave-road"
+        title="Wave Road"
+        allowfullscreen>
+    </iframe>
+
+    <a class="volver" href="index.html">
+        ← Volver a GameZone
+    </a>
 
 </body>
 </html>
+```
