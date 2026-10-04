@@ -3,15 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Space Waves - GAMEZONE</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 html,body{
     width:100%;
@@ -21,148 +16,103 @@ html,body{
     font-family:Arial,Helvetica,sans-serif;
 }
 
-body{
-    display:flex;
-    flex-direction:column;
-}
-
-.barra{
-    height:60px;
-    min-height:60px;
-    background:#111827;
+header{
+    height:68px;
+    background:#050505;
+    border-bottom:2px solid #ff9800;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 15px;
-    border-bottom:2px solid #263246;
-    color:white;
+    padding:0 18px 0 22px;
 }
 
 .logo{
-    font-size:24px;
+    color:#ff9800;
+    font-size:38px;
     font-weight:900;
-    letter-spacing:2px;
+    letter-spacing:4px;
 }
 
-.nombre{
-    font-size:18px;
-    color:#ddd;
-}
-
-.botones{
+.controles{
     display:flex;
-    gap:8px;
+    gap:10px;
 }
 
-button{
+.boton{
+    height:56px;
+    min-width:58px;
     border:0;
-    border-radius:8px;
-    padding:9px 13px;
-    font-size:14px;
+    border-radius:10px;
+    background:#ff9800;
+    color:#111;
+    font-size:18px;
     font-weight:bold;
     cursor:pointer;
-    background:white;
-    color:#111;
 }
 
-button:hover{
-    background:#dce3ec;
+.boton-volver{
+    padding:0 22px;
+    font-size:16px;
 }
 
-.juego{
-    flex:1;
+main{
     width:100%;
-    height:calc(100vh - 60px);
+    height:calc(100vh - 68px);
     background:#000;
-    position:relative;
 }
 
-iframe{
+#juego{
     width:100%;
     height:100%;
     border:0;
     display:block;
-}
-
-@media(max-width:600px){
-
-    .barra{
-        height:52px;
-        min-height:52px;
-        padding:0 8px;
-    }
-
-    .logo{
-        font-size:18px;
-    }
-
-    .nombre{
-        font-size:14px;
-    }
-
-    button{
-        padding:7px 9px;
-        font-size:12px;
-    }
-
-    .juego{
-        height:calc(100vh - 52px);
-    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="barra">
-
+<header>
     <div class="logo">GAMEZONE</div>
 
-    <div class="nombre">SPACE WAVES</div>
+    <div class="controles">
+        <button class="boton boton-volver" onclick="volver()">
+            ← GAMEZONE
+        </button>
 
-    <div class="botones">
-        <button onclick="volver()">⬅ VOLVER</button>
-        <button onclick="recargar()">🔄</button>
-        <button onclick="pantallaCompleta()">⛶</button>
+        <button class="boton" onclick="location.reload()">
+            🔄
+        </button>
+
+        <button class="boton" onclick="pantallaCompleta()">
+            ⛶
+        </button>
     </div>
+</header>
 
-</div>
-
-<div class="juego" id="zonaJuego">
-
+<main>
     <iframe
-        id="gameFrame"
-        src="https://www.cooljuegos.com/embed/space-waves/"
-        allowfullscreen
-        scrolling="no">
+        id="juego"
+        src="https://spacewaves.lol/"
+        allow="autoplay; fullscreen"
+        allowfullscreen>
     </iframe>
-
-</div>
+</main>
 
 <script>
-
 function volver(){
     window.location.href="index.html";
 }
 
-function recargar(){
-    document.getElementById("gameFrame").src =
-        document.getElementById("gameFrame").src;
-}
-
 function pantallaCompleta(){
+    const juego=document.getElementById("juego");
 
-    const zona = document.getElementById("zonaJuego");
-
-    if(zona.requestFullscreen){
-        zona.requestFullscreen();
+    if(document.fullscreenElement){
+        document.exitFullscreen();
+    }else if(juego.requestFullscreen){
+        juego.requestFullscreen();
     }
-    else if(zona.webkitRequestFullscreen){
-        zona.webkitRequestFullscreen();
-    }
-
 }
-
 </script>
 
 </body>
