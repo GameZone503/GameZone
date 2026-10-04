@@ -1,276 +1,408 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Racing Limits - GAMEZONE</title>
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html,body{
-  width:100%;
-  min-height:100%;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#080808;
-  color:white;
-}
-
+html,
 body{
-  min-height:100vh;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-/* CABECERA */
+/* =========================
+   BARRA SUPERIOR
+========================= */
+
 header{
-  height:70px;
-  background:#111;
-  border-bottom:2px solid #ff9800;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 22px;
+    width:100%;
+    height:68px;
+    background:#050505;
+    border-bottom:2px solid #ff9800;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 18px 0 22px;
 }
+
+/* LOGO */
 
 .logo{
-  color:#ff9800;
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:3px;
-}
-
-.volver{
-  background:#ff9800;
-  color:#111;
-  border:0;
-  border-radius:8px;
-  padding:11px 18px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* CONTENIDO */
-main{
-  min-height:calc(100vh - 70px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:25px;
-}
-
-.panel{
-  width:min(900px,100%);
-  background:#151515;
-  border:1px solid #333;
-  border-radius:18px;
-  overflow:hidden;
-  text-align:center;
-  box-shadow:0 10px 40px rgba(0,0,0,.5);
-}
-
-.titulo{
-  padding:25px 20px;
-  background:#1d1d1d;
-}
-
-.titulo h1{
-  color:#ff9800;
-  font-size:34px;
-  margin-bottom:8px;
-}
-
-.titulo p{
-  color:#aaa;
-  font-size:16px;
-}
-
-/* ZONA DEL JUEGO */
-.juego{
-  min-height:430px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:35px 20px;
-  background:
-    radial-gradient(circle at center,#222 0%,#0b0b0b 70%);
-}
-
-.icono{
-  font-size:100px;
-  margin-bottom:20px;
-}
-
-.juego h2{
-  font-size:28px;
-  margin-bottom:12px;
-}
-
-.juego p{
-  color:#aaa;
-  max-width:600px;
-  line-height:1.5;
-  margin-bottom:28px;
-}
-
-/* BOTÓN JUGAR */
-.jugar{
-  display:inline-block;
-  background:#ff9800;
-  color:#111;
-  text-decoration:none;
-  padding:17px 42px;
-  border-radius:10px;
-  font-size:21px;
-  font-weight:900;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.jugar:hover{
-  background:#ffb52e;
-  transform:scale(1.04);
+    color:#ff9800;
+    font-size:38px;
+    font-weight:900;
+    letter-spacing:4px;
 }
 
 /* CONTROLES */
+
 .controles{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  padding:18px;
-  background:#111;
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
+/* BOTONES */
+
 .boton{
-  background:#292929;
-  color:white;
-  border:1px solid #444;
-  border-radius:8px;
-  padding:11px 18px;
-  cursor:pointer;
-  font-weight:bold;
+    height:56px;
+    min-width:58px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#ff9800;
+    color:#111;
+
+    font-size:18px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.15s;
 }
 
 .boton:hover{
-  background:#3a3a3a;
+    background:#ffb52e;
+    transform:translateY(-1px);
 }
 
-/* MÓVIL */
-@media(max-width:600px){
+.boton:active{
+    transform:scale(.96);
+}
 
-  header{
-    height:60px;
-    padding:0 12px;
-  }
+/* BOTÓN VOLVER */
 
-  .logo{
-    font-size:23px;
-  }
+.boton-volver{
+    padding:0 22px;
+    font-size:16px;
+}
 
-  .volver{
-    padding:9px 11px;
-    font-size:12px;
-  }
+/* =========================
+   ÁREA PRINCIPAL
+========================= */
 
-  main{
-    padding:12px;
-  }
+main{
+    width:100%;
+    height:calc(100vh - 68px);
+    background:#000;
 
-  .titulo h1{
-    font-size:27px;
-  }
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-  .juego{
-    min-height:380px;
-  }
+    overflow:hidden;
+}
 
-  .icono{
-    font-size:75px;
-  }
+/* =========================
+   PANTALLA GAMEZONE
+========================= */
 
-  .jugar{
-    padding:15px 30px;
-    font-size:18px;
-  }
+.pantalla{
+    width:100%;
+    height:100%;
 
-  .controles{
-    flex-wrap:wrap;
-  }
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #242424 0%,
+            #101010 45%,
+            #000 100%
+        );
+
+    color:white;
+}
+
+/* ICONO */
+
+.icono{
+    font-size:110px;
+    margin-bottom:20px;
+}
+
+/* TÍTULO */
+
+.pantalla h1{
+    color:#ff9800;
+    font-size:42px;
+    margin-bottom:12px;
+    text-align:center;
+}
+
+/* TEXTO */
+
+.pantalla p{
+    color:#aaa;
+    font-size:17px;
+    text-align:center;
+    max-width:650px;
+    line-height:1.5;
+    margin:0 20px 30px;
+}
+
+/* =========================
+   BOTÓN JUGAR
+========================= */
+
+.jugar{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    min-width:260px;
+    padding:17px 30px;
+
+    background:#ff9800;
+    color:#111;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-size:21px;
+    font-weight:900;
+
+    transition:.2s;
+}
+
+.jugar:hover{
+    background:#ffb52e;
+    transform:scale(1.04);
+}
+
+.jugar:active{
+    transform:scale(.98);
+}
+
+/* =========================
+   INFORMACIÓN
+========================= */
+
+.aviso{
+    margin-top:22px;
+    color:#666;
+    font-size:13px;
+    text-align:center;
+}
+
+/* =========================
+   PANTALLA COMPLETA
+========================= */
+
+:fullscreen main{
+    height:100vh;
+}
+
+:fullscreen header{
+    display:none;
+}
+
+:fullscreen .pantalla{
+    height:100vh;
+}
+
+/* =========================
+   MÓVIL
+========================= */
+
+@media(max-width:700px){
+
+    header{
+        height:60px;
+        padding:0 10px 0 14px;
+    }
+
+    .logo{
+        font-size:23px;
+        letter-spacing:3px;
+    }
+
+    .controles{
+        gap:6px;
+    }
+
+    .boton{
+        height:46px;
+        min-width:46px;
+        font-size:15px;
+        border-radius:8px;
+    }
+
+    .boton-volver{
+        padding:0 12px;
+        font-size:12px;
+    }
+
+    main{
+        height:calc(100vh - 60px);
+    }
+
+    .icono{
+        font-size:75px;
+    }
+
+    .pantalla h1{
+        font-size:30px;
+    }
+
+    .pantalla p{
+        font-size:14px;
+    }
+
+    .jugar{
+        min-width:220px;
+        font-size:18px;
+        padding:15px 25px;
+    }
 }
 </style>
 </head>
 
 <body>
 
+<!-- =========================
+     BARRA GAMEZONE
+========================= -->
+
 <header>
 
-  <div class="logo">
-    GAMEZONE
-  </div>
-
-  <button class="volver" onclick="volverGameZone()">
-    ← GAMEZONE
-  </button>
-
-</header>
-
-
-<main>
-
-  <section class="panel">
-
-    <div class="titulo">
-      <h1>Racing Limits</h1>
-      <p>GAMEZONE</p>
-    </div>
-
-    <div class="juego">
-
-      <div class="icono">🏎️</div>
-
-      <h2>Racing Limits</h2>
-
-      <p>
-        El juego se abrirá directamente en su página de juego.
-        GAMEZONE permanece como tu página de entrada.
-      </p>
-
-      <a
-        class="jugar"
-        href="https://www.crazygames.com/es/game/racing-limits"
-        target="_blank"
-        rel="noopener noreferrer">
-        ▶ JUGAR RACING LIMITS
-      </a>
-
+    <div class="logo">
+        GAMEZONE
     </div>
 
     <div class="controles">
 
-      <button class="boton" onclick="volverGameZone()">
-        ← Volver
-      </button>
+        <button
+            class="boton boton-volver"
+            onclick="volverGameZone()">
+            ← GAMEZONE
+        </button>
 
-      <button class="boton" onclick="location.reload()">
-        🔄 Recargar
-      </button>
+        <button
+            class="boton"
+            onclick="recargarPagina()"
+            title="Recargar">
+            🔄
+        </button>
+
+        <button
+            class="boton"
+            onclick="pantallaCompleta()"
+            title="Pantalla completa">
+            ⛶
+        </button>
 
     </div>
 
-  </section>
+</header>
+
+
+<!-- =========================
+     CONTENIDO
+========================= -->
+
+<main id="zonaJuego">
+
+    <section class="pantalla">
+
+        <div class="icono">
+            🏎️
+        </div>
+
+        <h1>
+            Racing Limits
+        </h1>
+
+        <p>
+            Bienvenido a Racing Limits en GAMEZONE.
+            Pulsa el botón para comenzar a jugar.
+        </p>
+
+        <a
+            class="jugar"
+            href="https://www.crazygames.com/es/game/racing-limits"
+            target="_blank"
+            rel="noopener noreferrer">
+
+            ▶ JUGAR RACING LIMITS
+
+        </a>
+
+        <div class="aviso">
+            El juego se abre directamente para evitar problemas de conexión.
+        </div>
+
+    </section>
 
 </main>
 
 
 <script>
 
+/* =========================
+   VOLVER A GAMEZONE
+========================= */
+
 function volverGameZone(){
 
-  window.location.href = "index.html";
+    window.location.href = "index.html";
+
+}
+
+
+/* =========================
+   RECARGAR
+========================= */
+
+function recargarPagina(){
+
+    window.location.reload();
+
+}
+
+
+/* =========================
+   PANTALLA COMPLETA
+========================= */
+
+function pantallaCompleta(){
+
+    const zona = document.getElementById("zonaJuego");
+
+    if(document.fullscreenElement){
+
+        document.exitFullscreen();
+
+        return;
+
+    }
+
+    if(zona.requestFullscreen){
+
+        zona.requestFullscreen();
+
+    }
 
 }
 
@@ -278,4 +410,3 @@ function volverGameZone(){
 
 </body>
 </html>
-```
