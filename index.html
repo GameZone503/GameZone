@@ -112,7 +112,9 @@ main{
     background:#1d4ed8;
 }
 
-/* VENTANA DE LOS JUEGOS */
+
+/* ================= VISOR DE JUEGOS ================= */
+
 #ventanaJuego{
     position:fixed;
     inset:0;
@@ -158,7 +160,11 @@ main{
     background:#000;
 }
 
+
+/* ================= RESPONSIVE ================= */
+
 @media(max-width:900px){
+
     .juegos{
         grid-template-columns:repeat(2,1fr);
     }
@@ -169,6 +175,7 @@ main{
 }
 
 @media(max-width:650px){
+
     .juegos{
         grid-template-columns:1fr;
     }
@@ -183,6 +190,7 @@ main{
 }
 
 @media(max-width:400px){
+
     .portada{
         height:220px;
     }
@@ -199,12 +207,19 @@ main{
 </style>
 </head>
 
+
 <body>
 
 <header>
+
     <h1>GAMEZONE</h1>
-    <p>Todos tus juegos en un solo lugar</p>
+
+    <p>
+        Todos tus juegos en un solo lugar
+    </p>
+
 </header>
+
 
 <input
     id="buscador"
@@ -213,133 +228,48 @@ main{
     oninput="buscarJuego()"
 >
 
+
 <main>
 
-<!-- ================= MOTOS ================= -->
+
+<!-- =====================================================
+     MOTOS
+===================================================== -->
+
 <section class="seccion">
+
 <h2>🏍️ MOTOS</h2>
 
 <div class="juegos">
 
-<div class="card">
-<img class="portada" src="moto-x3m.jpg" alt="Moto X3M">
-<div class="info">
-<div class="nombre">Moto X3M</div>
-<button class="jugar" onclick="abrirJuego('moto-x3m.html')">JUGAR</button>
-</div>
-</div>
 
 <div class="card">
-<img class="portada" src="gp-moto-racing-2.jpg" alt="GP Moto Racing 2">
+
+<img
+    class="portada"
+    src="moto-x3m.jpg"
+    alt="Moto X3M"
+>
+
 <div class="info">
-<div class="nombre">GP Moto Racing 2</div>
-<button class="jugar" onclick="abrirJuego('gp-moto-racing-2.html')">JUGAR</button>
+
+<div class="nombre">
+Moto X3M
+</div>
+
+<button
+    class="jugar"
+    onclick="abrirJuego('moto-x3m.html')"
+>
+JUGAR
+</button>
+
 </div>
 </div>
+
+
 
 <div class="card">
-<img class="portada" src="motorbike.jpg" alt="Motorbike">
-<div class="info">
-<div class="nombre">Motorbike</div>
-<button class="jugar" onclick="abrirJuego('motorbike.html')">JUGAR</button>
-</div>
-</div>
 
-<div class="card">
-<img class="portada" src="2-player-moto-racing.jpg" alt="2 Player Moto Racing">
-<div class="info">
-<div class="nombre">2 Player Moto Racing</div>
-<button class="jugar" onclick="abrirJuego('2-player-moto-racing.html')">JUGAR</button>
-</div>
-</div>
-
-<div class="card">
-<img class="portada" src="super-bike-wild-race.jpg" alt="Super Bike Wild Race">
-<div class="info">
-<div class="nombre">Super Bike Wild Race</div>
-<button class="jugar" onclick="abrirJuego('super-bike-wild-race.html')">JUGAR</button>
-</div>
-</div>
-
-</div>
-</section>
-
-
-<!-- ================= CARROS ================= -->
-<section class="seccion">
-<h2>🚗 CARROS</h2>
-
-<div class="juegos">
-
-<div class="card">
-<img class="portada" src="racing-limits.jpg" alt="Racing Limits">
-<div class="info">
-<div class="nombre">Racing Limits</div>
-<button class="jugar" onclick="abrirJuego('racing-limits.html')">JUGAR</button>
-</div>
-</div>
-
-<div class="card">
-<img class="portada" src="traffic-racer.jpg" alt="Traffic Racer">
-<div class="info">
-<div class="nombre">Traffic Racer</div>
-<button class="jugar" onclick="abrirJuego('traffic-racer.html')">JUGAR</button>
-</div>
-</div>
-
-<div class="card">
-<img class="portada" src="car-racing.jpg" alt="Car Racing">
-<div class="info">
-<div class="nombre">Car Racing</div>
-<button class="jugar" onclick="abrirJuego('car-racing.html')">JUGAR</button>
-</div>
-</div>
-
-<div class="card">
-<img class="portada" src="highway-racing.jpg" alt="Highway Racing">
-<div class="info">
-<div class="nombre">Highway Racing</div>
-<button class="jugar" onclick="abrirJuego('highway-racing.html')">JUGAR</button>
-</div>
-</div>
-
-<div class="card">
-<img class="portada" src="city-car-driving.jpg" alt="City Car Driving">
-<div class="info">
-<div class="nombre">City Car Driving</div>
-<button class="jugar" onclick="abrirJuego('city-car-driving.html')">JUGAR</button>
-</div>
-</div>
-
-</div>
-</section>
-
-
-<!-- ================= FÚTBOL ================= -->
-<section class="seccion">
-<h2>⚽ FÚTBOL</h2>
-
-<div class="juegos">
-
-<div class="card">
-<img class="portada" src="football-legends.jpg" alt="Football Legends">
-<div class="info">
-<div class="nombre">Football Legends</div>
-<button class="jugar" onclick="abrirJuego('football-legends.html')">JUGAR</button>
-</div>
-</div>
-
-<div class="card">
-<img class="portada" src="world-soccer.jpg" alt="World Soccer">
-<div class="info">
-<div class="nombre">World Soccer</div>
-<button class="jugar" onclick="abrirJuego('world-soccer.html')">JUGAR</button>
-</div>
-</div>
-
-<div class="card">
-<img class="portada" src="penalty-shootout.jpg" alt="Penalty Shootout">
-<div class="info">
-<div class="nombre">Penalty Shootout</div>
-<button class="jugar" onclick="abrirJuego('penalt
+<img
 ```
