@@ -8,12 +8,11 @@
 <style>
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
 body{
-    font-family:Arial, sans-serif;
+    margin:0;
+    font-family:Arial,sans-serif;
     background:#0f172a;
     color:white;
 }
@@ -26,62 +25,59 @@ header{
 }
 
 header h1{
-    font-size:42px;
-    color:#38bdf8;
-    margin-bottom:8px;
+    margin:0;
+    font-size:48px;
+    font-weight:900;
 }
 
 header p{
+    margin:8px 0 18px;
     font-size:18px;
     color:#cbd5e1;
 }
 
 #buscador{
-    display:block;
-    width:90%;
-    max-width:600px;
-    margin:20px auto;
+    width:min(600px,90%);
     padding:14px 18px;
-    border:none;
-    border-radius:12px;
-    font-size:17px;
+    border:0;
+    border-radius:10px;
+    font-size:16px;
     outline:none;
 }
 
-.contenedor{
+main{
     width:95%;
     max-width:1400px;
-    margin:auto;
+    margin:30px auto;
 }
 
 .categoria{
-    margin-top:30px;
+    margin-bottom:45px;
 }
 
 .categoria h2{
-    font-size:28px;
-    color:#38bdf8;
-    margin-bottom:18px;
-    border-left:5px solid #2563eb;
+    font-size:30px;
+    margin-bottom:20px;
+    border-left:6px solid #2563eb;
     padding-left:12px;
 }
 
 .juegos{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
     gap:20px;
 }
 
 .card{
     background:#1e293b;
-    border-radius:15px;
+    border-radius:12px;
     overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,.35);
+    box-shadow:0 5px 15px rgba(0,0,0,.3);
     transition:.2s;
 }
 
 .card:hover{
-    transform:translateY(-5px);
+    transform:translateY(-4px);
 }
 
 .portada{
@@ -94,22 +90,23 @@ header p{
 }
 
 .nombre{
+    padding:14px 10px 8px;
     text-align:center;
-    font-size:19px;
+    font-size:18px;
     font-weight:bold;
-    padding:14px 8px 10px;
+    min-height:48px;
 }
 
 .jugar{
     display:block;
-    width:90%;
-    margin:0 auto 15px;
+    width:calc(100% - 20px);
+    margin:0 10px 12px;
     padding:12px;
-    border:none;
-    border-radius:10px;
+    border:0;
+    border-radius:8px;
     background:#2563eb;
     color:white;
-    font-size:17px;
+    font-size:16px;
     font-weight:bold;
     cursor:pointer;
 }
@@ -118,58 +115,44 @@ header p{
     background:#1d4ed8;
 }
 
-/* VENTANA DEL JUEGO */
 #ventanaJuego{
     display:none;
     position:fixed;
     inset:0;
-    background:#020617;
+    background:#000;
     z-index:9999;
-    flex-direction:column;
 }
 
 .barra-juego{
     height:58px;
-    min-height:58px;
     background:#111827;
     display:flex;
     align-items:center;
-    justify-content:center;
     gap:10px;
     padding:8px;
-    border-bottom:2px solid #2563eb;
 }
 
 .barra-juego button{
-    border:none;
-    border-radius:8px;
-    padding:10px 15px;
-    background:#2563eb;
+    border:0;
+    border-radius:7px;
+    padding:10px 14px;
     color:white;
+    background:#2563eb;
     font-weight:bold;
     cursor:pointer;
-}
-
-.barra-juego button:hover{
-    background:#1d4ed8;
 }
 
 .barra-juego .cerrar{
     background:#dc2626;
 }
 
-.barra-juego .cerrar:hover{
-    background:#b91c1c;
-}
-
 #juegoFrame{
     width:100%;
-    height:calc(100vh - 58px);
-    border:none;
+    height:calc(100% - 58px);
+    border:0;
     background:#000;
 }
 
-/* RESPONSIVE */
 @media(max-width:900px){
     .portada{
         height:200px;
@@ -177,25 +160,24 @@ header p{
 }
 
 @media(max-width:650px){
+    header h1{
+        font-size:38px;
+    }
+
     .portada{
         height:180px;
     }
 
-    header h1{
-        font-size:34px;
-    }
-
-    .barra-juego{
-        gap:5px;
-    }
-
-    .barra-juego button{
-        padding:8px 10px;
-        font-size:12px;
+    .juegos{
+        grid-template-columns:repeat(2,1fr);
     }
 }
 
 @media(max-width:400px){
+    .juegos{
+        grid-template-columns:1fr;
+    }
+
     .portada{
         height:220px;
     }
@@ -208,20 +190,22 @@ header p{
 <header>
     <h1>GAMEZONE</h1>
     <p>Todos tus juegos en un solo lugar</p>
+
+    <input
+        id="buscador"
+        type="text"
+        placeholder="🔎 Buscar juego..."
+        oninput="buscarJuego()"
+    >
 </header>
 
-<input
-    type="text"
-    id="buscador"
-    placeholder="🔎 Buscar juego..."
-    onkeyup="buscarJuego()"
->
 
-<div class="contenedor">
+<main>
 
 <!-- ================= MOTOS ================= -->
 
 <section class="categoria">
+
 <h2>🏍️ MOTOS</h2>
 
 <div class="juegos">
@@ -263,6 +247,7 @@ header p{
 <!-- ================= CARROS ================= -->
 
 <section class="categoria">
+
 <h2>🚗 CARROS</h2>
 
 <div class="juegos">
@@ -304,6 +289,7 @@ header p{
 <!-- ================= FUTBOL ================= -->
 
 <section class="categoria">
+
 <h2>⚽ FÚTBOL</h2>
 
 <div class="juegos">
@@ -339,6 +325,7 @@ header p{
 <!-- ================= PLATAFORMAS ================= -->
 
 <section class="categoria">
+
 <h2>🎮 PLATAFORMAS</h2>
 
 <div class="juegos">
@@ -349,11 +336,19 @@ header p{
 <button class="jugar" onclick="abrirJuego('geometry-dash.html')">JUGAR</button>
 </div>
 
+
 <div class="card">
 <img class="portada" src="level-devil.jpg" alt="Level Devil">
 <div class="nombre">Level Devil</div>
-<button class="jugar" onclick="abrirJuego('level-devil.html')">JUGAR</button>
+
+<button
+class="jugar"
+onclick="window.open('https://poki.com/es/g/level-devil','_blank')">
+JUGAR
+</button>
+
 </div>
+
 
 <div class="card">
 <img class="portada" src="sky-riders.jpg" alt="Sky Riders">
@@ -364,25 +359,27 @@ header p{
 </div>
 </section>
 
-</div>
+</main>
 
 
-<!-- ================= VENTANA DEL JUEGO ================= -->
+<!-- ================= VENTANA DE JUEGO ================= -->
 
 <div id="ventanaJuego">
 
     <div class="barra-juego">
 
-        <button class="cerrar" onclick="volverAlMenu()">
-            ← VOLVER
+        <button
+        class="cerrar"
+        onclick="volverAlMenu()">
+        ← VOLVER
         </button>
 
         <button onclick="reiniciarJuego()">
-            🔄 REINICIAR
+        🔄 REINICIAR
         </button>
 
         <button onclick="pantallaCompleta()">
-            ⛶ PANTALLA COMPLETA
+        ⛶ PANTALLA COMPLETA
         </button>
 
     </div>
@@ -399,65 +396,54 @@ header p{
 
 <script>
 
-let juegoActual = "";
+let juegoActual="";
 
-
-// ================= ABRIR JUEGO =================
 
 function abrirJuego(juego){
 
-    juegoActual = juego;
+    juegoActual=juego;
 
-    const ventana = document.getElementById("ventanaJuego");
-    const frame = document.getElementById("juegoFrame");
+    const frame=document.getElementById("juegoFrame");
 
-    frame.src = juego;
+    frame.src=juego;
 
-    ventana.style.display = "flex";
+    document.getElementById("ventanaJuego").style.display="block";
 
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow="hidden";
 }
 
-
-// ================= VOLVER =================
 
 function volverAlMenu(){
 
-    const ventana = document.getElementById("ventanaJuego");
-    const frame = document.getElementById("juegoFrame");
+    const frame=document.getElementById("juegoFrame");
 
-    frame.src = "";
+    frame.src="";
 
-    ventana.style.display = "none";
+    document.getElementById("ventanaJuego").style.display="none";
 
-    document.body.style.overflow = "auto";
+    document.body.style.overflow="auto";
 
-    juegoActual = "";
+    juegoActual="";
 }
 
-
-// ================= REINICIAR =================
 
 function reiniciarJuego(){
 
-    if(juegoActual !== ""){
+    if(!juegoActual)return;
 
-        const frame = document.getElementById("juegoFrame");
+    const frame=document.getElementById("juegoFrame");
 
-        frame.src = "";
+    frame.src="";
 
-        setTimeout(function(){
-            frame.src = juegoActual;
-        },50);
-    }
+    setTimeout(()=>{
+        frame.src=juegoActual;
+    },50);
 }
 
 
-// ================= PANTALLA COMPLETA =================
-
 function pantallaCompleta(){
 
-    const frame = document.getElementById("juegoFrame");
+    const frame=document.getElementById("juegoFrame");
 
     if(frame.requestFullscreen){
 
@@ -471,50 +457,44 @@ function pantallaCompleta(){
 }
 
 
-// ================= BUSCADOR =================
-
 function buscarJuego(){
 
-    const texto = document
+    const texto=
+        document
         .getElementById("buscador")
         .value
-        .toLowerCase();
+        .toLowerCase()
+        .trim();
 
-    const tarjetas = document.querySelectorAll(".card");
+    const tarjetas=
+        document.querySelectorAll(".card");
 
-    tarjetas.forEach(function(card){
+    tarjetas.forEach(card=>{
 
-        const nombre = card
+        const nombre=
+            card
             .querySelector(".nombre")
             .textContent
             .toLowerCase();
 
-        if(nombre.includes(texto)){
-
-            card.style.display = "";
-
-        }else{
-
-            card.style.display = "none";
-
-        }
+        card.style.display=
+            nombre.includes(texto)
+            ? ""
+            : "none";
 
     });
 }
 
 
-// ================= ESCAPE =================
+document.addEventListener("keydown",function(e){
 
-document.addEventListener("keydown", function(event){
+    if(e.key==="Escape"){
 
-    if(event.key === "Escape"){
+        const ventana=
+            document.getElementById("ventanaJuego");
 
-        const ventana = document.getElementById("ventanaJuego");
-
-        if(ventana.style.display === "flex"){
-
+        if(ventana.style.display==="block"){
             volverAlMenu();
-
         }
 
     }
