@@ -2,536 +2,589 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Level Devil - GAMEZONE</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Level Devil - GameZone</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    margin: 0;
-    background: #111;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
 }
 
-header {
-    background: #080808;
-    padding: 18px 10px;
-    border-bottom: 2px solid #333;
+body{
+    font-family:Arial,sans-serif;
+    background:#111;
+    color:white;
 }
 
-.logo {
-    font-size: 34px;
-    font-weight: bold;
-    letter-spacing: 3px;
+#game{
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:
+        linear-gradient(#202020 0 72%,#151515 72% 100%);
 }
 
-.subtitulo {
-    color: #aaa;
-    margin-top: 5px;
+/* TECHO */
+#techo{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:45px;
+    background:#292929;
+    border-bottom:4px solid #555;
 }
 
-.controles {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    padding: 15px;
+/* PISO */
+#piso{
+    position:absolute;
+    left:0;
+    bottom:17%;
+    width:100%;
+    height:25px;
+    background:#eee;
+    box-shadow:0 0 0 4px #111;
 }
 
-button {
-    border: none;
-    border-radius: 8px;
-    padding: 12px 18px;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    background: #222;
-    color: white;
+/* BANDERA */
+#meta{
+    position:absolute;
+    bottom:calc(17% + 25px);
+    right:7%;
+    width:45px;
+    height:80px;
 }
 
-button:hover {
-    background: #444;
+#poste{
+    position:absolute;
+    left:5px;
+    bottom:0;
+    width:5px;
+    height:80px;
+    background:#ddd;
 }
 
-#reiniciar {
-    background: #b51f1f;
+#bandera{
+    position:absolute;
+    top:0;
+    left:10px;
+    width:35px;
+    height:25px;
+    background:#31e86d;
+    clip-path:polygon(0 0,100% 50%,0 100%);
 }
 
-#reiniciar:hover {
-    background: #d52b2b;
+/* JUGADOR */
+#player{
+    position:absolute;
+    width:32px;
+    height:42px;
+    background:#ffcc33;
+    border-radius:7px 7px 4px 4px;
+    bottom:calc(17% + 25px);
+    left:8%;
+    box-shadow:inset 0 -7px #e99e00;
 }
 
-#pantalla {
-    background: #1769aa;
+/* OJOS */
+#player:before,
+#player:after{
+    content:"";
+    position:absolute;
+    top:10px;
+    width:5px;
+    height:5px;
+    background:#111;
+    border-radius:50%;
 }
 
-#pantalla:hover {
-    background: #2185d0;
+#player:before{
+    left:7px;
 }
 
-#juego {
-    width: min(900px, 95vw);
-    height: min(600px, 70vh);
-    min-height: 400px;
-    background: #202020;
-    border: 3px solid #555;
-    display: block;
-    margin: 10px auto 25px;
+#player:after{
+    right:7px;
 }
 
-.info {
-    color: #aaa;
-    margin-bottom: 20px;
+/* PINCHOS */
+.pincho{
+    position:absolute;
+    bottom:calc(17% + 25px);
+    width:0;
+    height:0;
+    border-left:15px solid transparent;
+    border-right:15px solid transparent;
+    border-bottom:32px solid #e33;
+    filter:drop-shadow(0 0 2px #000);
 }
 
-@media (max-width: 600px) {
-    .logo {
-        font-size: 26px;
-    }
+/* MENSAJE */
+#mensaje{
+    position:absolute;
+    top:12%;
+    width:100%;
+    text-align:center;
+    font-size:clamp(22px,4vw,40px);
+    font-weight:900;
+    opacity:.9;
+}
 
-    #juego {
-        min-height: 360px;
-    }
+/* HUD */
+#hud{
+    position:absolute;
+    top:58px;
+    left:20px;
+    font-size:18px;
+    font-weight:bold;
+    z-index:10;
+}
 
-    button {
-        padding: 10px 14px;
-    }
+/* CONTROLES */
+#controles{
+    position:absolute;
+    bottom:3%;
+    left:0;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    z-index:20;
+}
+
+.control{
+    width:58px;
+    height:48px;
+    border:0;
+    border-radius:12px;
+    background:#333;
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    box-shadow:0 4px 0 #111;
+}
+
+.control:active{
+    transform:translateY(3px);
+    box-shadow:0 1px 0 #111;
+}
+
+/* PANTALLA FINAL */
+#final{
+    display:none;
+    position:absolute;
+    inset:0;
+    z-index:100;
+    background:rgba(0,0,0,.88);
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    flex-direction:column;
+    gap:20px;
+}
+
+#final h1{
+    font-size:clamp(35px,8vw,70px);
+    color:#36ed70;
+}
+
+#final button{
+    padding:14px 30px;
+    border:0;
+    border-radius:30px;
+    background:#00eaff;
+    color:#001018;
+    font-size:18px;
+    font-weight:900;
+    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="logo">GAMEZONE</div>
-    <div class="subtitulo">Todos tus juegos en un solo lugar</div>
-</header>
+<div id="game">
 
-<div class="controles">
-    <button onclick="volver()">← VOLVER</button>
-    <button id="reiniciar" onclick="reiniciar()">↻ REINICIAR</button>
-    <button id="pantalla" onclick="pantallaCompleta()">⛶ PANTALLA COMPLETA</button>
-</div>
+    <div id="techo"></div>
 
-<canvas id="juego" width="900" height="600"></canvas>
+    <div id="hud">
+        NIVEL <span id="nivel">1</span> / 10
+    </div>
 
-<div class="info">
-    Usa ← → para moverte y ESPACIO para saltar
+    <div id="mensaje">
+        LLEGA A LA BANDERA
+    </div>
+
+    <div id="piso"></div>
+
+    <div id="meta">
+        <div id="poste"></div>
+        <div id="bandera"></div>
+    </div>
+
+    <div id="player"></div>
+
+    <div id="controles">
+        <button class="control" id="izq">◀</button>
+        <button class="control" id="salto">▲</button>
+        <button class="control" id="der">▶</button>
+    </div>
+
+    <div id="final">
+        <h1>¡GANASTE!</h1>
+        <p>Completaste todos los niveles.</p>
+        <button onclick="reiniciarTodo()">JUGAR DE NUEVO</button>
+    </div>
+
 </div>
 
 <script>
-const canvas = document.getElementById("juego");
-const ctx = canvas.getContext("2d");
+const player = document.getElementById("player");
+const game = document.getElementById("game");
+const nivelTexto = document.getElementById("nivel");
+
+let x = 8;
+let y = 0;
+
+let velocidadX = 0;
+let velocidadY = 0;
+
+let enSuelo = true;
+let jugando = true;
 
 let nivel = 1;
-const totalNiveles = 5;
 
-let jugador = {
-    x: 80,
-    y: 450,
-    w: 30,
-    h: 40,
-    vx: 0,
-    vy: 0,
-    velocidad: 5,
-    salto: -12,
-    enSuelo: false
-};
-
-let teclas = {};
-let muerto = false;
-let ganado = false;
-
-const gravedad = 0.6;
+const gravedad = 0.75;
+const salto = 13;
+const velocidad = 4;
 
 const niveles = [
-    {
-        plataformas: [
-            {x:0,y:540,w:900,h:60},
-            {x:250,y:430,w:180,h:25},
-            {x:520,y:350,w:180,h:25},
-            {x:760,y:270,w:100,h:25}
-        ],
-        puerta: {x:820,y:200,w:45,h:70},
-        trampas: [
-            {x:450,y:515,w:50,h:25}
-        ]
-    },
-
-    {
-        plataformas: [
-            {x:0,y:540,w:900,h:60},
-            {x:170,y:450,w:140,h:25},
-            {x:390,y:390,w:140,h:25},
-            {x:610,y:320,w:140,h:25},
-            {x:790,y:250,w:90,h:25}
-        ],
-        puerta: {x:815,y:180,w:45,h:70},
-        trampas: [
-            {x:310,y:515,w:55,h:25},
-            {x:540,y:515,w:55,h:25}
-        ]
-    },
-
-    {
-        plataformas: [
-            {x:0,y:540,w:900,h:60},
-            {x:100,y:430,w:150,h:25},
-            {x:350,y:350,w:150,h:25},
-            {x:600,y:430,w:150,h:25},
-            {x:800,y:330,w:70,h:25}
-        ],
-        puerta: {x:810,y:260,w:45,h:70},
-        trampas: [
-            {x:250,y:515,w:60,h:25},
-            {x:500,y:515,w:60,h:25},
-            {x:750,y:515,w:60,h:25}
-        ]
-    },
-
-    {
-        plataformas: [
-            {x:0,y:540,w:900,h:60},
-            {x:180,y:420,w:120,h:25},
-            {x:400,y:300,w:120,h:25},
-            {x:620,y:420,w:120,h:25},
-            {x:800,y:300,w:70,h:25}
-        ],
-        puerta: {x:815,y:220,w:45,h:70},
-        trampas: [
-            {x:300,y:515,w:70,h:25},
-            {x:530,y:515,w:70,h:25},
-            {x:740,y:515,w:60,h:25}
-        ]
-    },
-
-    {
-        plataformas: [
-            {x:0,y:540,w:900,h:60},
-            {x:130,y:430,w:120,h:25},
-            {x:300,y:350,w:120,h:25},
-            {x:470,y:430,w:120,h:25},
-            {x:640,y:330,w:120,h:25},
-            {x:800,y:250,w:70,h:25}
-        ],
-        puerta: {x:815,y:170,w:45,h:70},
-        trampas: [
-            {x:250,y:515,w:50,h:25},
-            {x:420,y:515,w:50,h:25},
-            {x:590,y:515,w:50,h:25},
-            {x:760,y:515,w:50,h:25}
-        ]
-    }
+    [35,55],
+    [50,70],
+    [30,60,78],
+    [45,65,82],
+    [25,48,70,88],
+    [40,58,75],
+    [32,52,68,84],
+    [45,63,78,91],
+    [28,46,64,82],
+    [40,55,70,85]
 ];
 
-function reiniciarJugador() {
-    jugador.x = 60;
-    jugador.y = 450;
-    jugador.vx = 0;
-    jugador.vy = 0;
-    muerto = false;
-    ganado = false;
+let pinchos = [];
+
+
+/* CREAR PINCHOS */
+
+function crearNivel(){
+
+    pinchos.forEach(p => p.remove());
+
+    pinchos = [];
+
+    const posiciones = niveles[nivel-1] || [];
+
+    posiciones.forEach(pos => {
+
+        const p = document.createElement("div");
+
+        p.className = "pincho";
+
+        p.style.left = pos + "%";
+
+        game.appendChild(p);
+
+        pinchos.push(p);
+
+    });
+
+    nivelTexto.textContent = nivel;
+
+    x = 8;
+    y = 0;
+
+    velocidadX = 0;
+    velocidadY = 0;
+
+    enSuelo = true;
+
+    actualizarJugador();
 }
 
-function reiniciar() {
-    nivel = 1;
-    reiniciarJugador();
+
+/* ACTUALIZAR */
+
+function actualizarJugador(){
+
+    player.style.left = x + "%";
+    player.style.bottom =
+        "calc(17% + 25px + " + y + "px)";
 }
 
-function volver() {
-    window.location.href = "index.html";
-}
 
-function pantallaCompleta() {
-    if (canvas.requestFullscreen) {
-        canvas.requestFullscreen();
-    }
-}
+/* MOVIMIENTO */
 
-document.addEventListener("keydown", function(e) {
-    teclas[e.key.toLowerCase()] = true;
+function mover(){
 
-    if (
-        e.key === " " ||
-        e.key === "ArrowUp" ||
-        e.key === "ArrowLeft" ||
-        e.key === "ArrowRight"
-    ) {
-        e.preventDefault();
-    }
+    if(!jugando) return;
 
-    if (
-        (e.key === " " || e.key === "ArrowUp" || e.key.toLowerCase() === "w") &&
-        jugador.enSuelo &&
-        !muerto &&
-        !ganado
-    ) {
-        jugador.vy = jugador.salto;
-        jugador.enSuelo = false;
-    }
+    x += velocidadX;
 
-    if (e.key.toLowerCase() === "r") {
-        reiniciarJugador();
-    }
-});
+    if(x < 1) x = 1;
 
-document.addEventListener("keyup", function(e) {
-    teclas[e.key.toLowerCase()] = false;
-});
+    if(x > 95) x = 95;
 
-function colision(a, b) {
-    return (
-        a.x < b.x + b.w &&
-        a.x + a.w > b.x &&
-        a.y < b.y + b.h &&
-        a.y + a.h > b.y
-    );
-}
+    if(!enSuelo){
 
-function actualizar() {
+        y += velocidadY;
 
-    if (muerto || ganado) {
-        return;
-    }
+        velocidadY -= gravedad;
 
-    jugador.vx = 0;
+        if(y <= 0){
 
-    if (teclas["arrowleft"] || teclas["a"]) {
-        jugador.vx = -jugador.velocidad;
-    }
+            y = 0;
+            velocidadY = 0;
+            enSuelo = true;
 
-    if (teclas["arrowright"] || teclas["d"]) {
-        jugador.vx = jugador.velocidad;
-    }
-
-    jugador.x += jugador.vx;
-
-    if (jugador.x < 0) {
-        jugador.x = 0;
-    }
-
-    if (jugador.x + jugador.w > canvas.width) {
-        jugador.x = canvas.width - jugador.w;
-    }
-
-    jugador.vy += gravedad;
-    jugador.y += jugador.vy;
-
-    jugador.enSuelo = false;
-
-    const datos = niveles[nivel - 1];
-
-    for (const plataforma of datos.plataformas) {
-
-        if (
-            jugador.x + jugador.w > plataforma.x &&
-            jugador.x < plataforma.x + plataforma.w &&
-            jugador.y + jugador.h > plataforma.y &&
-            jugador.y + jugador.h < plataforma.y + plataforma.h + 15 &&
-            jugador.vy >= 0
-        ) {
-            jugador.y = plataforma.y - jugador.h;
-            jugador.vy = 0;
-            jugador.enSuelo = true;
         }
+
     }
 
-    for (const trampa of datos.trampas) {
+    actualizarJugador();
 
-        if (colision(jugador, trampa)) {
+    comprobarPinchos();
+
+    comprobarMeta();
+
+    requestAnimationFrame(mover);
+}
+
+
+/* IZQUIERDA */
+
+function izquierda(){
+
+    velocidadX = -velocidad;
+
+}
+
+
+/* DERECHA */
+
+function derecha(){
+
+    velocidadX = velocidad;
+
+}
+
+
+/* PARAR */
+
+function parar(){
+
+    velocidadX = 0;
+
+}
+
+
+/* SALTAR */
+
+function saltar(){
+
+    if(enSuelo){
+
+        velocidadY = salto;
+
+        enSuelo = false;
+
+    }
+
+}
+
+
+/* PINCHOS */
+
+function comprobarPinchos(){
+
+    const pr = player.getBoundingClientRect();
+
+    for(const p of pinchos){
+
+        const r = p.getBoundingClientRect();
+
+        if(
+
+            pr.left < r.right - 5 &&
+            pr.right > r.left + 5 &&
+            pr.top < r.bottom &&
+            pr.bottom > r.top + 8
+
+        ){
+
             morir();
+
+            return;
+
         }
+
     }
 
-    if (colision(jugador, datos.puerta)) {
+}
+
+
+/* META */
+
+function comprobarMeta(){
+
+    if(x >= 90){
+
         siguienteNivel();
+
     }
 
-    if (jugador.y > canvas.height + 100) {
-        morir();
-    }
 }
 
-function morir() {
 
-    muerto = true;
+/* MORIR */
 
-    setTimeout(function() {
-        reiniciarJugador();
-    }, 800);
+function morir(){
+
+    x = 8;
+    y = 0;
+
+    velocidadX = 0;
+    velocidadY = 0;
+
+    enSuelo = true;
+
+    actualizarJugador();
+
 }
 
-function siguienteNivel() {
 
-    if (nivel < totalNiveles) {
-        nivel++;
-        reiniciarJugador();
-    } else {
-        ganado = true;
-    }
-}
+/* SIGUIENTE NIVEL */
 
-function dibujarFondo() {
+function siguienteNivel(){
 
-    ctx.fillStyle = "#151515";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    if(nivel >= 10){
 
-    ctx.fillStyle = "#1d1d1d";
+        ganar();
 
-    for (let x = 0; x < canvas.width; x += 40) {
-        for (let y = 0; y < canvas.height; y += 40) {
-            ctx.fillRect(x, y, 1, 1);
-        }
-    }
-}
+        return;
 
-function dibujarPlataformas() {
-
-    const datos = niveles[nivel - 1];
-
-    for (const p of datos.plataformas) {
-
-        ctx.fillStyle = "#777";
-        ctx.fillRect(p.x, p.y, p.w, p.h);
-
-        ctx.fillStyle = "#999";
-        ctx.fillRect(p.x, p.y, p.w, 5);
-    }
-}
-
-function dibujarTrampas() {
-
-    const datos = niveles[nivel - 1];
-
-    for (const t of datos.trampas) {
-
-        ctx.fillStyle = "#e33";
-
-        const cantidad = Math.max(1, Math.floor(t.w / 20));
-
-        for (let i = 0; i < cantidad; i++) {
-
-            const x = t.x + i * 20;
-
-            ctx.beginPath();
-            ctx.moveTo(x, t.y + t.h);
-            ctx.lineTo(x + 10, t.y);
-            ctx.lineTo(x + 20, t.y + t.h);
-            ctx.closePath();
-            ctx.fill();
-        }
-    }
-}
-
-function dibujarPuerta() {
-
-    const p = niveles[nivel - 1].puerta;
-
-    ctx.fillStyle = "#42e65b";
-    ctx.fillRect(p.x, p.y, p.w, p.h);
-
-    ctx.fillStyle = "#111";
-    ctx.fillRect(p.x + 10, p.y + 25, 7, 7);
-}
-
-function dibujarJugador() {
-
-    ctx.fillStyle = "#f1f1f1";
-    ctx.fillRect(
-        jugador.x,
-        jugador.y,
-        jugador.w,
-        jugador.h
-    );
-
-    ctx.fillStyle = "#222";
-    ctx.fillRect(
-        jugador.x + 6,
-        jugador.y + 8,
-        5,
-        5
-    );
-
-    ctx.fillRect(
-        jugador.x + 19,
-        jugador.y + 8,
-        5,
-        5
-    );
-}
-
-function dibujarTexto() {
-
-    ctx.fillStyle = "white";
-    ctx.font = "bold 22px Arial";
-
-    ctx.fillText(
-        "NIVEL " + nivel + " / " + totalNiveles,
-        20,
-        35
-    );
-
-    if (muerto) {
-
-        ctx.fillStyle = "#ff4444";
-        ctx.font = "bold 40px Arial";
-        ctx.fillText(
-            "¡UPS!",
-            canvas.width / 2 - 60,
-            canvas.height / 2
-        );
     }
 
-    if (ganado) {
+    nivel++;
 
-        ctx.fillStyle = "#45e65c";
-        ctx.font = "bold 42px Arial";
-        ctx.fillText(
-            "¡GANASTE!",
-            canvas.width / 2 - 120,
-            canvas.height / 2
-        );
+    crearNivel();
 
-        ctx.font = "20px Arial";
-        ctx.fillStyle = "white";
+}
 
-        ctx.fillText(
-            "Presiona REINICIAR para jugar otra vez",
-            canvas.width / 2 - 180,
-            canvas.height / 2 + 45
-        );
+
+/* GANAR */
+
+function ganar(){
+
+    jugando = false;
+
+    document.getElementById("final").style.display="flex";
+
+}
+
+
+/* REINICIAR TODO */
+
+function reiniciarTodo(){
+
+    document.getElementById("final").style.display="none";
+
+    nivel = 1;
+
+    jugando = true;
+
+    crearNivel();
+
+    requestAnimationFrame(mover);
+
+}
+
+
+/* TECLADO */
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="ArrowLeft" || e.key==="a"){
+
+        izquierda();
+
     }
-}
 
-function dibujar() {
+    if(e.key==="ArrowRight" || e.key==="d"){
 
-    dibujarFondo();
-    dibujarPlataformas();
-    dibujarTrampas();
-    dibujarPuerta();
+        derecha();
 
-    if (!ganado) {
-        dibujarJugador();
     }
 
-    dibujarTexto();
-}
+    if(
+        e.key==="ArrowUp" ||
+        e.key==="w" ||
+        e.key===" "
+    ){
 
-function juego() {
+        e.preventDefault();
 
-    actualizar();
-    dibujar();
+        saltar();
 
-    requestAnimationFrame(juego);
-}
+    }
 
-reiniciarJugador();
-juego();
+});
+
+
+document.addEventListener("keyup",function(e){
+
+    if(
+        e.key==="ArrowLeft" ||
+        e.key==="ArrowRight" ||
+        e.key==="a" ||
+        e.key==="d"
+    ){
+
+        parar();
+
+    }
+
+});
+
+
+/* BOTONES */
+
+const botonIzq = document.getElementById("izq");
+const botonDer = document.getElementById("der");
+const botonSalto = document.getElementById("salto");
+
+botonIzq.addEventListener("pointerdown",izquierda);
+botonDer.addEventListener("pointerdown",derecha);
+botonSalto.addEventListener("pointerdown",saltar);
+
+botonIzq.addEventListener("pointerup",parar);
+botonDer.addEventListener("pointerup",parar);
+
+botonIzq.addEventListener("pointerleave",parar);
+botonDer.addEventListener("pointerleave",parar);
+
+
+/* INICIAR */
+
+crearNivel();
+requestAnimationFrame(mover);
 </script>
 
 </body>
