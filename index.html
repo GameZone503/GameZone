@@ -3,197 +3,170 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAMEZONE</title>
+
+<title>GAMEZONE - Todos tus juegos en un solo lugar</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+    box-sizing: border-box;
 }
 
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#070a10;
-    color:white;
-    min-height:100vh;
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080b12;
+    color: white;
 }
 
-/* CABECERA */
-
-header{
-    background:
-        linear-gradient(135deg,#151b28,#080b12);
-    padding:32px 20px 25px;
-    text-align:center;
-    border-bottom:1px solid #293448;
+/* ENCABEZADO */
+header {
+    background: #111827;
+    padding: 22px 20px;
+    text-align: center;
+    border-bottom: 2px solid #263247;
 }
 
-.logo{
-    font-size:52px;
-    font-weight:900;
-    letter-spacing:6px;
+.logo {
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 3px;
 }
 
-.subtitulo{
-    margin-top:8px;
-    color:#aeb7c7;
-    font-size:17px;
-}
-
-/* CONTENEDOR */
-
-.contenedor{
-    width:min(1250px,94%);
-    margin:30px auto 60px;
+.slogan {
+    margin-top: 6px;
+    color: #b8c1d1;
+    font-size: 16px;
 }
 
 /* BUSCADOR */
-
-.buscador{
-    margin-bottom:38px;
+.search-box {
+    padding: 20px;
+    text-align: center;
 }
 
-.buscador input{
-    width:100%;
-    padding:17px 20px;
-    background:#111722;
-    color:white;
-    border:1px solid #303b4d;
-    border-radius:12px;
-    font-size:17px;
-    outline:none;
+#buscador {
+    width: min(700px, 95%);
+    padding: 14px 18px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    background: #161d2b;
+    color: white;
+    font-size: 16px;
+    border: 1px solid #303b50;
 }
 
-.buscador input:focus{
-    border-color:#68778d;
+#buscador::placeholder {
+    color: #8d98aa;
 }
 
-/* SECCIONES */
-
-.seccion{
-    margin-bottom:48px;
+/* CATEGORÍAS */
+.categoria {
+    padding: 10px 20px 30px;
 }
 
-.seccion h2{
-    font-size:29px;
-    margin-bottom:20px;
+.titulo-categoria {
+    font-size: 27px;
+    margin: 10px 0 18px;
+    border-left: 5px solid #4f8cff;
+    padding-left: 12px;
 }
 
-/* GRID */
-
-.juegos{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
+/* JUEGOS */
+.juegos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 20px;
 }
 
 /* TARJETA */
-
-.tarjeta{
-    background:#111722;
-    border:1px solid #293448;
-    border-radius:15px;
-    overflow:hidden;
-    transition:.25s;
+.juego {
+    background: #111827;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #263247;
+    transition: transform .2s, border-color .2s;
 }
 
-.tarjeta:hover{
-    transform:translateY(-6px);
-    border-color:#69778c;
-    box-shadow:0 10px 30px rgba(0,0,0,.35);
+.juego:hover {
+    transform: translateY(-5px);
+    border-color: #4f8cff;
 }
 
-/* PORTADA */
-
-.imagen{
-    width:100%;
-    height:190px;
-    background:#1b2330;
-    overflow:hidden;
-}
-
-.imagen img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    transition:.3s;
-}
-
-.tarjeta:hover .imagen img{
-    transform:scale(1.05);
+/* IMAGEN */
+.portada {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    background: #202938;
 }
 
 /* INFORMACIÓN */
-
-.info{
-    padding:16px;
+.info {
+    padding: 14px;
 }
 
-.info h3{
-    font-size:18px;
-    line-height:1.3;
-    min-height:47px;
-    margin-bottom:13px;
+.nombre {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
 }
 
 /* BOTÓN */
-
-.jugar{
-    display:block;
-    width:100%;
-    padding:12px;
-    border-radius:9px;
-    background:white;
-    color:#10151d;
-    text-decoration:none;
-    text-align:center;
-    font-weight:bold;
-    font-size:16px;
-    transition:.2s;
+.boton {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 11px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background .2s;
 }
 
-.jugar:hover{
-    background:#dce3eb;
-    transform:scale(1.02);
+.boton:hover {
+    background: #3b82f6;
 }
 
-/* OCULTAR TARJETAS DE BÚSQUEDA */
-
-.oculto{
-    display:none !important;
+/* SIN RESULTADOS */
+#sinResultados {
+    display: none;
+    text-align: center;
+    padding: 50px;
+    color: #9ca3af;
+    font-size: 20px;
 }
 
-/* RESPONSIVE */
+/* MÓVIL */
+@media (max-width: 600px) {
 
-@media(max-width:1000px){
-    .juegos{
-        grid-template-columns:repeat(3,1fr);
-    }
-}
-
-@media(max-width:700px){
-    .juegos{
-        grid-template-columns:repeat(2,1fr);
+    .logo {
+        font-size: 32px;
     }
 
-    .logo{
-        font-size:40px;
-    }
-}
-
-@media(max-width:480px){
-    .juegos{
-        grid-template-columns:1fr;
+    .juegos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
     }
 
-    .logo{
-        font-size:32px;
+    .portada {
+        height: 115px;
     }
 
-    .imagen{
-        height:210px;
+    .nombre {
+        font-size: 15px;
+    }
+
+    .info {
+        padding: 10px;
+    }
+
+    .boton {
+        padding: 9px;
+        font-size: 14px;
     }
 }
 </style>
@@ -203,86 +176,80 @@ header{
 
 <header>
     <div class="logo">GAMEZONE</div>
-    <div class="subtitulo">
-        Todos tus juegos en un solo lugar
-    </div>
+    <div class="slogan">Todos tus juegos en un solo lugar</div>
 </header>
 
-<main class="contenedor">
-
-<!-- BUSCADOR -->
-
-<div class="buscador">
+<div class="search-box">
     <input
         type="text"
-        id="buscar"
-        placeholder="🔎 Buscar un juego..."
-        oninput="buscarJuego()"
+        id="buscador"
+        placeholder="Buscar un juego..."
+        onkeyup="buscarJuego()"
     >
 </div>
 
 
-<!-- ================================================= -->
+<!-- ========================= -->
 <!-- MOTOS -->
-<!-- ================================================= -->
+<!-- ========================= -->
 
-<section class="seccion">
+<section class="categoria">
 
-<h2>🏍️ MOTOS</h2>
+<h2 class="titulo-categoria">🏍️ MOTOS</h2>
 
 <div class="juegos">
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/moto-x3m.jpg" alt="Moto X3M">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg"
+        alt="Moto X3M">
         <div class="info">
-            <h3>Moto X3M Bike Race Game</h3>
-            <a class="jugar" href="moto-x3m.html">▶ JUGAR</a>
+            <div class="nombre">Moto X3M Bike Race</div>
+            <a class="boton" href="moto-x3m.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/motorbike.jpg" alt="Motorbike">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/114280/big.gif"
+        alt="GP Moto Racing 2">
         <div class="info">
-            <h3>Motorbike</h3>
-            <a class="jugar" href="motorbike.html">▶ JUGAR</a>
+            <div class="nombre">GP Moto Racing 2</div>
+            <a class="boton" href="gp-moto-racing-2.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/gp-moto-racing-2.jpg" alt="GP Moto Racing 2">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/113515/big.gif"
+        alt="Motorbike">
         <div class="info">
-            <h3>GP Moto Racing 2</h3>
-            <a class="jugar" href="gp-moto-racing-2.html">▶ JUGAR</a>
+            <div class="nombre">Motorbike</div>
+            <a class="boton" href="motorbike.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/2-player-moto-racing.jpg" alt="2 Player Moto Racing">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/112473/big.gif"
+        alt="2 Player Moto Racing">
         <div class="info">
-            <h3>2 Player Moto Racing</h3>
-            <a class="jugar" href="2-player-moto-racing.html">▶ JUGAR</a>
+            <div class="nombre">2 Player Moto Racing</div>
+            <a class="boton" href="2-player-moto-racing.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/super-bike-wild-race.jpg" alt="Super Bike Wild Race">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/111990/big.gif"
+        alt="Super Bike Wild Race">
         <div class="info">
-            <h3>Super Bike Wild Race</h3>
-            <a class="jugar" href="super-bike-wild-race.html">▶ JUGAR</a>
+            <div class="nombre">Super Bike Wild Race</div>
+            <a class="boton" href="super-bike-wild-race.html">JUGAR</a>
         </div>
     </div>
 
@@ -290,67 +257,67 @@ header{
 </section>
 
 
-<!-- ================================================= -->
+<!-- ========================= -->
 <!-- CARROS -->
-<!-- ================================================= -->
+<!-- ========================= -->
 
-<section class="seccion">
+<section class="categoria">
 
-<h2>🚗 CARROS</h2>
+<h2 class="titulo-categoria">🏎️ CARROS</h2>
 
 <div class="juegos">
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/racing-limits.jpg" alt="Racing Limits">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/102992/big.gif"
+        alt="Racing Limits">
         <div class="info">
-            <h3>Racing Limits</h3>
-            <a class="jugar" href="racing-limits.html">▶ JUGAR</a>
+            <div class="nombre">Racing Limits</div>
+            <a class="boton" href="racing-limits.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/traffic-racer.jpg" alt="Traffic Racer">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/102273/big.gif"
+        alt="Traffic Racer">
         <div class="info">
-            <h3>Traffic Racer</h3>
-            <a class="jugar" href="traffic-racer.html">▶ JUGAR</a>
+            <div class="nombre">Traffic Racer</div>
+            <a class="boton" href="traffic-racer.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/car-racing.jpg" alt="Car Racing">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/110979/big.gif"
+        alt="Car Racing">
         <div class="info">
-            <h3>Car Racing</h3>
-            <a class="jugar" href="car-racing.html">▶ JUGAR</a>
+            <div class="nombre">Car Racing</div>
+            <a class="boton" href="car-racing.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/highway-racing.jpg" alt="Highway Racing">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/108772/big.gif"
+        alt="Highway Racing">
         <div class="info">
-            <h3>Highway Racing</h3>
-            <a class="jugar" href="highway-racing.html">▶ JUGAR</a>
+            <div class="nombre">Highway Racing</div>
+            <a class="boton" href="highway-racing.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/city-car-driving.jpg" alt="City Car Driving">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/109481/big.gif"
+        alt="City Car Driving">
         <div class="info">
-            <h3>City Car Driving</h3>
-            <a class="jugar" href="city-car-driving.html">▶ JUGAR</a>
+            <div class="nombre">City Car Driving</div>
+            <a class="boton" href="city-car-driving.html">JUGAR</a>
         </div>
     </div>
 
@@ -358,56 +325,56 @@ header{
 </section>
 
 
-<!-- ================================================= -->
+<!-- ========================= -->
 <!-- FÚTBOL -->
-<!-- ================================================= -->
+<!-- ========================= -->
 
-<section class="seccion">
+<section class="categoria">
 
-<h2>⚽ FÚTBOL</h2>
+<h2 class="titulo-categoria">⚽ FÚTBOL</h2>
 
 <div class="juegos">
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/football-legends.jpg" alt="Football Legends">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/110035/big.gif"
+        alt="Football Legends">
         <div class="info">
-            <h3>Football Legends</h3>
-            <a class="jugar" href="football-legends.html">▶ JUGAR</a>
+            <div class="nombre">Football Legends</div>
+            <a class="boton" href="football-legends.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/world-soccer.jpg" alt="World Soccer">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/109986/big.gif"
+        alt="World Soccer">
         <div class="info">
-            <h3>World Soccer</h3>
-            <a class="jugar" href="world-soccer.html">▶ JUGAR</a>
+            <div class="nombre">World Soccer</div>
+            <a class="boton" href="world-soccer.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/penalty-shootout.jpg" alt="Penalty Shootout">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/106565/big.gif"
+        alt="Penalty Shootout">
         <div class="info">
-            <h3>Penalty Shootout</h3>
-            <a class="jugar" href="penalty-shootout.html">▶ JUGAR</a>
+            <div class="nombre">Penalty Shootout</div>
+            <a class="boton" href="penalty-shootout.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/3d-soccer-champions.jpg" alt="3D Soccer Champions">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/107691/big.gif"
+        alt="3D Soccer Champions">
         <div class="info">
-            <h3>3D Soccer Champions</h3>
-            <a class="jugar" href="3d-soccer-champions.html">▶ JUGAR</a>
+            <div class="nombre">3D Soccer Champions</div>
+            <a class="boton" href="3d-soccer-champions.html">JUGAR</a>
         </div>
     </div>
 
@@ -415,94 +382,100 @@ header{
 </section>
 
 
-<!-- ================================================= -->
-<!-- PLATAFORMAS Y ARCADE -->
-<!-- ================================================= -->
+<!-- ========================= -->
+<!-- PLATAFORMAS -->
+<!-- ========================= -->
 
-<section class="seccion">
+<section class="categoria">
 
-<h2>🎮 PLATAFORMAS Y ARCADE</h2>
+<h2 class="titulo-categoria">🎮 PLATAFORMAS</h2>
 
 <div class="juegos">
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/geometry-dash.jpg" alt="Geometry Dash">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/110166/big.gif"
+        alt="Geometry Dash Lite">
         <div class="info">
-            <h3>Geometry Dash Lite</h3>
-            <a class="jugar" href="geometry-dash-lite.html">▶ JUGAR</a>
+            <div class="nombre">Geometry Dash Lite</div>
+            <a class="boton" href="geometry-dash.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/level-devil.jpg" alt="Level Devil">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/113226/big.gif"
+        alt="Level Devil">
         <div class="info">
-            <h3>Level Devil</h3>
-            <a class="jugar" href="level-devil.html">▶ JUGAR</a>
+            <div class="nombre">Level Devil</div>
+            <a class="boton" href="level-devil.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/sky-riders.jpg" alt="Sky Riders">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/108476/big.gif"
+        alt="Sky Riders">
         <div class="info">
-            <h3>Sky Riders</h3>
-            <a class="jugar" href="sky-riders.html">▶ JUGAR</a>
+            <div class="nombre">Sky Riders</div>
+            <a class="boton" href="sky-riders.html">JUGAR</a>
         </div>
     </div>
 
 
-    <div class="tarjeta">
-        <div class="imagen">
-            <img src="img/wave-road.jpg" alt="Wave Road">
-        </div>
+    <div class="juego">
+        <img class="portada"
+        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/112789/big.gif"
+        alt="Wave Road">
         <div class="info">
-            <h3>Wave Road</h3>
-            <a class="jugar" href="wave-road.html">▶ JUGAR</a>
+            <div class="nombre">Wave Road</div>
+            <a class="boton" href="wave-road.html">JUGAR</a>
         </div>
     </div>
 
 </div>
 </section>
 
-</main>
+
+<div id="sinResultados">
+    No se encontró ningún juego.
+</div>
 
 
 <script>
 
-function buscarJuego(){
+function buscarJuego() {
 
-    const texto =
-        document
-        .getElementById("buscar")
+    const texto = document
+        .getElementById("buscador")
         .value
         .toLowerCase()
         .trim();
 
-    const tarjetas =
-        document.querySelectorAll(".tarjeta");
+    const juegos = document.querySelectorAll(".juego");
 
-    tarjetas.forEach(function(tarjeta){
+    let encontrados = 0;
 
-        const nombre =
-            tarjeta
-            .querySelector("h3")
+    juegos.forEach(function(juego) {
+
+        const nombre = juego
+            .querySelector(".nombre")
             .textContent
             .toLowerCase();
 
-        if(nombre.includes(texto)){
-            tarjeta.classList.remove("oculto");
-        }else{
-            tarjeta.classList.add("oculto");
+        if (nombre.includes(texto)) {
+            juego.style.display = "";
+            encontrados++;
+        } else {
+            juego.style.display = "none";
         }
 
     });
+
+    document.getElementById("sinResultados").style.display =
+        encontrados === 0 ? "block" : "none";
 }
 
 </script>
