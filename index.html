@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -88,7 +87,7 @@ main{
     background:#080c18;
 }
 
-/* COLORES DE CATEGORÍAS */
+/* COLORES */
 .motos .titulo-categoria{
     color:#00eaff;
     border-left:8px solid #00eaff;
@@ -134,7 +133,7 @@ main{
     transform:translateY(-7px);
 }
 
-/* PORTADAS - TODAS DEL MISMO TAMAÑO */
+/* PORTADAS */
 .portada{
     width:100%;
     height:300px;
@@ -174,7 +173,7 @@ main{
     transform:scale(1.06);
 }
 
-/* BOTONES POR CATEGORÍA */
+/* BOTONES */
 .motos .jugar{
     background:#00dcff;
     color:#001018;
@@ -315,19 +314,19 @@ main{
 
 <header>
 
-    <div class="logo">GAMEZONE</div>
+<div class="logo">GAMEZONE</div>
 
-    <div class="subtitulo">
-        Todos tus juegos en un solo lugar
-    </div>
+<div class="subtitulo">
+Todos tus juegos en un solo lugar
+</div>
 
-    <div class="search-box">
-        <input
-            id="buscador"
-            type="text"
-            placeholder="Buscar un juego..."
-        >
-    </div>
+<div class="search-box">
+<input
+id="buscador"
+type="text"
+placeholder="Buscar un juego..."
+>
+</div>
 
 </header>
 
@@ -500,9 +499,13 @@ JUGAR
 <div class="card">
 <img class="portada" src="level-devil.jpg" alt="Level Devil">
 <div class="nombre">Level Devil</div>
-<button class="jugar" onclick="abrirJuego('level-devil.html')">
+
+<!-- VERSIÓN OFICIAL DE POKI -->
+<button class="jugar"
+onclick="abrirJuego('https://poki.com/es/g/level-devil')">
 JUGAR
 </button>
+
 </div>
 
 <div class="card">
@@ -523,28 +526,28 @@ JUGAR
 
 <div id="ventanaJuego">
 
-    <div class="barra-juego">
+<div class="barra-juego">
 
-        <button class="cerrar" onclick="volverAlMenu()">
-            ← VOLVER
-        </button>
+<button class="cerrar" onclick="volverAlMenu()">
+← VOLVER
+</button>
 
-        <button onclick="reiniciarJuego()">
-            🔄 REINICIAR
-        </button>
+<button onclick="reiniciarJuego()">
+🔄 REINICIAR
+</button>
 
-        <button onclick="pantallaCompleta()">
-            ⛶ PANTALLA COMPLETA
-        </button>
+<button onclick="pantallaCompleta()">
+⛶ PANTALLA COMPLETA
+</button>
 
-    </div>
+</div>
 
-    <iframe
-        id="juegoFrame"
-        title="Juego GameZone"
-        allow="fullscreen; autoplay"
-        allowfullscreen>
-    </iframe>
+<iframe
+id="juegoFrame"
+title="Juego GameZone"
+allow="fullscreen; autoplay"
+allowfullscreen>
+</iframe>
 
 </div>
 
@@ -555,22 +558,22 @@ JUGAR
 
 document.getElementById("buscador").addEventListener("input",function(){
 
-    const texto=this.value.toLowerCase().trim();
+const texto=this.value.toLowerCase().trim();
 
-    document.querySelectorAll(".card").forEach(function(card){
+document.querySelectorAll(".card").forEach(function(card){
 
-        const nombre=card
-            .querySelector(".nombre")
-            .textContent
-            .toLowerCase();
+const nombre=card
+.querySelector(".nombre")
+.textContent
+.toLowerCase();
 
-        if(nombre.includes(texto)){
-            card.classList.remove("oculto");
-        }else{
-            card.classList.add("oculto");
-        }
+if(nombre.includes(texto)){
+card.classList.remove("oculto");
+}else{
+card.classList.add("oculto");
+}
 
-    });
+});
 
 });
 
@@ -579,14 +582,23 @@ document.getElementById("buscador").addEventListener("input",function(){
 
 function abrirJuego(juego){
 
-    const ventana=document.getElementById("ventanaJuego");
-    const frame=document.getElementById("juegoFrame");
+const ventana=document.getElementById("ventanaJuego");
+const frame=document.getElementById("juegoFrame");
 
-    frame.src=juego;
+/* Limpiar primero */
+frame.src="";
 
-    ventana.style.display="flex";
+/* Abrir el juego */
+setTimeout(function(){
 
-    document.body.style.overflow="hidden";
+frame.src=juego;
+
+},50);
+
+ventana.style.display="flex";
+
+document.body.style.overflow="hidden";
+
 }
 
 
@@ -594,14 +606,15 @@ function abrirJuego(juego){
 
 function volverAlMenu(){
 
-    const ventana=document.getElementById("ventanaJuego");
-    const frame=document.getElementById("juegoFrame");
+const ventana=document.getElementById("ventanaJuego");
+const frame=document.getElementById("juegoFrame");
 
-    frame.src="";
+frame.src="";
 
-    ventana.style.display="none";
+ventana.style.display="none";
 
-    document.body.style.overflow="auto";
+document.body.style.overflow="auto";
+
 }
 
 
@@ -609,15 +622,22 @@ function volverAlMenu(){
 
 function reiniciarJuego(){
 
-    const frame=document.getElementById("juegoFrame");
+const frame=document.getElementById("juegoFrame");
 
-    const actual=frame.src;
+const actual=frame.src;
 
-    frame.src="";
+if(!actual){
+return;
+}
 
-    setTimeout(function(){
-        frame.src=actual;
-    },100);
+frame.src="";
+
+setTimeout(function(){
+
+frame.src=actual;
+
+},150);
+
 }
 
 
@@ -625,11 +645,18 @@ function reiniciarJuego(){
 
 function pantallaCompleta(){
 
-    const frame=document.getElementById("juegoFrame");
+const frame=document.getElementById("juegoFrame");
 
-    if(frame.requestFullscreen){
-        frame.requestFullscreen();
-    }
+if(frame.requestFullscreen){
+
+frame.requestFullscreen();
+
+}else if(frame.webkitRequestFullscreen){
+
+frame.webkitRequestFullscreen();
+
+}
+
 }
 
 
@@ -637,15 +664,17 @@ function pantallaCompleta(){
 
 document.addEventListener("keydown",function(e){
 
-    if(e.key==="Escape"){
+if(e.key==="Escape"){
 
-        const ventana=document.getElementById("ventanaJuego");
+const ventana=document.getElementById("ventanaJuego");
 
-        if(ventana.style.display==="flex"){
-            volverAlMenu();
-        }
+if(ventana.style.display==="flex"){
 
-    }
+volverAlMenu();
+
+}
+
+}
 
 });
 
@@ -653,4 +682,3 @@ document.addEventListener("keydown",function(e){
 
 </body>
 </html>
-```
