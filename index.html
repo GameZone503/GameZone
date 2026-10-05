@@ -13,161 +13,113 @@
 
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #080b12;
+    background: #0b0f19;
     color: white;
+    font-family: Arial, sans-serif;
 }
 
-/* ENCABEZADO */
 header {
-    background: #111827;
-    padding: 22px 20px;
+    background: linear-gradient(135deg, #111827, #18243a);
+    padding: 30px 20px;
     text-align: center;
-    border-bottom: 2px solid #263247;
 }
 
 .logo {
     font-size: 42px;
     font-weight: 900;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
 }
 
-.slogan {
-    margin-top: 6px;
+.subtitle {
+    margin-top: 8px;
     color: #b8c1d1;
-    font-size: 16px;
+    font-size: 17px;
 }
 
-/* BUSCADOR */
 .search-box {
-    padding: 20px;
-    text-align: center;
+    max-width: 600px;
+    margin: 25px auto 0;
 }
 
-#buscador {
-    width: min(700px, 95%);
-    padding: 14px 18px;
+#search {
+    width: 100%;
+    padding: 15px 18px;
     border: none;
-    outline: none;
     border-radius: 12px;
-    background: #161d2b;
-    color: white;
+    outline: none;
     font-size: 16px;
-    border: 1px solid #303b50;
 }
 
-#buscador::placeholder {
-    color: #8d98aa;
+main {
+    max-width: 1250px;
+    margin: auto;
+    padding: 30px 20px 50px;
 }
 
-/* CATEGORÍAS */
-.categoria {
-    padding: 10px 20px 30px;
+.category-title {
+    font-size: 28px;
+    margin: 35px 0 18px;
 }
 
-.titulo-categoria {
-    font-size: 27px;
-    margin: 10px 0 18px;
-    border-left: 5px solid #4f8cff;
-    padding-left: 12px;
-}
-
-/* JUEGOS */
-.juegos {
+.games {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 20px;
 }
 
-/* TARJETA */
-.juego {
-    background: #111827;
+.card {
+    background: #151c2b;
     border-radius: 14px;
     overflow: hidden;
-    border: 1px solid #263247;
-    transition: transform .2s, border-color .2s;
+    box-shadow: 0 5px 20px rgba(0,0,0,.35);
+    transition: transform .2s, box-shadow .2s;
 }
 
-.juego:hover {
+.card:hover {
     transform: translateY(-5px);
-    border-color: #4f8cff;
+    box-shadow: 0 10px 28px rgba(0,0,0,.55);
 }
 
-/* IMAGEN */
-.portada {
+.cover {
     width: 100%;
-    height: 150px;
+    height: 145px;
     object-fit: cover;
     display: block;
-    background: #202938;
+    background: #263044;
 }
 
-/* INFORMACIÓN */
-.info {
-    padding: 14px;
+.card-content {
+    padding: 15px;
 }
 
-.nombre {
+.game-name {
+    min-height: 45px;
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 12px;
 }
 
-/* BOTÓN */
-.boton {
+.play {
     display: block;
-    width: 100%;
     text-align: center;
-    padding: 11px;
+    text-decoration: none;
     background: #2563eb;
     color: white;
-    text-decoration: none;
+    padding: 11px;
     border-radius: 8px;
     font-weight: bold;
-    transition: background .2s;
+    margin-top: 12px;
 }
 
-.boton:hover {
-    background: #3b82f6;
+.play:hover {
+    background: #1d4ed8;
 }
 
-/* SIN RESULTADOS */
-#sinResultados {
+.no-results {
     display: none;
     text-align: center;
     padding: 50px;
     color: #9ca3af;
     font-size: 20px;
-}
-
-/* MÓVIL */
-@media (max-width: 600px) {
-
-    .logo {
-        font-size: 32px;
-    }
-
-    .juegos {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .portada {
-        height: 115px;
-    }
-
-    .nombre {
-        font-size: 15px;
-    }
-
-    .info {
-        padding: 10px;
-    }
-
-    .boton {
-        padding: 9px;
-        font-size: 14px;
-    }
 }
 </style>
 </head>
@@ -175,308 +127,414 @@ header {
 <body>
 
 <header>
+
     <div class="logo">GAMEZONE</div>
-    <div class="slogan">Todos tus juegos en un solo lugar</div>
+
+    <div class="subtitle">
+        Todos tus juegos en un solo lugar
+    </div>
+
+    <div class="search-box">
+        <input
+            id="search"
+            type="text"
+            placeholder="Buscar juego..."
+        >
+    </div>
+
 </header>
 
-<div class="search-box">
-    <input
-        type="text"
-        id="buscador"
-        placeholder="Buscar un juego..."
-        onkeyup="buscarJuego()"
-    >
-</div>
 
+<main>
 
-<!-- ========================= -->
-<!-- MOTOS -->
-<!-- ========================= -->
+<!-- ================= MOTOS ================= -->
 
-<section class="categoria">
+<h2 class="category-title">🏍️ Motos</h2>
 
-<h2 class="titulo-categoria">🏍️ MOTOS</h2>
+<div class="games">
 
-<div class="juegos">
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg"
-        alt="Moto X3M">
-        <div class="info">
-            <div class="nombre">Moto X3M Bike Race</div>
-            <a class="boton" href="moto-x3m.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg"
+            alt="Moto X3M"
+            data-fallback="moto">
+        <div class="card-content">
+            <div class="game-name">Moto X3M Bike Race</div>
+            <a class="play" href="moto-x3m.html">JUGAR</a>
         </div>
     </div>
 
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/114280/big.gif"
-        alt="GP Moto Racing 2">
-        <div class="info">
-            <div class="nombre">GP Moto Racing 2</div>
-            <a class="boton" href="gp-moto-racing-2.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/114280/big.gif"
+            alt="GP Moto Racing 2"
+            data-fallback="moto">
+        <div class="card-content">
+            <div class="game-name">GP Moto Racing 2</div>
+            <a class="play" href="gp-moto-racing-2.html">JUGAR</a>
         </div>
     </div>
 
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/113515/big.gif"
-        alt="Motorbike">
-        <div class="info">
-            <div class="nombre">Motorbike</div>
-            <a class="boton" href="motorbike.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/108476/big.gif"
+            alt="Motorbike"
+            data-fallback="moto">
+        <div class="card-content">
+            <div class="game-name">Motorbike</div>
+            <a class="play" href="motorbike.html">JUGAR</a>
         </div>
     </div>
 
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/112473/big.gif"
-        alt="2 Player Moto Racing">
-        <div class="info">
-            <div class="nombre">2 Player Moto Racing</div>
-            <a class="boton" href="2-player-moto-racing.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/109000/big.gif"
+            alt="2 Player Moto Racing"
+            data-fallback="moto">
+        <div class="card-content">
+            <div class="game-name">2 Player Moto Racing</div>
+            <a class="play" href="2-player-moto-racing.html">JUGAR</a>
         </div>
     </div>
 
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/111990/big.gif"
-        alt="Super Bike Wild Race">
-        <div class="info">
-            <div class="nombre">Super Bike Wild Race</div>
-            <a class="boton" href="super-bike-wild-race.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/108500/big.gif"
+            alt="Super Bike Wild Race"
+            data-fallback="moto">
+        <div class="card-content">
+            <div class="game-name">Super Bike Wild Race</div>
+            <a class="play" href="super-bike-wild-race.html">JUGAR</a>
         </div>
     </div>
 
 </div>
-</section>
 
 
-<!-- ========================= -->
-<!-- CARROS -->
-<!-- ========================= -->
+<!-- ================= CARROS ================= -->
 
-<section class="categoria">
+<h2 class="category-title">🚗 Carros</h2>
 
-<h2 class="titulo-categoria">🏎️ CARROS</h2>
+<div class="games">
 
-<div class="juegos">
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/102992/big.gif"
-        alt="Racing Limits">
-        <div class="info">
-            <div class="nombre">Racing Limits</div>
-            <a class="boton" href="racing-limits.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/102273/big.gif"
+            alt="Racing Limits"
+            data-fallback="car">
+        <div class="card-content">
+            <div class="game-name">Racing Limits</div>
+            <a class="play" href="racing-limits.html">JUGAR</a>
         </div>
     </div>
 
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/102273/big.gif"
-        alt="Traffic Racer">
-        <div class="info">
-            <div class="nombre">Traffic Racer</div>
-            <a class="boton" href="traffic-racer.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/102273/big.gif"
+            alt="Traffic Racer"
+            data-fallback="car">
+        <div class="card-content">
+            <div class="game-name">Traffic Racer</div>
+            <a class="play" href="traffic-racer.html">JUGAR</a>
         </div>
     </div>
 
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/110979/big.gif"
-        alt="Car Racing">
-        <div class="info">
-            <div class="nombre">Car Racing</div>
-            <a class="boton" href="car-racing.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/110979/big.gif"
+            alt="Car Racing"
+            data-fallback="car">
+        <div class="card-content">
+            <div class="game-name">Car Racing</div>
+            <a class="play" href="car-racing.html">JUGAR</a>
         </div>
     </div>
 
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/108772/big.gif"
-        alt="Highway Racing">
-        <div class="info">
-            <div class="nombre">Highway Racing</div>
-            <a class="boton" href="highway-racing.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/108772/big.gif"
+            alt="Highway Racing"
+            data-fallback="car">
+        <div class="card-content">
+            <div class="game-name">Highway Racing</div>
+            <a class="play" href="highway-racing.html">JUGAR</a>
         </div>
     </div>
 
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/109481/big.gif"
-        alt="City Car Driving">
-        <div class="info">
-            <div class="nombre">City Car Driving</div>
-            <a class="boton" href="city-car-driving.html">JUGAR</a>
-        </div>
-    </div>
-
-</div>
-</section>
-
-
-<!-- ========================= -->
-<!-- FÚTBOL -->
-<!-- ========================= -->
-
-<section class="categoria">
-
-<h2 class="titulo-categoria">⚽ FÚTBOL</h2>
-
-<div class="juegos">
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/110035/big.gif"
-        alt="Football Legends">
-        <div class="info">
-            <div class="nombre">Football Legends</div>
-            <a class="boton" href="football-legends.html">JUGAR</a>
-        </div>
-    </div>
-
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/109986/big.gif"
-        alt="World Soccer">
-        <div class="info">
-            <div class="nombre">World Soccer</div>
-            <a class="boton" href="world-soccer.html">JUGAR</a>
-        </div>
-    </div>
-
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/106565/big.gif"
-        alt="Penalty Shootout">
-        <div class="info">
-            <div class="nombre">Penalty Shootout</div>
-            <a class="boton" href="penalty-shootout.html">JUGAR</a>
-        </div>
-    </div>
-
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/107691/big.gif"
-        alt="3D Soccer Champions">
-        <div class="info">
-            <div class="nombre">3D Soccer Champions</div>
-            <a class="boton" href="3d-soccer-champions.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/109481/big.gif"
+            alt="City Car Driving"
+            data-fallback="car">
+        <div class="card-content">
+            <div class="game-name">City Car Driving</div>
+            <a class="play" href="city-car-driving.html">JUGAR</a>
         </div>
     </div>
 
 </div>
-</section>
 
 
-<!-- ========================= -->
-<!-- PLATAFORMAS -->
-<!-- ========================= -->
+<!-- ================= FÚTBOL ================= -->
 
-<section class="categoria">
+<h2 class="category-title">⚽ Fútbol</h2>
 
-<h2 class="titulo-categoria">🎮 PLATAFORMAS</h2>
+<div class="games">
 
-<div class="juegos">
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/110166/big.gif"
-        alt="Geometry Dash Lite">
-        <div class="info">
-            <div class="nombre">Geometry Dash Lite</div>
-            <a class="boton" href="geometry-dash.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/105978/big.gif"
+            alt="Football Legends"
+            data-fallback="football">
+        <div class="card-content">
+            <div class="game-name">Football Legends</div>
+            <a class="play" href="football-legends.html">JUGAR</a>
         </div>
     </div>
 
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/113226/big.gif"
-        alt="Level Devil">
-        <div class="info">
-            <div class="nombre">Level Devil</div>
-            <a class="boton" href="level-devil.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/110174/big.gif"
+            alt="World Soccer"
+            data-fallback="football">
+        <div class="card-content">
+            <div class="game-name">World Soccer</div>
+            <a class="play" href="world-soccer.html">JUGAR</a>
         </div>
     </div>
 
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/108476/big.gif"
-        alt="Sky Riders">
-        <div class="info">
-            <div class="nombre">Sky Riders</div>
-            <a class="boton" href="sky-riders.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/104756/big.gif"
+            alt="Penalty Shootout"
+            data-fallback="football">
+        <div class="card-content">
+            <div class="game-name">Penalty Shootout</div>
+            <a class="play" href="penalty-shootout.html">JUGAR</a>
         </div>
     </div>
 
-
-    <div class="juego">
-        <img class="portada"
-        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/112789/big.gif"
-        alt="Wave Road">
-        <div class="info">
-            <div class="nombre">Wave Road</div>
-            <a class="boton" href="wave-road.html">JUGAR</a>
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/110100/big.gif"
+            alt="3D Soccer Champions"
+            data-fallback="football">
+        <div class="card-content">
+            <div class="game-name">3D Soccer Champions</div>
+            <a class="play" href="3d-soccer-champions.html">JUGAR</a>
         </div>
     </div>
 
 </div>
-</section>
 
 
-<div id="sinResultados">
+<!-- ================= PLATAFORMAS ================= -->
+
+<h2 class="category-title">🎮 Plataformas</h2>
+
+<div class="games">
+
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/104781/big.gif"
+            alt="Geometry Dash Lite"
+            data-fallback="geometry">
+        <div class="card-content">
+            <div class="game-name">Geometry Dash Lite</div>
+            <a class="play" href="geometry-dash.html">JUGAR</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/113226/big.gif"
+            alt="Level Devil"
+            data-fallback="level">
+        <div class="card-content">
+            <div class="game-name">Level Devil</div>
+            <a class="play" href="level-devil.html">JUGAR</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img
+            class="cover"
+            src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/108476/big.gif"
+            alt="Sky Riders"
+            data-fallback="sky">
+        <div class="card-content">
+            <div class="game-name">Sky Riders</div>
+            <a class="play" href="sky-riders.html">JUGAR</a>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="noResults" class="no-results">
     No se encontró ningún juego.
 </div>
+
+</main>
 
 
 <script>
 
-function buscarJuego() {
+/* ================================
+   PORTADAS DE RESPALDO
+================================ */
 
-    const texto = document
-        .getElementById("buscador")
-        .value
-        .toLowerCase()
-        .trim();
+const fallbacks = {
 
-    const juegos = document.querySelectorAll(".juego");
+    moto:
+    "data:image/svg+xml;charset=UTF-8," +
+    encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="500">
+        <rect width="100%" height="100%" fill="#172033"/>
+        <text x="50%" y="45%" text-anchor="middle"
+        fill="white" font-size="60" font-family="Arial"
+        font-weight="bold">GAMEZONE</text>
+        <text x="50%" y="62%" text-anchor="middle"
+        fill="#60a5fa" font-size="32" font-family="Arial">MOTO</text>
+    </svg>`),
 
-    let encontrados = 0;
+    car:
+    "data:image/svg+xml;charset=UTF-8," +
+    encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="500">
+        <rect width="100%" height="100%" fill="#172033"/>
+        <text x="50%" y="45%" text-anchor="middle"
+        fill="white" font-size="60" font-family="Arial"
+        font-weight="bold">GAMEZONE</text>
+        <text x="50%" y="62%" text-anchor="middle"
+        fill="#60a5fa" font-size="32" font-family="Arial">CARRERAS</text>
+    </svg>`),
 
-    juegos.forEach(function(juego) {
+    football:
+    "data:image/svg+xml;charset=UTF-8," +
+    encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="500">
+        <rect width="100%" height="100%" fill="#172033"/>
+        <text x="50%" y="45%" text-anchor="middle"
+        fill="white" font-size="60" font-family="Arial"
+        font-weight="bold">GAMEZONE</text>
+        <text x="50%" y="62%" text-anchor="middle"
+        fill="#60a5fa" font-size="32" font-family="Arial">FÚTBOL</text>
+    </svg>`),
 
-        const nombre = juego
-            .querySelector(".nombre")
+    geometry:
+    "data:image/svg+xml;charset=UTF-8," +
+    encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="500">
+        <rect width="100%" height="100%" fill="#172033"/>
+        <text x="50%" y="45%" text-anchor="middle"
+        fill="white" font-size="60" font-family="Arial"
+        font-weight="bold">GAMEZONE</text>
+        <text x="50%" y="62%" text-anchor="middle"
+        fill="#60a5fa" font-size="32" font-family="Arial">GEOMETRY</text>
+    </svg>`),
+
+    level:
+    "data:image/svg+xml;charset=UTF-8," +
+    encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="500">
+        <rect width="100%" height="100%" fill="#172033"/>
+        <text x="50%" y="45%" text-anchor="middle"
+        fill="white" font-size="60" font-family="Arial"
+        font-weight="bold">GAMEZONE</text>
+        <text x="50%" y="62%" text-anchor="middle"
+        fill="#60a5fa" font-size="32" font-family="Arial">LEVEL DEVIL</text>
+    </svg>`),
+
+    sky:
+    "data:image/svg+xml;charset=UTF-8," +
+    encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="900" height="500">
+        <rect width="100%" height="100%" fill="#172033"/>
+        <text x="50%" y="45%" text-anchor="middle"
+        fill="white" font-size="60" font-family="Arial"
+        font-weight="bold">GAMEZONE</text>
+        <text x="50%" y="62%" text-anchor="middle"
+        fill="#60a5fa" font-size="32" font-family="Arial">SKY RIDERS</text>
+    </svg>`)
+};
+
+
+/* ================================
+   SI UNA FOTO FALLA
+================================ */
+
+document.querySelectorAll(".cover").forEach(img => {
+
+    img.addEventListener("error", function() {
+
+        const tipo = this.dataset.fallback;
+
+        if (fallbacks[tipo]) {
+            this.src = fallbacks[tipo];
+        }
+
+        this.onerror = null;
+    });
+
+});
+
+
+/* ================================
+   BUSCADOR
+================================ */
+
+const search = document.getElementById("search");
+const cards = document.querySelectorAll(".card");
+const noResults = document.getElementById("noResults");
+
+search.addEventListener("input", function() {
+
+    const text = this.value.toLowerCase().trim();
+
+    let visibles = 0;
+
+    cards.forEach(card => {
+
+        const name =
+            card.querySelector(".game-name")
             .textContent
             .toLowerCase();
 
-        if (nombre.includes(texto)) {
-            juego.style.display = "";
-            encontrados++;
+        if (name.includes(text)) {
+
+            card.style.display = "";
+
+            visibles++;
+
         } else {
-            juego.style.display = "none";
+
+            card.style.display = "none";
+
         }
 
     });
 
-    document.getElementById("sinResultados").style.display =
-        encontrados === 0 ? "block" : "none";
-}
+    noResults.style.display =
+        visibles === 0 ? "block" : "none";
+
+});
 
 </script>
 
