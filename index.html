@@ -112,7 +112,7 @@ main{
     background:#1d4ed8;
 }
 
-/* VENTANA DEL JUEGO */
+/* VENTANA DE LOS JUEGOS */
 #ventanaJuego{
     position:fixed;
     inset:0;
@@ -215,7 +215,7 @@ main{
 
 <main>
 
-<!-- MOTOS -->
+<!-- ================= MOTOS ================= -->
 <section class="seccion">
 <h2>🏍️ MOTOS</h2>
 
@@ -265,7 +265,7 @@ main{
 </section>
 
 
-<!-- CARROS -->
+<!-- ================= CARROS ================= -->
 <section class="seccion">
 <h2>🚗 CARROS</h2>
 
@@ -315,7 +315,7 @@ main{
 </section>
 
 
-<!-- FÚTBOL -->
+<!-- ================= FÚTBOL ================= -->
 <section class="seccion">
 <h2>⚽ FÚTBOL</h2>
 
@@ -341,173 +341,5 @@ main{
 <img class="portada" src="penalty-shootout.jpg" alt="Penalty Shootout">
 <div class="info">
 <div class="nombre">Penalty Shootout</div>
-<button class="jugar" onclick="abrirJuego('penalty-shootout.html')">JUGAR</button>
-</div>
-</div>
-
-<div class="card">
-<img class="portada" src="3d-soccer-champions.jpg" alt="3D Soccer Champions">
-<div class="info">
-<div class="nombre">3D Soccer Champions</div>
-<button class="jugar" onclick="abrirJuego('3d-soccer-champions.html')">JUGAR</button>
-</div>
-</div>
-
-</div>
-</section>
-
-
-<!-- PLATAFORMAS -->
-<section class="seccion">
-<h2>🎮 PLATAFORMAS</h2>
-
-<div class="juegos">
-
-<div class="card">
-<img class="portada" src="geometry-dash.jpg" alt="Geometry Dash">
-<div class="info">
-<div class="nombre">Geometry Dash</div>
-<button class="jugar" onclick="abrirJuego('geometry-dash.html')">JUGAR</button>
-</div>
-</div>
-
-<div class="card">
-<img class="portada" src="sky-riders.jpg" alt="Sky Riders">
-<div class="info">
-<div class="nombre">Sky Riders</div>
-<button class="jugar" onclick="abrirJuego('sky-riders.html')">JUGAR</button>
-</div>
-</div>
-
-</div>
-</section>
-
-</main>
-
-
-<!-- VISOR DE JUEGOS -->
-<div id="ventanaJuego">
-
-    <div class="barra-juego">
-
-        <button class="cerrar" onclick="volverAlMenu()">
-            ← VOLVER
-        </button>
-
-        <button onclick="reiniciarJuego()">
-            🔄 REINICIAR
-        </button>
-
-        <button onclick="pantallaCompleta()">
-            ⛶ PANTALLA COMPLETA
-        </button>
-
-    </div>
-
-    <iframe
-        id="juegoFrame"
-        title="Juego GameZone"
-        allow="fullscreen; autoplay"
-        allowfullscreen>
-    </iframe>
-
-</div>
-
-
-<script>
-
-let juegoActual = "";
-
-function abrirJuego(juego){
-
-    juegoActual = juego;
-
-    const ventana = document.getElementById("ventanaJuego");
-    const frame = document.getElementById("juegoFrame");
-
-    frame.src = juego;
-
-    ventana.style.display = "flex";
-
-    document.body.style.overflow = "hidden";
-}
-
-
-function volverAlMenu(){
-
-    const ventana = document.getElementById("ventanaJuego");
-    const frame = document.getElementById("juegoFrame");
-
-    frame.src = "";
-
-    ventana.style.display = "none";
-
-    document.body.style.overflow = "auto";
-}
-
-
-function reiniciarJuego(){
-
-    const frame = document.getElementById("juegoFrame");
-
-    if(juegoActual){
-        frame.src = "";
-        setTimeout(function(){
-            frame.src = juegoActual;
-        },50);
-    }
-}
-
-
-function pantallaCompleta(){
-
-    const frame = document.getElementById("juegoFrame");
-
-    if(frame.requestFullscreen){
-        frame.requestFullscreen();
-    }else if(frame.webkitRequestFullscreen){
-        frame.webkitRequestFullscreen();
-    }
-}
-
-
-function buscarJuego(){
-
-    const texto = document
-        .getElementById("buscador")
-        .value
-        .toLowerCase()
-        .trim();
-
-    const tarjetas = document.querySelectorAll(".card");
-
-    tarjetas.forEach(function(card){
-
-        const nombre = card
-            .querySelector(".nombre")
-            .textContent
-            .toLowerCase();
-
-        if(nombre.includes(texto)){
-            card.style.display = "";
-        }else{
-            card.style.display = "none";
-        }
-
-    });
-}
-
-
-document.addEventListener("keydown", function(e){
-
-    if(e.key === "Escape"){
-        volverAlMenu();
-    }
-
-});
-
-</script>
-
-</body>
-</html>
+<button class="jugar" onclick="abrirJuego('penalt
 ```
