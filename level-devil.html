@@ -2,280 +2,297 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Level Devil - GameZone</title>
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-    background:#f05a24;
-    font-family:Arial,sans-serif;
-    overflow:hidden;
-    touch-action:none;
+  overflow:hidden;
+  background:#111;
+  font-family:Arial,sans-serif;
+  user-select:none;
 }
 
 #game{
-    width:100vw;
-    height:100vh;
-    display:flex;
-    flex-direction:column;
+  width:100vw;
+  height:100vh;
+  background:#f5a623;
+  position:relative;
 }
 
-.top{
-    height:58px;
-    background:#171717;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 18px;
-    z-index:20;
+#bar{
+  height:58px;
+  background:#171717;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  position:relative;
+  z-index:50;
 }
 
-.top h1{
-    font-size:22px;
+#bar strong{
+  font-size:21px;
 }
 
-#levelText{
-    font-weight:bold;
+#levelName{
+  font-weight:bold;
 }
 
 #restart{
-    background:#e53935;
-    color:white;
-    border:0;
-    border-radius:8px;
-    padding:10px 15px;
-    font-weight:bold;
-    cursor:pointer;
+  border:0;
+  background:#e53935;
+  color:white;
+  padding:10px 16px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+#gameArea{
+  position:absolute;
+  left:0;
+  right:0;
+  top:58px;
+  bottom:0;
+  overflow:hidden;
 }
 
 #world{
-    position:relative;
-    flex:1;
-    overflow:hidden;
-    background:#f4b52b;
+  position:absolute;
+  width:1100px;
+  height:620px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  background:#f8c62d;
+  overflow:hidden;
 }
 
-#level{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    width:min(1000px,95vw);
-    height:min(560px,78vh);
-    background:#f7c934;
-    overflow:hidden;
-}
+/* PERSONAJE */
 
-/* jugador */
 #player{
-    position:absolute;
-    width:30px;
-    height:38px;
-    background:#111;
-    border-radius:5px 5px 2px 2px;
-    z-index:10;
+  position:absolute;
+  width:28px;
+  height:38px;
+  background:#111;
+  border-radius:5px 5px 3px 3px;
+  z-index:20;
 }
 
-/* suelo */
-.platform{
-    position:absolute;
-    background:#e63b32;
-    height:28px;
-    z-index:4;
+#player:before{
+  content:"";
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:white;
+  border-radius:50%;
+  left:6px;
+  top:8px;
 }
 
-/* techo */
-.ceiling{
-    position:absolute;
-    background:#e63b32;
-    height:25px;
-    z-index:4;
+#player:after{
+  content:"";
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:white;
+  border-radius:50%;
+  right:6px;
+  top:8px;
 }
 
-/* pinchos */
+/* SUELO */
+
+.block{
+  position:absolute;
+  background:#df3b32;
+  z-index:5;
+}
+
+/* PINCHOS */
+
 .spike{
-    position:absolute;
-    width:0;
-    height:0;
-    border-left:13px solid transparent;
-    border-right:13px solid transparent;
-    border-bottom:30px solid #151515;
-    z-index:7;
+  position:absolute;
+  width:0;
+  height:0;
+  border-left:15px solid transparent;
+  border-right:15px solid transparent;
+  border-bottom:34px solid #151515;
+  z-index:15;
 }
 
-/* llave */
+/* LLAVE */
+
 .key{
-    position:absolute;
-    width:20px;
-    height:20px;
-    border:5px solid #ffdf00;
-    border-radius:50%;
-    z-index:8;
+  position:absolute;
+  width:22px;
+  height:22px;
+  border:5px solid #ffe600;
+  border-radius:50%;
+  z-index:16;
+  filter:drop-shadow(0 0 3px #fff);
 }
 
 .key:after{
-    content:"";
-    position:absolute;
-    width:15px;
-    height:5px;
-    background:#ffdf00;
-    left:12px;
-    top:3px;
+  content:"";
+  position:absolute;
+  width:18px;
+  height:5px;
+  background:#ffe600;
+  right:-17px;
+  top:4px;
 }
 
-/* puerta */
+/* PUERTA */
+
 .door{
-    position:absolute;
-    width:48px;
-    height:72px;
-    background:#eeeeee;
-    border:5px solid #555;
-    bottom:28px;
-    z-index:5;
+  position:absolute;
+  width:52px;
+  height:76px;
+  background:#eee;
+  border:5px solid #555;
+  z-index:10;
+}
+
+.door.locked{
+  background:#777;
 }
 
 .door:after{
-    content:"";
-    position:absolute;
-    width:7px;
-    height:7px;
-    background:#222;
-    border-radius:50%;
-    right:7px;
-    top:32px;
+  content:"";
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#222;
+  right:7px;
+  top:32px;
 }
 
-.locked{
-    background:#777;
-}
+/* PORTAL */
 
-/* portal */
 #portal{
-    position:absolute;
-    width:75px;
-    height:105px;
-    border-radius:50%;
-    border:9px solid #682cff;
-    background:#24104c;
-    box-shadow:
-        0 0 15px #7d42ff,
-        0 0 35px #7d42ff,
-        inset 0 0 20px #b987ff;
-    z-index:12;
-    display:none;
-    animation:portal 1s infinite alternate;
+  display:none;
+  position:absolute;
+  width:78px;
+  height:110px;
+  border-radius:50%;
+  background:#210a48;
+  border:8px solid #682cff;
+  box-shadow:
+    0 0 10px #8d5aff,
+    0 0 30px #6c35ff,
+    inset 0 0 25px #c19aff;
+  z-index:25;
+  animation:portal 1s infinite alternate;
 }
 
 @keyframes portal{
-    from{
-        transform:scale(.92);
-    }
-    to{
-        transform:scale(1.08);
-    }
+  from{transform:scale(.94)}
+  to{transform:scale(1.08)}
 }
 
-#portalText{
-    position:absolute;
-    color:white;
-    font-size:14px;
-    font-weight:bold;
-    text-align:center;
-    width:180px;
-    left:-53px;
-    top:-35px;
-    text-shadow:0 2px 4px #000;
+#portalLabel{
+  position:absolute;
+  width:160px;
+  left:-49px;
+  top:-34px;
+  color:white;
+  text-align:center;
+  font-weight:bold;
+  text-shadow:0 2px 5px black;
 }
 
-/* mensaje */
+/* MENSAJE */
+
 #message{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    background:rgba(0,0,0,.88);
-    color:white;
-    padding:25px;
-    border-radius:15px;
-    text-align:center;
-    z-index:30;
-    display:none;
-    min-width:260px;
+  display:none;
+  position:absolute;
+  z-index:100;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(15,15,15,.95);
+  color:white;
+  padding:28px;
+  border-radius:14px;
+  text-align:center;
+  min-width:290px;
 }
 
 #message h2{
-    margin-bottom:10px;
+  margin-bottom:10px;
+}
+
+#message p{
+  color:#ddd;
 }
 
 #message button{
-    margin-top:15px;
-    padding:11px 20px;
-    border:0;
-    border-radius:8px;
-    background:#35c759;
-    color:white;
-    font-weight:bold;
+  margin-top:18px;
+  border:0;
+  background:#39c463;
+  color:white;
+  padding:12px 22px;
+  border-radius:8px;
+  font-weight:bold;
 }
 
-/* controles */
-.controls{
-    position:absolute;
-    bottom:15px;
-    left:15px;
-    display:flex;
-    gap:10px;
-    z-index:25;
+/* CONTROLES */
+
+#controls{
+  position:absolute;
+  bottom:18px;
+  left:18px;
+  z-index:60;
+  display:flex;
+  gap:9px;
 }
 
-.controls button{
-    width:60px;
-    height:60px;
-    border:0;
-    border-radius:12px;
-    background:rgba(0,0,0,.65);
-    color:white;
-    font-size:25px;
+.control{
+  width:58px;
+  height:58px;
+  border:0;
+  border-radius:12px;
+  background:rgba(0,0,0,.65);
+  color:white;
+  font-size:24px;
 }
 
-.rightControls{
-    position:absolute;
-    bottom:15px;
-    right:15px;
-    z-index:25;
+#jump{
+  margin-left:8px;
 }
 
-.rightControls button{
-    width:75px;
-    height:60px;
-    border:0;
-    border-radius:12px;
-    background:rgba(0,0,0,.65);
-    color:white;
-    font-size:13px;
-    font-weight:bold;
+#mobileRestart{
+  position:absolute;
+  right:18px;
+  bottom:18px;
+  z-index:60;
+  border:0;
+  border-radius:10px;
+  background:rgba(0,0,0,.65);
+  color:white;
+  padding:14px;
+  font-weight:bold;
 }
 
-@media(max-width:600px){
-    #level{
-        width:96vw;
-        height:65vh;
-    }
+@media(max-width:700px){
+  #world{
+    transform:translate(-50%,-50%) scale(.72);
+  }
+}
 
-    .top h1{
-        font-size:17px;
-    }
-
-    .controls button{
-        width:55px;
-        height:55px;
-    }
+@media(max-width:500px){
+  #world{
+    transform:translate(-50%,-50%) scale(.58);
+  }
 }
 </style>
 </head>
@@ -284,561 +301,1026 @@ body{
 
 <div id="game">
 
-    <div class="top">
-        <h1>GAMEZONE</h1>
-        <div id="levelText">NIVEL 1</div>
-        <button id="restart">🔄</button>
+  <div id="bar">
+    <strong>GAMEZONE</strong>
+    <span id="levelName">NIVEL 1</span>
+    <button id="restart">🔄 REINICIAR</button>
+  </div>
+
+  <div id="gameArea">
+
+    <div id="world"></div>
+
+    <div id="player"></div>
+
+    <div id="portal">
+      <div id="portalLabel">PORTAL</div>
     </div>
 
-    <div id="world">
-
-        <div id="level"></div>
-
-        <div id="player"></div>
-
-        <div id="portal">
-            <div id="portalText">PORTAL</div>
-        </div>
-
-        <div id="message">
-            <h2 id="messageTitle">¡Nivel completado!</h2>
-            <p id="messageText"></p>
-            <button id="messageButton">CONTINUAR</button>
-        </div>
-
-        <div class="controls">
-            <button id="left">◀</button>
-            <button id="jump">▲</button>
-            <button id="right">▶</button>
-        </div>
-
-        <div class="rightControls">
-            <button id="mobileRestart">REINICIAR</button>
-        </div>
-
+    <div id="message">
+      <h2 id="messageTitle"></h2>
+      <p id="messageText"></p>
+      <button id="messageButton"></button>
     </div>
+
+    <div id="controls">
+      <button class="control" id="left">◀</button>
+      <button class="control" id="jump">▲</button>
+      <button class="control" id="right">▶</button>
+    </div>
+
+    <button id="mobileRestart">REINICIAR</button>
+
+  </div>
 </div>
 
 <script>
-const levelBox = document.getElementById("level");
-const player = document.getElementById("player");
-const portal = document.getElementById("portal");
-const levelText = document.getElementById("levelText");
-const message = document.getElementById("message");
-const messageTitle = document.getElementById("messageTitle");
-const messageText = document.getElementById("messageText");
-const messageButton = document.getElementById("messageButton");
 
-let currentLevel = 1;
+const world=document.getElementById("world");
+const player=document.getElementById("player");
+const portal=document.getElementById("portal");
+const levelName=document.getElementById("levelName");
 
-let px = 50;
-let py = 0;
-let vx = 0;
-let vy = 0;
+const message=document.getElementById("message");
+const messageTitle=document.getElementById("messageTitle");
+const messageText=document.getElementById("messageText");
+const messageButton=document.getElementById("messageButton");
 
-let leftPressed = false;
-let rightPressed = false;
-let jumpPressed = false;
+let level=1;
 
-let grounded = false;
-let hasKey = false;
-let levelWon = false;
+let x=55;
+let y=520;
 
-const gravity = 0.65;
-const speed = 4.5;
-const jumpPower = 12;
+let vx=0;
+let vy=0;
 
-const levels = [];
+let left=false;
+let right=false;
 
-/* crear 20 niveles */
-for(let i=1;i<=20;i++){
+let grounded=false;
+let keyTaken=false;
+let finished=false;
 
-    let data = {
-        key:null,
-        door:{x:900},
-        spikes:[],
-        platforms:[
-            {x:0,y:500,w:1000,h:28}
-        ]
-    };
+let jumpRequest=false;
 
-    if(i>1){
-        data.spikes.push(
-            {x:250,y:470},
-            {x:420,y:470},
-            {x:650,y:470}
-        );
-    }
+const gravity=.62;
+const moveSpeed=4.5;
+const jumpPower=12;
 
-    if(i%2===0){
-        data.key={x:500,y:400};
 
-        data.platforms.push(
-            {x:350,y:410,w:180,h:22},
-            {x:600,y:350,w:180,h:22}
-        );
-    }
+/* =========================
+   NIVELES
+========================= */
 
-    if(i%3===0){
-        data.spikes.push(
-            {x:330,y:380},
-            {x:550,y:320},
-            {x:760,y:470}
-        );
-    }
+const levels=[
 
-    if(i%4===0){
-        data.platforms.push(
-            {x:150,y:390,w:130,h:22},
-            {x:430,y:300,w:150,h:22},
-            {x:700,y:250,w:140,h:22}
-        );
+/* 1 */
+{
+  key:null,
+  door:{x:1000,y:544},
+  blocks:[
+    [0,572,1100,48]
+  ],
+  spikes:[
+    [400,538],
+    [430,538],
+    [700,538]
+  ]
+},
 
-        data.key={x:735,y:200};
-    }
+/* 2 */
+{
+  key:{x:530,y:480},
+  door:{x:1010,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [300,510,180,20],
+    [520,450,150,20],
+    [760,510,150,20]
+  ],
+  spikes:[
+    [180,538],
+    [200,538],
+    [680,538]
+  ]
+},
 
-    levels.push(data);
+/* 3 */
+{
+  key:{x:840,y:350},
+  door:{x:1010,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [180,510,140,20],
+    [400,430,150,20],
+    [650,350,170,20],
+    [900,450,150,20]
+  ],
+  spikes:[
+    [340,538],
+    [360,538],
+    [560,538],
+    [580,538],
+    [820,538]
+  ]
+},
+
+/* 4 */
+{
+  key:{x:480,y:300},
+  door:{x:990,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [250,500,140,20],
+    [430,400,150,20],
+    [650,300,160,20],
+    [850,400,150,20]
+  ],
+  spikes:[
+    [150,538],
+    [170,538],
+    [600,538],
+    [620,538],
+    [800,538]
+  ]
+},
+
+/* 5 */
+{
+  key:{x:760,y:480},
+  door:{x:1010,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [350,500,120,20],
+    [600,450,130,20],
+    [800,510,160,20]
+  ],
+  spikes:[
+    [250,538],
+    [270,538],
+    [480,538],
+    [500,538],
+    [740,538]
+  ]
+},
+
+/* 6 */
+{
+  key:{x:300,y:380},
+  door:{x:1000,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [180,430,150,20],
+    [430,500,150,20],
+    [650,400,160,20],
+    [850,500,130,20]
+  ],
+  spikes:[
+    [350,538],
+    [370,538],
+    [590,538],
+    [610,538],
+    [810,538]
+  ]
+},
+
+/* 7 */
+{
+  key:{x:670,y:300},
+  door:{x:1010,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [300,490,130,20],
+    [500,390,130,20],
+    [680,300,150,20],
+    [880,430,140,20]
+  ],
+  spikes:[
+    [150,538],
+    [170,538],
+    [450,538],
+    [470,538],
+    [820,538]
+  ]
+},
+
+/* 8 */
+{
+  key:{x:250,y:350},
+  door:{x:1000,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [150,450,160,20],
+    [390,350,150,20],
+    [620,450,150,20],
+    [820,350,150,20]
+  ],
+  spikes:[
+    [330,538],
+    [350,538],
+    [550,538],
+    [570,538],
+    [780,538]
+  ]
+},
+
+/* 9 */
+{
+  key:{x:900,y:280},
+  door:{x:1000,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [250,500,150,20],
+    [470,420,150,20],
+    [700,340,170,20],
+    [900,430,120,20]
+  ],
+  spikes:[
+    [420,538],
+    [440,538],
+    [640,538],
+    [660,538],
+    [870,538]
+  ]
+},
+
+/* 10 */
+{
+  key:{x:540,y:300},
+  door:{x:1010,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [200,470,140,20],
+    [400,370,160,20],
+    [620,470,140,20],
+    [820,370,150,20]
+  ],
+  spikes:[
+    [350,538],
+    [370,538],
+    [580,538],
+    [600,538],
+    [780,538]
+  ]
+},
+
+/* 11 */
+{
+  key:{x:750,y:280},
+  door:{x:1000,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [180,500,120,20],
+    [350,430,120,20],
+    [530,350,120,20],
+    [700,270,150,20],
+    [900,430,120,20]
+  ],
+  spikes:[
+    [300,538],
+    [320,538],
+    [480,538],
+    [500,538],
+    [670,538],
+    [690,538]
+  ]
+},
+
+/* 12 */
+{
+  key:{x:420,y:280},
+  door:{x:1010,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [250,450,160,20],
+    [430,350,150,20],
+    [650,450,150,20],
+    [850,350,150,20]
+  ],
+  spikes:[
+    [160,538],
+    [180,538],
+    [410,538],
+    [430,538],
+    [810,538]
+  ]
+},
+
+/* 13 */
+{
+  key:{x:780,y:380},
+  door:{x:1010,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [300,480,130,20],
+    [500,400,130,20],
+    [700,320,150,20],
+    [880,430,130,20]
+  ],
+  spikes:[
+    [220,538],
+    [240,538],
+    [450,538],
+    [470,538],
+    [650,538],
+    [670,538]
+  ]
+},
+
+/* 14 */
+{
+  key:{x:300,y:300},
+  door:{x:1000,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [150,430,140,20],
+    [350,330,140,20],
+    [550,430,140,20],
+    [750,330,160,20]
+  ],
+  spikes:[
+    [300,538],
+    [320,538],
+    [500,538],
+    [520,538],
+    [700,538]
+  ]
+},
+
+/* 15 */
+{
+  key:{x:650,y:250},
+  door:{x:1010,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [220,500,120,20],
+    [400,400,130,20],
+    [580,300,130,20],
+    [760,400,150,20]
+  ],
+  spikes:[
+    [350,538],
+    [370,538],
+    [540,538],
+    [560,538],
+    [720,538],
+    [740,538]
+  ]
+},
+
+/* 16 */
+{
+  key:{x:880,y:300},
+  door:{x:1010,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [180,450,150,20],
+    [380,350,140,20],
+    [570,450,140,20],
+    [760,350,170,20]
+  ],
+  spikes:[
+    [330,538],
+    [350,538],
+    [530,538],
+    [550,538],
+    [710,538]
+  ]
+},
+
+/* 17 */
+{
+  key:{x:500,y:250},
+  door:{x:1010,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [250,470,130,20],
+    [420,350,150,20],
+    [620,250,140,20],
+    [820,400,160,20]
+  ],
+  spikes:[
+    [170,538],
+    [190,538],
+    [390,538],
+    [410,538],
+    [580,538],
+    [600,538],
+    [780,538]
+  ]
+},
+
+/* 18 */
+{
+  key:{x:730,y:260},
+  door:{x:1010,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [160,470,140,20],
+    [360,390,140,20],
+    [550,310,140,20],
+    [730,230,150,20],
+    [900,400,120,20]
+  ],
+  spikes:[
+    [310,538],
+    [330,538],
+    [510,538],
+    [530,538],
+    [700,538],
+    [720,538]
+  ]
+},
+
+/* 19 */
+{
+  key:{x:450,y:280},
+  door:{x:1010,y:496},
+  blocks:[
+    [0,572,1100,48],
+    [220,450,150,20],
+    [400,350,150,20],
+    [600,450,150,20],
+    [800,350,160,20]
+  ],
+  spikes:[
+    [160,538],
+    [180,538],
+    [380,538],
+    [400,538],
+    [560,538],
+    [580,538],
+    [770,538]
+  ]
+},
+
+/* 20 */
+{
+  key:{x:520,y:300},
+  door:{x:900,y:400},
+  blocks:[
+    [0,572,1100,48],
+    [250,480,150,20],
+    [450,380,170,20],
+    [680,300,170,20],
+    [880,450,130,20]
+  ],
+  spikes:[
+    [150,538],
+    [170,538],
+    [420,538],
+    [440,538],
+    [630,538],
+    [650,538]
+  ]
 }
 
-/* nivel 20: portal */
-levels[19].key={
-    x:500,
-    y:380
-};
+];
 
-levels[19].platforms.push(
-    {x:350,y:420,w:180,h:22},
-    {x:650,y:360,w:170,h:22}
-);
 
-/* portal */
-function createPortal(){
-    portal.style.left="850px";
-    portal.style.top="360px";
-    portal.style.display="block";
+/* =========================
+   CARGAR NIVEL
+========================= */
+
+function loadLevel(n){
+
+  level=n;
+
+  const data=levels[(n-1)%20];
+
+  world.innerHTML="";
+
+  portal.style.display="none";
+
+  keyTaken=false;
+  finished=false;
+
+  x=55;
+  y=530;
+  vx=0;
+  vy=0;
+
+  levelName.textContent=
+    n<=20 ? "NIVEL "+n : "ZONA 2 • NIVEL "+(n-20);
+
+  /* bloques */
+
+  data.blocks.forEach(b=>{
+
+    const el=document.createElement("div");
+
+    el.className="block";
+
+    el.style.left=b[0]+"px";
+    el.style.top=b[1]+"px";
+    el.style.width=b[2]+"px";
+    el.style.height=b[3]+"px";
+
+    world.appendChild(el);
+
+  });
+
+
+  /* pinchos */
+
+  data.spikes.forEach(s=>{
+
+    const el=document.createElement("div");
+
+    el.className="spike";
+
+    el.style.left=s[0]+"px";
+    el.style.top=s[1]+"px";
+
+    world.appendChild(el);
+
+  });
+
+
+  /* llave */
+
+  if(data.key){
+
+    const key=document.createElement("div");
+
+    key.className="key";
+
+    key.id="key";
+
+    key.style.left=data.key.x+"px";
+    key.style.top=data.key.y+"px";
+
+    world.appendChild(key);
+
+  }
+
+
+  /* puerta */
+
+  const door=document.createElement("div");
+
+  door.id="door";
+
+  door.className="door";
+
+  if(data.key){
+    door.classList.add("locked");
+  }
+
+  door.style.left=data.door.x+"px";
+  door.style.top=data.door.y+"px";
+
+  world.appendChild(door);
+
+
+  player.style.left=x+"px";
+  player.style.top=y+"px";
+
+  message.style.display="none";
 }
 
-/* cargar nivel */
-function loadLevel(number){
 
-    currentLevel=number;
+/* =========================
+   COLISIONES
+========================= */
 
-    levelText.textContent=
-        number<=20
-        ? "NIVEL "+number
-        : "ZONA 2 - NIVEL "+(number-20);
+function collision(a,b){
 
-    levelBox.innerHTML="";
+  return(
+    a.left<b.right &&
+    a.right>b.left &&
+    a.top<b.bottom &&
+    a.bottom>b.top
+  );
 
-    hasKey=false;
-    levelWon=false;
+}
 
-    portal.style.display="none";
 
-    px=50;
-    py=430;
-    vx=0;
-    vy=0;
+function playerRect(){
 
-    const data=levels[(number-1)%20];
+  return{
+    left:x,
+    right:x+28,
+    top:y,
+    bottom:y+38
+  };
 
-    /* plataformas */
-    data.platforms.forEach(p=>{
+}
 
-        const el=document.createElement("div");
 
-        el.className="platform";
+/* =========================
+   ACTUALIZAR JUEGO
+========================= */
 
-        el.style.left=p.x+"px";
-        el.style.top=p.y+"px";
-        el.style.width=p.w+"px";
-        el.style.height=p.h+"px";
+function gameLoop(){
 
-        levelBox.appendChild(el);
-    });
+  if(!finished){
 
-    /* pinchos */
-    data.spikes.forEach(s=>{
-
-        const el=document.createElement("div");
-
-        el.className="spike";
-
-        el.style.left=s.x+"px";
-        el.style.top=s.y+"px";
-
-        levelBox.appendChild(el);
-    });
-
-    /* llave */
-    if(data.key){
-
-        const key=document.createElement("div");
-
-        key.className="key";
-
-        key.style.left=data.key.x+"px";
-        key.style.top=data.key.y+"px";
-
-        key.id="key";
-
-        levelBox.appendChild(key);
+    if(left){
+      vx=-moveSpeed;
+    }
+    else if(right){
+      vx=moveSpeed;
+    }
+    else{
+      vx*=.78;
     }
 
-    /* puerta */
-    const door=document.createElement("div");
+    x+=vx;
 
-    door.className="door locked";
-    door.style.left=data.door.x+"px";
+    if(x<0)x=0;
+    if(x>1060)x=1060;
 
-    door.id="door";
-
-    levelBox.appendChild(door);
-
-    player.style.left=px+"px";
-    player.style.top=py+"px";
-
-    message.style.display="none";
-}
-
-/* colisión */
-function rects(a,b){
-
-    return(
-        a.left < b.right &&
-        a.right > b.left &&
-        a.top < b.bottom &&
-        a.bottom > b.top
-    );
-}
-
-function getRect(el){
-    return el.getBoundingClientRect();
-}
-
-/* comprobar mundo */
-function update(){
-
-    if(levelWon)return;
-
-    if(leftPressed) vx=-speed;
-    else if(rightPressed) vx=speed;
-    else vx*=0.8;
-
-    px+=vx;
-
-    if(px<0)px=0;
-    if(px>950)px=950;
 
     vy+=gravity;
-    py+=vy;
+
+    y+=vy;
 
     grounded=false;
 
-    const playerRect={
-        left:px,
-        right:px+30,
-        top:py,
-        bottom:py+38
-    };
 
-    const platforms=document.querySelectorAll(".platform");
+    const p=playerRect();
 
-    platforms.forEach(el=>{
 
-        const r=el.getBoundingClientRect();
-        const worldRect=levelBox.getBoundingClientRect();
+    /* plataformas */
 
-        const p={
-            left:r.left-worldRect.left,
-            right:r.right-worldRect.left,
-            top:r.top-worldRect.top,
-            bottom:r.bottom-worldRect.top
-        };
+    document.querySelectorAll(".block").forEach(el=>{
 
-        if(
-            playerRect.right>p.left &&
-            playerRect.left<p.right &&
-            playerRect.bottom>p.top &&
-            playerRect.bottom<p.bottom+20 &&
-            vy>=0
-        ){
-            py=p.top-38;
-            vy=0;
-            grounded=true;
-        }
+      const r={
+        left:parseFloat(el.style.left),
+        right:parseFloat(el.style.left)+el.offsetWidth,
+        top:parseFloat(el.style.top),
+        bottom:parseFloat(el.style.top)+el.offsetHeight
+      };
+
+      if(
+        p.right>r.left &&
+        p.left<r.right &&
+        p.bottom>r.top &&
+        p.bottom<r.bottom+18 &&
+        vy>=0
+      ){
+
+        y=r.top-38;
+
+        vy=0;
+
+        grounded=true;
+
+      }
+
     });
 
-    /* saltar */
-    if(jumpPressed && grounded){
-        vy=-jumpPower;
-        grounded=false;
+
+    /* salto */
+
+    if(jumpRequest && grounded){
+
+      vy=-jumpPower;
+
+      grounded=false;
+
     }
 
-    jumpPressed=false;
+    jumpRequest=false;
 
-    /* caer fuera */
-    if(py>570){
-        die();
-    }
 
     /* pinchos */
+
     document.querySelectorAll(".spike").forEach(el=>{
 
-        const r=el.getBoundingClientRect();
-        const worldRect=levelBox.getBoundingClientRect();
+      const s={
+        left:parseFloat(el.style.left),
+        right:parseFloat(el.style.left)+30,
+        top:parseFloat(el.style.top)+8,
+        bottom:parseFloat(el.style.top)+34
+      };
 
-        const s={
-            left:r.left-worldRect.left,
-            right:r.right-worldRect.left,
-            top:r.top-worldRect.top,
-            bottom:r.bottom-worldRect.top
-        };
+      if(collision(p,s)){
 
-        if(
-            playerRect.right>s.left &&
-            playerRect.left<s.right &&
-            playerRect.bottom>s.top+5 &&
-            playerRect.top<s.bottom
-        ){
-            die();
-        }
+        loadLevel(level);
+
+      }
+
     });
 
-    /* llave */
-    const key=document.getElementById("key");
 
-    if(key && !hasKey){
+    /* caída */
 
-        const r=key.getBoundingClientRect();
-        const worldRect=levelBox.getBoundingClientRect();
+    if(y>640){
 
-        const k={
-            left:r.left-worldRect.left,
-            right:r.right-worldRect.left,
-            top:r.top-worldRect.top,
-            bottom:r.bottom-worldRect.top
-        };
+      loadLevel(level);
 
-        if(rects(playerRect,k)){
-
-            hasKey=true;
-            key.remove();
-
-            const door=document.getElementById("door");
-
-            if(door){
-                door.classList.remove("locked");
-            }
-        }
     }
 
+
+    /* llave */
+
+    const key=document.getElementById("key");
+
+    if(key && !keyTaken){
+
+      const k={
+        left:parseFloat(key.style.left),
+        right:parseFloat(key.style.left)+22,
+        top:parseFloat(key.style.top),
+        bottom:parseFloat(key.style.top)+22
+      };
+
+      if(collision(p,k)){
+
+        keyTaken=true;
+
+        key.remove();
+
+        const door=document.getElementById("door");
+
+        if(door){
+          door.classList.remove("locked");
+        }
+
+      }
+
+    }
+
+
     /* puerta */
+
     const door=document.getElementById("door");
 
     if(door){
 
-        const r=door.getBoundingClientRect();
-        const worldRect=levelBox.getBoundingClientRect();
+      const d={
+        left:parseFloat(door.style.left),
+        right:parseFloat(door.style.left)+52,
+        top:parseFloat(door.style.top),
+        bottom:parseFloat(door.style.top)+76
+      };
 
-        const d={
-            left:r.left-worldRect.left,
-            right:r.right-worldRect.left,
-            top:r.top-worldRect.top,
-            bottom:r.bottom-worldRect.top
-        };
+      if(collision(p,d)){
 
-        if(rects(playerRect,d)){
+        const needsKey=levels[(level-1)%20].key;
 
-            if(!levels[(currentLevel-1)%20].key || hasKey){
-                completeLevel();
-            }
+        if(!needsKey || keyTaken){
+
+          completeLevel();
+
         }
+
+      }
+
     }
+
 
     /* portal */
-    if(currentLevel===20 && hasKey){
 
-        createPortal();
+    if(level===20 && keyTaken){
 
-        const r=portal.getBoundingClientRect();
-        const worldRect=levelBox.getBoundingClientRect();
+      portal.style.display="block";
 
-        const po={
-            left:r.left-worldRect.left,
-            right:r.right-worldRect.left,
-            top:r.top-worldRect.top,
-            bottom:r.bottom-worldRect.top
-        };
+      portal.style.left="930px";
+      portal.style.top="280px";
 
-        if(rects(playerRect,po)){
-            nextZone();
-        }
+      const po={
+        left:930,
+        right:1008,
+        top:280,
+        bottom:390
+      };
+
+      if(collision(p,po)){
+
+        openNextZone();
+
+      }
+
     }
 
-    player.style.left=px+"px";
-    player.style.top=py+"px";
 
-    requestAnimationFrame(update);
+    player.style.left=x+"px";
+    player.style.top=y+"px";
+
+  }
+
+  requestAnimationFrame(gameLoop);
+
 }
 
-function die(){
 
-    loadLevel(currentLevel);
-}
+/* =========================
+   COMPLETAR NIVEL
+========================= */
 
-/* completar */
 function completeLevel(){
 
-    if(levelWon)return;
+  if(finished)return;
 
-    levelWon=true;
+  finished=true;
 
-    if(currentLevel<20){
+  if(level<20){
 
-        messageTitle.textContent="¡NIVEL COMPLETADO!";
-
-        messageText.textContent=
-            "Preparándote para el nivel "+(currentLevel+1);
-
-        messageButton.textContent="SIGUIENTE NIVEL";
-
-        messageButton.onclick=()=>{
-            loadLevel(currentLevel+1);
-            requestAnimationFrame(update);
-        };
-
-    }else{
-
-        messageTitle.textContent="¡COMPLETASTE LOS 20 NIVELES!";
-
-        messageText.textContent=
-            "El portal se ha desbloqueado. Entra al portal para continuar.";
-
-        messageButton.textContent="IR AL PORTAL";
-
-        messageButton.onclick=()=>{
-            message.style.display="none";
-            levelWon=false;
-            createPortal();
-            requestAnimationFrame(update);
-        };
-    }
-
-    message.style.display="block";
-}
-
-/* zona siguiente */
-function nextZone(){
-
-    messageTitle.textContent="¡PORTAL ACTIVADO!";
+    messageTitle.textContent="¡NIVEL COMPLETADO!";
 
     messageText.textContent=
-        "Has llegado a la siguiente zona.";
+      "Nivel "+level+" superado.";
 
-    messageButton.textContent="SIGUIENTE NIVEL";
+    messageButton.textContent=
+      "SIGUIENTE NIVEL";
 
     messageButton.onclick=()=>{
 
-        message.style.display="none";
+      loadLevel(level+1);
 
-        currentLevel=21;
-
-        loadLevel(21);
-
-        requestAnimationFrame(update);
     };
 
-    message.style.display="block";
+  }
+  else{
+
+    messageTitle.textContent=
+      "¡HAS COMPLETADO LOS 20 NIVELES!";
+
+    messageText.textContent=
+      "El portal se ha desbloqueado.";
+
+    messageButton.textContent=
+      "ABRIR PORTAL";
+
+    messageButton.onclick=()=>{
+
+      message.style.display="none";
+
+      finished=false;
+
+      portal.style.display="block";
+
+    };
+
+  }
+
+  message.style.display="block";
+
 }
 
-/* teclado */
+
+/* =========================
+   SIGUIENTE ZONA
+========================= */
+
+function openNextZone(){
+
+  finished=true;
+
+  messageTitle.textContent=
+    "¡PORTAL ACTIVADO!";
+
+  messageText.textContent=
+    "Has llegado a la siguiente zona.";
+
+  messageButton.textContent=
+    "CONTINUAR";
+
+  messageButton.onclick=()=>{
+
+    message.style.display="none";
+
+    loadLevel(21);
+
+  };
+
+  message.style.display="block";
+
+}
+
+
+/* =========================
+   TECLADO
+========================= */
+
 document.addEventListener("keydown",e=>{
 
-    if(e.key==="ArrowLeft" || e.key.toLowerCase()==="a"){
-        leftPressed=true;
-    }
+  if(
+    e.key==="ArrowLeft" ||
+    e.key.toLowerCase()==="a"
+  ){
+    left=true;
+  }
 
-    if(e.key==="ArrowRight" || e.key.toLowerCase()==="d"){
-        rightPressed=true;
-    }
+  if(
+    e.key==="ArrowRight" ||
+    e.key.toLowerCase()==="d"
+  ){
+    right=true;
+  }
 
-    if(
-        e.key==="ArrowUp" ||
-        e.key===" " ||
-        e.key.toLowerCase()==="w"
-    ){
-        jumpPressed=true;
-    }
+  if(
+    e.key==="ArrowUp" ||
+    e.key===" " ||
+    e.key.toLowerCase()==="w"
+  ){
+    jumpRequest=true;
+  }
 
-    if(e.key==="r"){
-        loadLevel(currentLevel);
-        requestAnimationFrame(update);
-    }
+  if(e.key.toLowerCase()==="r"){
+
+    loadLevel(level);
+
+  }
+
 });
+
 
 document.addEventListener("keyup",e=>{
 
-    if(e.key==="ArrowLeft" || e.key.toLowerCase()==="a"){
-        leftPressed=false;
-    }
+  if(
+    e.key==="ArrowLeft" ||
+    e.key.toLowerCase()==="a"
+  ){
+    left=false;
+  }
 
-    if(e.key==="ArrowRight" || e.key.toLowerCase()==="d"){
-        rightPressed=false;
-    }
+  if(
+    e.key==="ArrowRight" ||
+    e.key.toLowerCase()==="d"
+  ){
+    right=false;
+  }
+
 });
 
-/* botones móviles */
-function holdButton(button,down,up){
 
-    button.addEventListener("touchstart",e=>{
-        e.preventDefault();
-        down();
-    });
+/* =========================
+   CONTROLES TÁCTILES
+========================= */
 
-    button.addEventListener("touchend",e=>{
-        e.preventDefault();
-        up();
-    });
+function hold(button,down,up){
 
-    button.addEventListener("mousedown",down);
-    button.addEventListener("mouseup",up);
-    button.addEventListener("mouseleave",up);
+  button.addEventListener("touchstart",e=>{
+    e.preventDefault();
+    down();
+  });
+
+  button.addEventListener("touchend",e=>{
+    e.preventDefault();
+    up();
+  });
+
+  button.addEventListener("mousedown",down);
+
+  button.addEventListener("mouseup",up);
+
+  button.addEventListener("mouseleave",up);
+
 }
 
-holdButton(
-    document.getElementById("left"),
-    ()=>leftPressed=true,
-    ()=>leftPressed=false
+
+hold(
+  document.getElementById("left"),
+  ()=>left=true,
+  ()=>left=false
 );
 
-holdButton(
-    document.getElementById("right"),
-    ()=>rightPressed=true,
-    ()=>rightPressed=false
+hold(
+  document.getElementById("right"),
+  ()=>right=true,
+  ()=>right=false
 );
 
-document.getElementById("jump").addEventListener("touchstart",e=>{
+
+document.getElementById("jump").addEventListener(
+  "mousedown",
+  ()=>jumpRequest=true
+);
+
+document.getElementById("jump").addEventListener(
+  "touchstart",
+  e=>{
     e.preventDefault();
-    jumpPressed=true;
-});
+    jumpRequest=true;
+  }
+);
 
-document.getElementById("jump").addEventListener("mousedown",()=>{
-    jumpPressed=true;
-});
+
+/* reiniciar */
 
 document.getElementById("restart").onclick=()=>{
-    loadLevel(currentLevel);
-    requestAnimationFrame(update);
+
+  loadLevel(level);
+
 };
 
 document.getElementById("mobileRestart").onclick=()=>{
-    loadLevel(currentLevel);
-    requestAnimationFrame(update);
+
+  loadLevel(level);
+
 };
 
+
+/* iniciar */
+
 loadLevel(1);
-requestAnimationFrame(update);
+
+requestAnimationFrame(gameLoop);
+
 </script>
 
 </body>
