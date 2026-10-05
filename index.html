@@ -14,266 +14,186 @@
 
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#080b12;
+    background:#070a10;
     color:white;
+    min-height:100vh;
 }
 
 /* CABECERA */
-header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:rgba(9,13,21,.97);
-    border-bottom:1px solid #293449;
-    backdrop-filter:blur(12px);
-}
 
-.barra{
-    width:min(1450px,94%);
-    min-height:82px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:25px;
+header{
+    background:
+        linear-gradient(135deg,#151b28,#080b12);
+    padding:32px 20px 25px;
+    text-align:center;
+    border-bottom:1px solid #293448;
 }
 
 .logo{
-    font-size:38px;
-    font-weight:1000;
-    letter-spacing:4px;
-}
-
-.logo span{
-    color:#38bdf8;
+    font-size:52px;
+    font-weight:900;
+    letter-spacing:6px;
 }
 
 .subtitulo{
-    color:#8793a5;
-    font-size:14px;
-    margin-top:4px;
+    margin-top:8px;
+    color:#aeb7c7;
+    font-size:17px;
 }
 
-.buscar{
-    width:390px;
-}
+/* CONTENEDOR */
 
-.buscar input{
-    width:100%;
-    padding:14px 18px;
-    border-radius:12px;
-    border:1px solid #344158;
-    outline:none;
-    background:#141b28;
-    color:white;
-    font-size:15px;
-}
-
-.buscar input:focus{
-    border-color:#38bdf8;
-}
-
-/* CONTENIDO */
 .contenedor{
-    width:min(1450px,94%);
-    margin:32px auto 60px;
+    width:min(1250px,94%);
+    margin:30px auto 60px;
 }
 
-.intro{
-    margin-bottom:35px;
+/* BUSCADOR */
+
+.buscador{
+    margin-bottom:38px;
 }
 
-.intro h1{
-    font-size:40px;
-    margin-bottom:8px;
+.buscador input{
+    width:100%;
+    padding:17px 20px;
+    background:#111722;
+    color:white;
+    border:1px solid #303b4d;
+    border-radius:12px;
+    font-size:17px;
+    outline:none;
 }
 
-.intro p{
-    color:#8995a7;
+.buscador input:focus{
+    border-color:#68778d;
 }
 
 /* SECCIONES */
+
 .seccion{
-    margin-bottom:45px;
+    margin-bottom:48px;
 }
 
-.titulo{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:17px;
-}
-
-.titulo h2{
-    font-size:27px;
-}
-
-.cantidad{
-    color:#718096;
-    font-size:13px;
+.seccion h2{
+    font-size:29px;
+    margin-bottom:20px;
 }
 
 /* GRID */
+
 .juegos{
     display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:17px;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
 }
 
 /* TARJETA */
+
 .tarjeta{
-    background:#121925;
-    border:1px solid #263248;
-    border-radius:14px;
+    background:#111722;
+    border:1px solid #293448;
+    border-radius:15px;
     overflow:hidden;
-    transition:.2s;
+    transition:.25s;
 }
 
 .tarjeta:hover{
-    transform:translateY(-5px);
-    border-color:#526681;
-    box-shadow:0 12px 30px rgba(0,0,0,.4);
+    transform:translateY(-6px);
+    border-color:#69778c;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
 
-/* FOTO */
-.portada{
+/* PORTADA */
+
+.imagen{
     width:100%;
-    height:165px;
-    background:#151d2b;
+    height:190px;
+    background:#1b2330;
     overflow:hidden;
-    position:relative;
 }
 
-.portada img{
+.imagen img{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
-    transition:.25s;
+    transition:.3s;
 }
 
-.tarjeta:hover .portada img{
+.tarjeta:hover .imagen img{
     transform:scale(1.05);
 }
 
-.tipo{
-    position:absolute;
-    top:9px;
-    left:9px;
-    z-index:2;
-    background:rgba(0,0,0,.72);
-    padding:5px 8px;
-    border-radius:6px;
-    font-size:10px;
-    font-weight:bold;
-}
+/* INFORMACIÓN */
 
-/* INFO */
 .info{
-    padding:14px;
+    padding:16px;
 }
 
 .info h3{
-    font-size:16px;
+    font-size:18px;
     line-height:1.3;
-    min-height:42px;
-    margin-bottom:11px;
+    min-height:47px;
+    margin-bottom:13px;
 }
+
+/* BOTÓN */
 
 .jugar{
     display:block;
     width:100%;
-    padding:11px;
+    padding:12px;
     border-radius:9px;
-    background:#f5f7fa;
+    background:white;
     color:#10151d;
-    text-align:center;
     text-decoration:none;
-    font-size:13px;
-    font-weight:900;
-    transition:.15s;
+    text-align:center;
+    font-weight:bold;
+    font-size:16px;
+    transition:.2s;
 }
 
 .jugar:hover{
-    background:#38bdf8;
+    background:#dce3eb;
     transform:scale(1.02);
 }
 
-/* RESULTADOS */
-.sin-resultados{
-    display:none;
-    text-align:center;
-    padding:60px 20px;
-}
+/* OCULTAR TARJETAS DE BÚSQUEDA */
 
-.sin-resultados h2{
-    margin-bottom:8px;
-}
-
-/* PIE */
-footer{
-    border-top:1px solid #202a3a;
-    padding:28px;
-    text-align:center;
-    color:#687589;
+.oculto{
+    display:none !important;
 }
 
 /* RESPONSIVE */
-@media(max-width:1150px){
-    .juegos{
-        grid-template-columns:repeat(4,1fr);
-    }
-}
 
-@media(max-width:900px){
-    .barra{
-        flex-direction:column;
-        padding:18px 0;
-    }
-
-    .logo{
-        text-align:center;
-    }
-
-    .buscar{
-        width:100%;
-    }
-
+@media(max-width:1000px){
     .juegos{
         grid-template-columns:repeat(3,1fr);
     }
 }
 
-@media(max-width:650px){
-    .intro h1{
-        font-size:30px;
-    }
-
+@media(max-width:700px){
     .juegos{
         grid-template-columns:repeat(2,1fr);
-        gap:12px;
     }
 
-    .portada{
-        height:135px;
+    .logo{
+        font-size:40px;
     }
 }
 
-@media(max-width:420px){
+@media(max-width:480px){
     .juegos{
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:1fr;
     }
 
-    .portada{
-        height:115px;
+    .logo{
+        font-size:32px;
     }
 
-    .info{
-        padding:10px;
-    }
-
-    .info h3{
-        font-size:14px;
+    .imagen{
+        height:210px;
     }
 }
 </style>
@@ -282,744 +202,308 @@ footer{
 <body>
 
 <header>
-    <div class="barra">
-
-        <div>
-            <div class="logo">
-                GAME<span>ZONE</span>
-            </div>
-
-            <div class="subtitulo">
-                Todos tus juegos en un solo lugar
-            </div>
-        </div>
-
-        <div class="buscar">
-            <input
-                id="buscador"
-                type="text"
-                placeholder="🔎 Buscar un juego..."
-            >
-        </div>
-
+    <div class="logo">GAMEZONE</div>
+    <div class="subtitulo">
+        Todos tus juegos en un solo lugar
     </div>
 </header>
 
-
 <main class="contenedor">
 
-    <div class="intro">
-        <h1>Biblioteca de juegos</h1>
-        <p>Elige tu juego y pulsa JUGAR.</p>
+<!-- BUSCADOR -->
+
+<div class="buscador">
+    <input
+        type="text"
+        id="buscar"
+        placeholder="🔎 Buscar un juego..."
+        oninput="buscarJuego()"
+    >
+</div>
+
+
+<!-- ================================================= -->
+<!-- MOTOS -->
+<!-- ================================================= -->
+
+<section class="seccion">
+
+<h2>🏍️ MOTOS</h2>
+
+<div class="juegos">
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/moto-x3m.jpg" alt="Moto X3M">
+        </div>
+        <div class="info">
+            <h3>Moto X3M Bike Race Game</h3>
+            <a class="jugar" href="moto-x3m.html">▶ JUGAR</a>
+        </div>
     </div>
 
 
-    <!-- =========================
-         MOTOS
-    ========================== -->
-
-    <section class="seccion">
-
-        <div class="titulo">
-            <h2>🏍️ MOTOS</h2>
-            <span class="cantidad">5 juegos</span>
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/motorbike.jpg" alt="Motorbike">
         </div>
-
-        <div class="juegos">
-
-
-            <!-- MOTO X3M -->
-
-            <article class="tarjeta" data-nombre="Moto X3M Bike Race Game">
-
-                <div class="portada">
-
-                    <span class="tipo">MOTOS</span>
-
-                    <img
-                        src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg"
-                        alt="Moto X3M"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Moto X3M Bike Race Game</h3>
-
-                    <a
-                        class="jugar"
-                        href="moto-x3m.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- MOTORBIKE -->
-
-            <article class="tarjeta" data-nombre="Motorbike">
-
-                <div class="portada">
-
-                    <span class="tipo">MOTOS</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Motorbike"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Motorbike</h3>
-
-                    <a
-                        class="jugar"
-                        href="motorbike.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- GP MOTO RACING 2 -->
-
-            <article class="tarjeta" data-nombre="GP Moto Racing 2">
-
-                <div class="portada">
-
-                    <span class="tipo">MOTOS</span>
-
-                    <img
-                        src="https://img.pog.com/cloud/v2-y8-thumbs-big-thumbnails-001/114280/big.gif"
-                        alt="GP Moto Racing 2"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>GP Moto Racing 2</h3>
-
-                    <a
-                        class="jugar"
-                        href="gp-moto-racing-2.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- 2 PLAYER MOTO -->
-
-            <article class="tarjeta" data-nombre="2 Player Moto Racing">
-
-                <div class="portada">
-
-                    <span class="tipo">MOTOS</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="2 Player Moto Racing"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>2 Player Moto Racing</h3>
-
-                    <a
-                        class="jugar"
-                        href="2-player-moto-racing.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <!-- SUPER BIKE -->
-
-            <article class="tarjeta" data-nombre="Super Bike Wild Race">
-
-                <div class="portada">
-
-                    <span class="tipo">MOTOS</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Super Bike Wild Race"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Super Bike Wild Race</h3>
-
-                    <a
-                        class="jugar"
-                        href="super-bike-wild-race.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
+        <div class="info">
+            <h3>Motorbike</h3>
+            <a class="jugar" href="motorbike.html">▶ JUGAR</a>
         </div>
-    </section>
-
-
-    <!-- =========================
-         CARROS
-    ========================== -->
-
-    <section class="seccion">
-
-        <div class="titulo">
-            <h2>🚗 CARROS</h2>
-            <span class="cantidad">5 juegos</span>
-        </div>
-
-        <div class="juegos">
-
-
-            <article class="tarjeta" data-nombre="Racing Limits">
-
-                <div class="portada">
-
-                    <span class="tipo">CARROS</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Racing Limits"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Racing Limits</h3>
-
-                    <a
-                        class="jugar"
-                        href="racing-limits.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="tarjeta" data-nombre="Traffic Racer">
-
-                <div class="portada">
-
-                    <span class="tipo">CARROS</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Traffic Racer"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Traffic Racer</h3>
-
-                    <a
-                        class="jugar"
-                        href="traffic-racer.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="tarjeta" data-nombre="Car Racing">
-
-                <div class="portada">
-
-                    <span class="tipo">CARROS</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Car Racing"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Car Racing</h3>
-
-                    <a
-                        class="jugar"
-                        href="car-racing.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="tarjeta" data-nombre="Highway Racing">
-
-                <div class="portada">
-
-                    <span class="tipo">CARROS</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Highway Racing"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Highway Racing</h3>
-
-                    <a
-                        class="jugar"
-                        href="highway-racing.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="tarjeta" data-nombre="City Car Driving">
-
-                <div class="portada">
-
-                    <span class="tipo">CARROS</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="City Car Driving"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>City Car Driving</h3>
-
-                    <a
-                        class="jugar"
-                        href="city-car-driving.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-        </div>
-    </section>
-
-
-    <!-- =========================
-         FÚTBOL
-    ========================== -->
-
-    <section class="seccion">
-
-        <div class="titulo">
-            <h2>⚽ FÚTBOL</h2>
-            <span class="cantidad">4 juegos</span>
-        </div>
-
-        <div class="juegos">
-
-
-            <article class="tarjeta" data-nombre="Football Legends 2026">
-
-                <div class="portada">
-
-                    <span class="tipo">FÚTBOL</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Football Legends 2026"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Football Legends 2026</h3>
-
-                    <a
-                        class="jugar"
-                        href="football-legends.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="tarjeta" data-nombre="World Soccer">
-
-                <div class="portada">
-
-                    <span class="tipo">FÚTBOL</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="World Soccer"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>World Soccer</h3>
-
-                    <a
-                        class="jugar"
-                        href="world-soccer.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="tarjeta" data-nombre="Penalty Shootout">
-
-                <div class="portada">
-
-                    <span class="tipo">FÚTBOL</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Penalty Shootout"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Penalty Shootout</h3>
-
-                    <a
-                        class="jugar"
-                        href="penalty-shootout.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="tarjeta" data-nombre="3D Soccer Champions">
-
-                <div class="portada">
-
-                    <span class="tipo">FÚTBOL</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="3D Soccer Champions"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>3D Soccer Champions</h3>
-
-                    <a
-                        class="jugar"
-                        href="3d-soccer-champions.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-        </div>
-    </section>
-
-
-    <!-- =========================
-         PLATAFORMAS / ARCADE
-    ========================== -->
-
-    <section class="seccion">
-
-        <div class="titulo">
-            <h2>🎮 PLATAFORMAS Y ARCADE</h2>
-            <span class="cantidad">5 juegos</span>
-        </div>
-
-        <div class="juegos">
-
-
-            <article class="tarjeta" data-nombre="Geometry Dash Lite">
-
-                <div class="portada">
-
-                    <span class="tipo">ARCADE</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Geometry Dash Lite"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Geometry Dash Lite</h3>
-
-                    <a
-                        class="jugar"
-                        href="geometry-dash-lite.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="tarjeta" data-nombre="Level Devil">
-
-                <div class="portada">
-
-                    <span class="tipo">PLATAFORMAS</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Level Devil"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Level Devil</h3>
-
-                    <a
-                        class="jugar"
-                        href="level-devil.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="tarjeta" data-nombre="Sky Riders">
-
-                <div class="portada">
-
-                    <span class="tipo">ARCADE</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Sky Riders"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Sky Riders</h3>
-
-                    <a
-                        class="jugar"
-                        href="sky-riders.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="tarjeta" data-nombre="Bowmaster">
-
-                <div class="portada">
-
-                    <span class="tipo">HABILIDAD</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Bowmaster"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Bowmaster</h3>
-
-                    <a
-                        class="jugar"
-                        href="bowmaster.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="tarjeta" data-nombre="Wave Road">
-
-                <div class="portada">
-
-                    <span class="tipo">ARCADE</span>
-
-                    <img
-                        src="https://img.gamedistribution.com/placeholder.jpg"
-                        alt="Wave Road"
-                        onerror="this.style.display='none'"
-                    >
-
-                </div>
-
-                <div class="info">
-
-                    <h3>Wave Road</h3>
-
-                    <a
-                        class="jugar"
-                        href="wave-road.html"
-                    >
-                        ▶ JUGAR
-                    </a>
-
-                </div>
-
-            </article>
-
-        </div>
-    </section>
-
-
-    <div id="sinResultados" class="sin-resultados">
-        <h2>No encontramos ese juego</h2>
-        <p>Prueba con otro nombre.</p>
     </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/gp-moto-racing-2.jpg" alt="GP Moto Racing 2">
+        </div>
+        <div class="info">
+            <h3>GP Moto Racing 2</h3>
+            <a class="jugar" href="gp-moto-racing-2.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/2-player-moto-racing.jpg" alt="2 Player Moto Racing">
+        </div>
+        <div class="info">
+            <h3>2 Player Moto Racing</h3>
+            <a class="jugar" href="2-player-moto-racing.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/super-bike-wild-race.jpg" alt="Super Bike Wild Race">
+        </div>
+        <div class="info">
+            <h3>Super Bike Wild Race</h3>
+            <a class="jugar" href="super-bike-wild-race.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- CARROS -->
+<!-- ================================================= -->
+
+<section class="seccion">
+
+<h2>🚗 CARROS</h2>
+
+<div class="juegos">
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/racing-limits.jpg" alt="Racing Limits">
+        </div>
+        <div class="info">
+            <h3>Racing Limits</h3>
+            <a class="jugar" href="racing-limits.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/traffic-racer.jpg" alt="Traffic Racer">
+        </div>
+        <div class="info">
+            <h3>Traffic Racer</h3>
+            <a class="jugar" href="traffic-racer.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/car-racing.jpg" alt="Car Racing">
+        </div>
+        <div class="info">
+            <h3>Car Racing</h3>
+            <a class="jugar" href="car-racing.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/highway-racing.jpg" alt="Highway Racing">
+        </div>
+        <div class="info">
+            <h3>Highway Racing</h3>
+            <a class="jugar" href="highway-racing.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/city-car-driving.jpg" alt="City Car Driving">
+        </div>
+        <div class="info">
+            <h3>City Car Driving</h3>
+            <a class="jugar" href="city-car-driving.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- FÚTBOL -->
+<!-- ================================================= -->
+
+<section class="seccion">
+
+<h2>⚽ FÚTBOL</h2>
+
+<div class="juegos">
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/football-legends.jpg" alt="Football Legends">
+        </div>
+        <div class="info">
+            <h3>Football Legends</h3>
+            <a class="jugar" href="football-legends.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/world-soccer.jpg" alt="World Soccer">
+        </div>
+        <div class="info">
+            <h3>World Soccer</h3>
+            <a class="jugar" href="world-soccer.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/penalty-shootout.jpg" alt="Penalty Shootout">
+        </div>
+        <div class="info">
+            <h3>Penalty Shootout</h3>
+            <a class="jugar" href="penalty-shootout.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/3d-soccer-champions.jpg" alt="3D Soccer Champions">
+        </div>
+        <div class="info">
+            <h3>3D Soccer Champions</h3>
+            <a class="jugar" href="3d-soccer-champions.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- PLATAFORMAS Y ARCADE -->
+<!-- ================================================= -->
+
+<section class="seccion">
+
+<h2>🎮 PLATAFORMAS Y ARCADE</h2>
+
+<div class="juegos">
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/geometry-dash.jpg" alt="Geometry Dash">
+        </div>
+        <div class="info">
+            <h3>Geometry Dash Lite</h3>
+            <a class="jugar" href="geometry-dash-lite.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/level-devil.jpg" alt="Level Devil">
+        </div>
+        <div class="info">
+            <h3>Level Devil</h3>
+            <a class="jugar" href="level-devil.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/sky-riders.jpg" alt="Sky Riders">
+        </div>
+        <div class="info">
+            <h3>Sky Riders</h3>
+            <a class="jugar" href="sky-riders.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="imagen">
+            <img src="img/wave-road.jpg" alt="Wave Road">
+        </div>
+        <div class="info">
+            <h3>Wave Road</h3>
+            <a class="jugar" href="wave-road.html">▶ JUGAR</a>
+        </div>
+    </div>
+
+</div>
+</section>
 
 </main>
 
 
-<footer>
-    GAMEZONE · Todos tus juegos en un solo lugar
-</footer>
-
-
 <script>
 
-const buscador = document.getElementById("buscador");
-const tarjetas = document.querySelectorAll(".tarjeta");
-const secciones = document.querySelectorAll(".seccion");
-const sinResultados = document.getElementById("sinResultados");
+function buscarJuego(){
 
-buscador.addEventListener("input", function(){
+    const texto =
+        document
+        .getElementById("buscar")
+        .value
+        .toLowerCase()
+        .trim();
 
-    const texto = this.value.toLowerCase().trim();
-
-    let encontrados = 0;
+    const tarjetas =
+        document.querySelectorAll(".tarjeta");
 
     tarjetas.forEach(function(tarjeta){
 
-        const nombre = tarjeta.dataset.nombre.toLowerCase();
+        const nombre =
+            tarjeta
+            .querySelector("h3")
+            .textContent
+            .toLowerCase();
 
         if(nombre.includes(texto)){
-            tarjeta.style.display = "";
-            encontrados++;
+            tarjeta.classList.remove("oculto");
         }else{
-            tarjeta.style.display = "none";
+            tarjeta.classList.add("oculto");
         }
 
     });
-
-    secciones.forEach(function(seccion){
-
-        const visibles = seccion.querySelectorAll(
-            ".tarjeta:not([style*='display: none'])"
-        );
-
-        if(texto !== "" && visibles.length === 0){
-            seccion.style.display = "none";
-        }else{
-            seccion.style.display = "";
-        }
-
-    });
-
-    if(texto !== "" && encontrados === 0){
-        sinResultados.style.display = "block";
-    }else{
-        sinResultados.style.display = "none";
-    }
-
-});
+}
 
 </script>
 
