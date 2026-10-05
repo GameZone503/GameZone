@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>GAMEZONE</title>
 
 <style>
@@ -15,7 +14,7 @@ body{
     margin:0;
     background:#080b12;
     color:white;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 header{
@@ -24,16 +23,11 @@ header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    position:sticky;
-    top:0;
-    z-index:10;
-    box-shadow:0 4px 20px rgba(0,0,0,.5);
 }
 
 .logo{
     font-size:34px;
     font-weight:900;
-    letter-spacing:2px;
 }
 
 .logo span{
@@ -41,22 +35,20 @@ header{
 }
 
 .slogan{
-    color:#aab4c4;
-    font-size:14px;
+    color:#aaa;
 }
 
-.search-box{
+.search{
     padding:25px 35px 10px;
 }
 
-#search{
+#buscar{
     width:100%;
-    padding:15px 18px;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #333;
     background:#151b26;
     color:white;
-    border:1px solid #303949;
-    border-radius:12px;
-    outline:none;
     font-size:16px;
 }
 
@@ -65,12 +57,10 @@ header{
 }
 
 .category{
-    margin-top:25px;
-    margin-bottom:30px;
+    margin-bottom:35px;
 }
 
 .category h2{
-    margin-bottom:16px;
     font-size:25px;
 }
 
@@ -80,25 +70,24 @@ header{
     gap:20px;
 }
 
-.game-card{
+.card{
     background:#121824;
-    border:1px solid #273142;
+    border:1px solid #293244;
     border-radius:15px;
     overflow:hidden;
     transition:.2s;
 }
 
-.game-card:hover{
+.card:hover{
     transform:translateY(-5px);
     border-color:#00d9ff;
 }
 
-.cover{
+.card img{
     width:100%;
     height:145px;
     object-fit:cover;
     display:block;
-    background:#202734;
 }
 
 .info{
@@ -107,48 +96,33 @@ header{
 
 .info h3{
     margin:0 0 12px;
-    font-size:18px;
     min-height:42px;
 }
 
-.play{
+button{
     width:100%;
     padding:11px;
     border:0;
     border-radius:9px;
     background:#00d9ff;
     color:#001018;
-    font-size:15px;
     font-weight:bold;
     cursor:pointer;
 }
 
-.play:hover{
-    background:#55e6ff;
-}
-
-.no-results{
-    display:none;
-    text-align:center;
-    padding:50px;
-    color:#9ca7b8;
+button:hover{
+    background:#5eeaff;
 }
 
 @media(max-width:600px){
-
     header{
         flex-direction:column;
-        gap:6px;
+        gap:7px;
         text-align:center;
-        padding:18px;
-    }
-
-    .logo{
-        font-size:28px;
     }
 
     .container,
-    .search-box{
+    .search{
         padding-left:15px;
         padding-right:15px;
     }
@@ -158,7 +132,7 @@ header{
         gap:12px;
     }
 
-    .cover{
+    .card img{
         height:115px;
     }
 
@@ -176,156 +150,69 @@ header{
 <body>
 
 <header>
+    <div class="logo">
+        GAME<span>ZONE</span>
+    </div>
 
-<div class="logo">
-GAME<span>ZONE</span>
-</div>
-
-<div class="slogan">
-Todos tus juegos en un solo lugar
-</div>
-
+    <div class="slogan">
+        Todos tus juegos en un solo lugar
+    </div>
 </header>
 
-
-<div class="search-box">
-
-<input
-type="text"
-id="search"
-placeholder="Buscar juego..."
-onkeyup="buscarJuegos()">
-
+<div class="search">
+    <input
+        id="buscar"
+        type="text"
+        placeholder="Buscar juego..."
+        onkeyup="buscarJuegos()">
 </div>
-
 
 <div class="container">
 
-
-<!-- ================= MOTOS ================= -->
+<!-- MOTOS -->
 
 <section class="category">
-
 <h2>🏍️ Motos</h2>
 
 <div class="games">
 
-
-<div class="game-card" data-name="moto x3m bike race">
-
-<img
-class="cover"
-src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg"
-alt="Moto X3M">
-
+<div class="card" data-name="moto x3m">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>Moto X3M Bike Race</h3>
-
-<button
-class="play"
-onclick="location.href='moto-x3m.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='moto-x3m.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="gp moto racing 2">
-
-<img
-class="cover"
-src="img/gp-moto-racing-2.jpg"
-alt="GP Moto Racing 2">
-
+<div class="card" data-name="gp moto racing 2">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>GP Moto Racing 2</h3>
-
-<button
-class="play"
-onclick="location.href='gp-moto-racing-2.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='gp-moto-racing-2.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="motorbike">
-
-<img
-class="cover"
-src="img/motorbike.jpg"
-alt="Motorbike">
-
+<div class="card" data-name="motorbike">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>Motorbike</h3>
-
-<button
-class="play"
-onclick="location.href='motorbike.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='motorbike.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="2 player moto racing">
-
-<img
-class="cover"
-src="img/2-player-moto-racing.jpg"
-alt="2 Player Moto Racing">
-
+<div class="card" data-name="2 player moto racing">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>2 Player Moto Racing</h3>
-
-<button
-class="play"
-onclick="location.href='2-player-moto-racing.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='2-player-moto-racing.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="super bike wild race">
-
-<img
-class="cover"
-src="img/super-bike-wild-race.jpg"
-alt="Super Bike Wild Race">
-
+<div class="card" data-name="super bike wild race">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>Super Bike Wild Race</h3>
-
-<button
-class="play"
-onclick="location.href='super-bike-wild-race.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='super-bike-wild-race.html'">JUGAR</button>
 </div>
 </div>
 
@@ -333,131 +220,50 @@ JUGAR
 </section>
 
 
-
-<!-- ================= CARROS ================= -->
+<!-- CARROS -->
 
 <section class="category">
-
 <h2>🚗 Carros</h2>
 
 <div class="games">
 
-
-<div class="game-card" data-name="racing limits">
-
-<img
-class="cover"
-src="img/racing-limits.jpg"
-alt="Racing Limits">
-
+<div class="card" data-name="racing limits">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>Racing Limits</h3>
-
-<button
-class="play"
-onclick="location.href='racing-limits.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='racing-limits.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="traffic racer">
-
-<img
-class="cover"
-src="img/traffic-racer.jpg"
-alt="Traffic Racer">
-
+<div class="card" data-name="traffic racer">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>Traffic Racer</h3>
-
-<button
-class="play"
-onclick="location.href='traffic-racer.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='traffic-racer.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="car racing">
-
-<img
-class="cover"
-src="img/car-racing.jpg"
-alt="Car Racing">
-
+<div class="card" data-name="car racing">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>Car Racing</h3>
-
-<button
-class="play"
-onclick="location.href='car-racing.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='car-racing.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="highway racing">
-
-<img
-class="cover"
-src="img/highway-racing.jpg"
-alt="Highway Racing">
-
+<div class="card" data-name="highway racing">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>Highway Racing</h3>
-
-<button
-class="play"
-onclick="location.href='highway-racing.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='highway-racing.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="city car driving">
-
-<img
-class="cover"
-src="img/city-car-driving.jpg"
-alt="City Car Driving">
-
+<div class="card" data-name="city car driving">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>City Car Driving</h3>
-
-<button
-class="play"
-onclick="location.href='city-car-driving.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='city-car-driving.html'">JUGAR</button>
 </div>
 </div>
 
@@ -465,107 +271,42 @@ JUGAR
 </section>
 
 
-
-<!-- ================= FUTBOL ================= -->
+<!-- FUTBOL -->
 
 <section class="category">
-
 <h2>⚽ Fútbol</h2>
 
 <div class="games">
 
-
-<div class="game-card" data-name="football legends">
-
-<img
-class="cover"
-src="img/football-legends.jpg"
-alt="Football Legends">
-
+<div class="card" data-name="football legends">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>Football Legends</h3>
-
-<button
-class="play"
-onclick="location.href='football-legends.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='football-legends.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="world soccer">
-
-<img
-class="cover"
-src="img/world-soccer.jpg"
-alt="World Soccer">
-
+<div class="card" data-name="world soccer">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>World Soccer</h3>
-
-<button
-class="play"
-onclick="location.href='world-soccer.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='world-soccer.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="penalty shootout">
-
-<img
-class="cover"
-src="img/penalty-shootout.jpg"
-alt="Penalty Shootout">
-
+<div class="card" data-name="penalty shootout">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>Penalty Shootout</h3>
-
-<button
-class="play"
-onclick="location.href='penalty-shootout.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='penalty-shootout.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="3d soccer champions">
-
-<img
-class="cover"
-src="img/3d-soccer-champions.jpg"
-alt="3D Soccer Champions">
-
+<div class="card" data-name="3d soccer champions">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>3D Soccer Champions</h3>
-
-<button
-class="play"
-onclick="location.href='3d-soccer-champions.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='3d-soccer-champions.html'">JUGAR</button>
 </div>
 </div>
 
@@ -573,99 +314,39 @@ JUGAR
 </section>
 
 
-
-<!-- ================= PLATAFORMAS ================= -->
+<!-- PLATAFORMAS -->
 
 <section class="category">
-
 <h2>🎮 Plataformas</h2>
 
 <div class="games">
 
-
-<div class="game-card" data-name="geometry dash lite">
-
-<img
-class="cover"
-src="img/geometry-dash.jpg"
-alt="Geometry Dash Lite">
-
+<div class="card" data-name="geometry dash lite">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>Geometry Dash Lite</h3>
-
-<button
-class="play"
-onclick="location.href='geometry-dash.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='geometry-dash.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="level devil">
-
-<img
-class="cover"
-src="img/level-devil.jpg"
-alt="Level Devil">
-
+<div class="card" data-name="level devil">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>Level Devil</h3>
-
-<button
-class="play"
-onclick="location.href='level-devil.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='level-devil.html'">JUGAR</button>
 </div>
 </div>
 
-
-
-<div class="game-card" data-name="sky riders">
-
-<img
-class="cover"
-src="img/sky-riders.jpg"
-alt="Sky Riders">
-
+<div class="card" data-name="sky riders">
+<img src="https://img.cdn.famobi.com/portal/html5games/images/tmp/MotoX3mTeaser.jpg">
 <div class="info">
-
 <h3>Sky Riders</h3>
-
-<button
-class="play"
-onclick="location.href='sky-riders.html'">
-
-JUGAR
-
-</button>
-
+<button onclick="location.href='sky-riders.html'">JUGAR</button>
 </div>
 </div>
 
 </div>
 </section>
-
-
-
-<div
-id="noResults"
-class="no-results">
-
-No se encontró ningún juego.
-
-</div>
-
 
 </div>
 
@@ -674,67 +355,26 @@ No se encontró ningún juego.
 
 function buscarJuegos(){
 
-const texto =
-document
-.getElementById("search")
-.value
-.toLowerCase()
-.trim();
+    const texto =
+        document.getElementById("buscar")
+        .value
+        .toLowerCase();
 
-const juegos =
-document.querySelectorAll(".game-card");
+    const tarjetas =
+        document.querySelectorAll(".card");
 
-let encontrados = 0;
+    tarjetas.forEach(tarjeta => {
 
+        const nombre =
+            tarjeta.dataset.name;
 
-juegos.forEach(juego => {
+        if(nombre.includes(texto)){
+            tarjeta.style.display = "";
+        }else{
+            tarjeta.style.display = "none";
+        }
 
-const nombre =
-juego.dataset.name.toLowerCase();
-
-if(nombre.includes(texto)){
-
-juego.style.display = "";
-encontrados++;
-
-}else{
-
-juego.style.display = "none";
-
-}
-
-});
-
-
-document
-.querySelectorAll(".category")
-.forEach(categoria => {
-
-const visibles =
-categoria.querySelectorAll(
-".game-card:not([style*='display: none'])"
-);
-
-if(visibles.length === 0){
-
-categoria.style.display = "none";
-
-}else{
-
-categoria.style.display = "";
-
-}
-
-});
-
-
-document
-.getElementById("noResults")
-.style.display =
-encontrados === 0
-? "block"
-: "none";
-
+    });
 }
 
 </script>
