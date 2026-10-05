@@ -14,458 +14,892 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #050816;
+    background: #030611;
     color: white;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
+
 header {
-    padding: 25px 5%;
+    background:
+        linear-gradient(135deg, #020718, #100321, #020718);
+    padding: 25px 4%;
     text-align: center;
-    background: linear-gradient(135deg, #06112e, #13052d);
     border-bottom: 3px solid #00eaff;
-    box-shadow: 0 0 25px #00eaff;
+    box-shadow:
+        0 0 15px #00eaff,
+        0 0 35px rgba(0,234,255,.3);
 }
 
 .logo {
-    font-size: 55px;
+    font-size: clamp(42px, 7vw, 75px);
     font-weight: 900;
     font-style: italic;
-    background: linear-gradient(90deg, #00eaff, #7c4dff, #ff00cc);
+    letter-spacing: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00eaff,
+            #168cff,
+            #8b4dff,
+            #ff00cc
+        );
+
     -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
-    letter-spacing: 3px;
 }
 
 .subtitulo {
-    font-size: 20px;
-    color: #ddd;
+    font-size: clamp(17px, 3vw, 24px);
+    font-weight: bold;
+    color: #eeeeee;
     margin-top: 5px;
 }
 
-/* BUSCADOR */
+/* ================= BUSCADOR ================= */
+
 .search-box {
-    margin: 25px auto 10px;
-    max-width: 600px;
+    width: 90%;
+    max-width: 650px;
+    margin: 25px auto 5px;
 }
 
 .search-box input {
     width: 100%;
-    padding: 15px 22px;
+    padding: 16px 22px;
+
     border-radius: 30px;
-    border: 2px solid #7c4dff;
-    background: #080d22;
+    border: 2px solid #734dff;
+
+    background: #060b1c;
     color: white;
-    font-size: 17px;
+
+    font-size: 18px;
     outline: none;
-    box-shadow: 0 0 15px #7c4dff;
+
+    box-shadow:
+        0 0 12px #734dff,
+        inset 0 0 10px rgba(115,77,255,.15);
+}
+
+.search-box input:focus {
+    border-color: #00eaff;
+    box-shadow: 0 0 18px #00eaff;
 }
 
 .search-box input::placeholder {
     color: #aaa;
 }
 
-/* CONTENEDOR */
+/* ================= CONTENIDO ================= */
+
 main {
     width: 94%;
-    max-width: 1500px;
+    max-width: 1550px;
     margin: auto;
-    padding: 25px 0 50px;
+    padding: 30px 0 60px;
 }
 
-/* CATEGORÍAS */
+/* ================= CATEGORÍAS ================= */
+
 .categoria {
-    margin-bottom: 40px;
+    margin-bottom: 45px;
 }
 
 .titulo-categoria {
     display: flex;
     align-items: center;
-    gap: 15px;
-    font-size: 32px;
-    font-weight: 900;
+
+    min-height: 60px;
+
+    padding: 10px 22px;
+    margin-bottom: 20px;
+
+    font-size: clamp(27px, 4vw, 40px);
     font-style: italic;
-    padding: 10px 20px;
-    margin-bottom: 18px;
+    font-weight: 900;
+
     border-radius: 12px;
+
+    background: linear-gradient(
+        90deg,
+        rgba(255,255,255,.06),
+        transparent
+    );
 }
 
-/* COLORES */
+/* MOTOS */
+
 .motos .titulo-categoria {
     color: #00eaff;
     border-left: 8px solid #00eaff;
-    background: linear-gradient(90deg, #062849, transparent);
-    box-shadow: 0 0 15px #00eaff;
+    box-shadow: 0 0 18px rgba(0,234,255,.5);
 }
 
+/* CARROS */
+
 .carros .titulo-categoria {
-    color: #ff00e6;
-    border-left: 8px solid #ff00e6;
-    background: linear-gradient(90deg, #3c0738, transparent);
-    box-shadow: 0 0 15px #ff00e6;
+    color: #ff20dc;
+    border-left: 8px solid #ff20dc;
+    box-shadow: 0 0 18px rgba(255,32,220,.5);
 }
+
+/* FÚTBOL */
 
 .futbol .titulo-categoria {
     color: #00ff55;
     border-left: 8px solid #00ff55;
-    background: linear-gradient(90deg, #063d1b, transparent);
-    box-shadow: 0 0 15px #00ff55;
+    box-shadow: 0 0 18px rgba(0,255,85,.5);
 }
+
+/* PLATAFORMAS */
 
 .plataformas .titulo-categoria {
-    color: #b400ff;
-    border-left: 8px solid #b400ff;
-    background: linear-gradient(90deg, #28083c, transparent);
-    box-shadow: 0 0 15px #b400ff;
+    color: #b84cff;
+    border-left: 8px solid #b84cff;
+    box-shadow: 0 0 18px rgba(184,76,255,.5);
 }
 
-/* GRID */
+/* ================= GRID ================= */
+
 .juegos {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 18px;
+    gap: 20px;
 }
 
-/* TARJETAS */
+/* ================= TARJETAS ================= */
+
 .card {
-    background: #090d1c;
-    border-radius: 16px;
     overflow: hidden;
-    border: 2px solid #27304d;
-    transition: 0.25s;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+
+    background: #080c1c;
+
+    border-radius: 17px;
+    border: 2px solid #222b45;
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        border-color .25s;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.55);
 }
 
 .card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-7px) scale(1.015);
 }
 
-.motos .card:hover {
-    border-color: #00eaff;
-    box-shadow: 0 0 25px #00eaff;
-}
+/* ================= IMÁGENES ================= */
 
-.carros .card:hover {
-    border-color: #ff00e6;
-    box-shadow: 0 0 25px #ff00e6;
-}
-
-.futbol .card:hover {
-    border-color: #00ff55;
-    box-shadow: 0 0 25px #00ff55;
-}
-
-.plataformas .card:hover {
-    border-color: #b400ff;
-    box-shadow: 0 0 25px #b400ff;
-}
-
-/* IMÁGENES */
 .card img {
     width: 100%;
-    height: 180px;
+    height: 190px;
+
+    display: block;
+
     object-fit: cover;
-    display: block;
+
+    background: #070b18;
 }
 
-/* NOMBRE */
+/* ================= NOMBRES ================= */
+
 .nombre {
-    text-align: center;
-    font-size: 17px;
-    font-weight: bold;
-    padding: 12px 5px 8px;
-    min-height: 48px;
-}
+    min-height: 55px;
 
-/* BOTÓN */
-.jugar {
-    display: block;
-    width: 75%;
-    margin: 8px auto 15px;
-    padding: 11px;
-    border: none;
-    border-radius: 25px;
-    color: #001018;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 8px;
+
+    text-align: center;
+
     font-size: 17px;
     font-weight: 900;
+}
+
+/* ================= BOTONES ================= */
+
+.jugar {
+    display: block;
+
+    width: 78%;
+
+    margin: 5px auto 17px;
+
+    padding: 12px;
+
+    border: none;
+    border-radius: 30px;
+
+    font-size: 17px;
+    font-weight: 900;
+
     cursor: pointer;
-    transition: 0.2s;
-}
 
-.motos .jugar {
-    background: #00eaff;
-    box-shadow: 0 0 15px #00eaff;
-}
-
-.carros .jugar {
-    background: #ff00e6;
-    box-shadow: 0 0 15px #ff00e6;
-}
-
-.futbol .jugar {
-    background: #00ff55;
-    box-shadow: 0 0 15px #00ff55;
-}
-
-.plataformas .jugar {
-    background: #c000ff;
-    box-shadow: 0 0 15px #c000ff;
-    color: white;
+    transition:
+        transform .2s,
+        filter .2s;
 }
 
 .jugar:hover {
-    transform: scale(1.05);
+    transform: scale(1.06);
+    filter: brightness(1.2);
 }
 
-/* OCULTAR */
+.jugar:active {
+    transform: scale(.96);
+}
+
+/* MOTOS */
+
+.motos .card:hover {
+    border-color: #00eaff;
+    box-shadow: 0 0 25px rgba(0,234,255,.65);
+}
+
+.motos .jugar {
+    color: #001015;
+    background: linear-gradient(
+        90deg,
+        #00cfff,
+        #00f6ff
+    );
+
+    box-shadow: 0 0 15px #00eaff;
+}
+
+/* CARROS */
+
+.carros .card:hover {
+    border-color: #ff20dc;
+    box-shadow: 0 0 25px rgba(255,32,220,.65);
+}
+
+.carros .jugar {
+    color: white;
+    background: linear-gradient(
+        90deg,
+        #e800ff,
+        #ff20dc
+    );
+
+    box-shadow: 0 0 15px #ff20dc;
+}
+
+/* FÚTBOL */
+
+.futbol .card:hover {
+    border-color: #00ff55;
+    box-shadow: 0 0 25px rgba(0,255,85,.65);
+}
+
+.futbol .jugar {
+    color: #001508;
+    background: linear-gradient(
+        90deg,
+        #00d83f,
+        #00ff55
+    );
+
+    box-shadow: 0 0 15px #00ff55;
+}
+
+/* PLATAFORMAS */
+
+.plataformas .card:hover {
+    border-color: #b84cff;
+    box-shadow: 0 0 25px rgba(184,76,255,.65);
+}
+
+.plataformas .jugar {
+    color: white;
+    background: linear-gradient(
+        90deg,
+        #8c00ff,
+        #d000ff
+    );
+
+    box-shadow: 0 0 15px #b84cff;
+}
+
+/* ================= BUSCADOR ================= */
+
 .oculto {
-    display: none;
+    display: none !important;
 }
 
-/* CELULAR */
-@media (max-width: 1000px) {
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1200px) {
+
+    .juegos {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+}
+
+@media (max-width: 900px) {
+
     .juegos {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .card img {
+        height: 170px;
+    }
+
 }
 
 @media (max-width: 650px) {
-    .logo {
-        font-size: 40px;
-    }
 
     .juegos {
         grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
     }
 
     .card img {
-        height: 140px;
+        height: 135px;
     }
 
-    .titulo-categoria {
-        font-size: 25px;
+    .nombre {
+        font-size: 14px;
+        min-height: 48px;
     }
+
+    .jugar {
+        width: 85%;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    main {
+        width: 96%;
+    }
+
 }
 
 @media (max-width: 400px) {
+
     .juegos {
         grid-template-columns: 1fr;
     }
+
+    .card img {
+        height: 190px;
+    }
+
 }
 </style>
 </head>
 
 <body>
 
+<!-- ================= HEADER ================= -->
+
 <header>
-    <div class="logo">🎮 GAMEZONE</div>
-    <div class="subtitulo">Todos tus juegos en un solo lugar</div>
+
+    <div class="logo">
+        🎮 GAMEZONE
+    </div>
+
+    <div class="subtitulo">
+        Todos tus juegos en un solo lugar
+    </div>
 
     <div class="search-box">
+
         <input
-            type="text"
             id="buscador"
+            type="text"
             placeholder="Buscar un juego..."
-            onkeyup="buscarJuego()"
+            autocomplete="off"
         >
+
     </div>
+
 </header>
+
 
 <main>
 
-<!-- ================= MOTOS ================= -->
+<!-- ================================================= -->
+<!-- ===================== MOTOS ===================== -->
+<!-- ================================================= -->
+
 <section class="categoria motos">
 
-    <h2 class="titulo-categoria">🏍️ MOTOS</h2>
+    <h2 class="titulo-categoria">
+        🏍️ MOTOS
+    </h2>
 
     <div class="juegos">
 
-        <div class="card">
-            <img src="fotos/moto-x3m.jpg" alt="Moto X3M Bike Race">
-            <div class="nombre">Moto X3M Bike Race</div>
-            <button class="jugar" onclick="window.location.href='moto-x3m.html'">
-                JUGAR
-            </button>
-        </div>
+        <!-- 1 -->
 
         <div class="card">
-            <img src="fotos/gp-moto-racing-2.jpg" alt="GP Moto Racing 2">
-            <div class="nombre">GP Moto Racing 2</div>
-            <button class="jugar" onclick="window.location.href='gp-moto-racing-2.html'">
+
+            <img
+                src="fotos/moto-x3m.jpg"
+                alt="Moto X3M Bike Race"
+            >
+
+            <div class="nombre">
+                Moto X3M Bike Race
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='moto-x3m.html'"
+            >
                 JUGAR
             </button>
+
         </div>
 
-        <div class="card">
-            <img src="fotos/motorbike.jpg" alt="Motorbike">
-            <div class="nombre">Motorbike</div>
-            <button class="jugar" onclick="window.location.href='motorbike.html'">
-                JUGAR
-            </button>
-        </div>
+
+        <!-- 2 -->
 
         <div class="card">
-            <img src="fotos/2-player-moto-racing.jpg" alt="2 Player Moto Racing">
-            <div class="nombre">2 Player Moto Racing</div>
-            <button class="jugar" onclick="window.location.href='2-player-moto-racing.html'">
+
+            <img
+                src="fotos/gp-moto-racing-2.jpg"
+                alt="GP Moto Racing 2"
+            >
+
+            <div class="nombre">
+                GP Moto Racing 2
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='gp-moto-racing-2.html'"
+            >
                 JUGAR
             </button>
+
         </div>
 
+
+        <!-- 3 -->
+
         <div class="card">
-            <img src="fotos/super-bike-wild-race.jpg" alt="Super Bike Wild Race">
-            <div class="nombre">Super Bike Wild Race</div>
-            <button class="jugar" onclick="window.location.href='super-bike-wild-race.html'">
+
+            <img
+                src="fotos/motorbike.jpg"
+                alt="Motorbike"
+            >
+
+            <div class="nombre">
+                Motorbike
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='motorbike.html'"
+            >
                 JUGAR
             </button>
+
+        </div>
+
+
+        <!-- 4 -->
+
+        <div class="card">
+
+            <img
+                src="fotos/2-player-moto-racing.jpg"
+                alt="2 Player Moto Racing"
+            >
+
+            <div class="nombre">
+                2 Player Moto Racing
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='2-player-moto-racing.html'"
+            >
+                JUGAR
+            </button>
+
+        </div>
+
+
+        <!-- 5 -->
+
+        <div class="card">
+
+            <img
+                src="fotos/super-bike-wild-race.jpg"
+                alt="Super Bike Wild Race"
+            >
+
+            <div class="nombre">
+                Super Bike Wild Race
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='super-bike-wild-race.html'"
+            >
+                JUGAR
+            </button>
+
         </div>
 
     </div>
+
 </section>
 
 
-<!-- ================= CARROS ================= -->
+<!-- ================================================= -->
+<!-- ===================== CARROS ==================== -->
+<!-- ================================================= -->
+
 <section class="categoria carros">
 
-    <h2 class="titulo-categoria">🚗 CARROS</h2>
+    <h2 class="titulo-categoria">
+        🚗 CARROS
+    </h2>
 
     <div class="juegos">
 
-        <div class="card">
-            <img src="fotos/racing-limits.jpg" alt="Racing Limits">
-            <div class="nombre">Racing Limits</div>
-            <button class="jugar" onclick="window.location.href='racing-limits.html'">
-                JUGAR
-            </button>
-        </div>
+        <!-- 6 -->
 
         <div class="card">
-            <img src="fotos/traffic-racer.jpg" alt="Traffic Racer">
-            <div class="nombre">Traffic Racer</div>
-            <button class="jugar" onclick="window.location.href='traffic-racer.html'">
+
+            <img
+                src="fotos/racing-limits.jpg"
+                alt="Racing Limits"
+            >
+
+            <div class="nombre">
+                Racing Limits
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='racing-limits.html'"
+            >
                 JUGAR
             </button>
+
         </div>
 
-        <div class="card">
-            <img src="fotos/car-racing.jpg" alt="Car Racing">
-            <div class="nombre">Car Racing</div>
-            <button class="jugar" onclick="window.location.href='car-racing.html'">
-                JUGAR
-            </button>
-        </div>
+
+        <!-- 7 -->
 
         <div class="card">
-            <img src="fotos/highway-racing.jpg" alt="Highway Racing">
-            <div class="nombre">Highway Racing</div>
-            <button class="jugar" onclick="window.location.href='highway-racing.html'">
+
+            <img
+                src="fotos/traffic-racer.jpg"
+                alt="Traffic Racer"
+            >
+
+            <div class="nombre">
+                Traffic Racer
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='traffic-racer.html'"
+            >
                 JUGAR
             </button>
+
         </div>
 
+
+        <!-- 8 -->
+
         <div class="card">
-            <img src="fotos/city-car-driving.jpg" alt="City Car Driving">
-            <div class="nombre">City Car Driving</div>
-            <button class="jugar" onclick="window.location.href='city-car-driving.html'">
+
+            <img
+                src="fotos/car-racing.jpg"
+                alt="Car Racing"
+            >
+
+            <div class="nombre">
+                Car Racing
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='car-racing.html'"
+            >
                 JUGAR
             </button>
+
+        </div>
+
+
+        <!-- 9 -->
+
+        <div class="card">
+
+            <img
+                src="fotos/highway-racing.jpg"
+                alt="Highway Racing"
+            >
+
+            <div class="nombre">
+                Highway Racing
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='highway-racing.html'"
+            >
+                JUGAR
+            </button>
+
+        </div>
+
+
+        <!-- 10 -->
+
+        <div class="card">
+
+            <img
+                src="fotos/city-car-driving.jpg"
+                alt="City Car Driving"
+            >
+
+            <div class="nombre">
+                City Car Driving
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='city-car-driving.html'"
+            >
+                JUGAR
+            </button>
+
         </div>
 
     </div>
+
 </section>
 
 
-<!-- ================= FÚTBOL ================= -->
+<!-- ================================================= -->
+<!-- ===================== FÚTBOL ==================== -->
+<!-- ================================================= -->
+
 <section class="categoria futbol">
 
-    <h2 class="titulo-categoria">⚽ FÚTBOL</h2>
+    <h2 class="titulo-categoria">
+        ⚽ FÚTBOL
+    </h2>
 
     <div class="juegos">
 
-        <div class="card">
-            <img src="fotos/football-legends.jpg" alt="Football Legends">
-            <div class="nombre">Football Legends</div>
-            <button class="jugar" onclick="window.location.href='football-legends.html'">
-                JUGAR
-            </button>
-        </div>
+        <!-- 11 -->
 
         <div class="card">
-            <img src="fotos/world-soccer.jpg" alt="World Soccer">
-            <div class="nombre">World Soccer</div>
-            <button class="jugar" onclick="window.location.href='world-soccer.html'">
+
+            <img
+                src="fotos/football-legends.jpg"
+                alt="Football Legends"
+            >
+
+            <div class="nombre">
+                Football Legends
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='football-legends.html'"
+            >
                 JUGAR
             </button>
+
         </div>
 
-        <div class="card">
-            <img src="fotos/penalty-shootout.jpg" alt="Penalty Shootout">
-            <div class="nombre">Penalty Shootout</div>
-            <button class="jugar" onclick="window.location.href='penalty-shootout.html'">
-                JUGAR
-            </button>
-        </div>
+
+        <!-- 12 -->
 
         <div class="card">
-            <img src="fotos/3d-soccer-champions.jpg" alt="3D Soccer Champions">
-            <div class="nombre">3D Soccer Champions</div>
-            <button class="jugar" onclick="window.location.href='3d-soccer-champions.html'">
+
+            <img
+                src="fotos/world-soccer.jpg"
+                alt="World Soccer"
+            >
+
+            <div class="nombre">
+                World Soccer
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='world-soccer.html'"
+            >
                 JUGAR
             </button>
+
+        </div>
+
+
+        <!-- 13 -->
+
+        <div class="card">
+
+            <img
+                src="fotos/penalty-shootout.jpg"
+                alt="Penalty Shootout"
+            >
+
+            <div class="nombre">
+                Penalty Shootout
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='penalty-shootout.html'"
+            >
+                JUGAR
+            </button>
+
+        </div>
+
+
+        <!-- 14 -->
+
+        <div class="card">
+
+            <img
+                src="fotos/3d-soccer-champions.jpg"
+                alt="3D Soccer Champions"
+            >
+
+            <div class="nombre">
+                3D Soccer Champions
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='3d-soccer-champions.html'"
+            >
+                JUGAR
+            </button>
+
         </div>
 
     </div>
+
 </section>
 
 
-<!-- ================= PLATAFORMAS ================= -->
+<!-- ================================================= -->
+<!-- ================= PLATAFORMAS =================== -->
+<!-- ================================================= -->
+
 <section class="categoria plataformas">
 
-    <h2 class="titulo-categoria">🎮 PLATAFORMAS</h2>
+    <h2 class="titulo-categoria">
+        🎮 PLATAFORMAS
+    </h2>
 
     <div class="juegos">
 
-        <div class="card">
-            <img src="fotos/geometry-dash.jpg" alt="Geometry Dash Lite">
-            <div class="nombre">Geometry Dash Lite</div>
-            <button class="jugar" onclick="window.location.href='geometry-dash.html'">
-                JUGAR
-            </button>
-        </div>
+        <!-- 15 -->
 
         <div class="card">
-            <img src="fotos/level-devil.jpg" alt="Level Devil">
-            <div class="nombre">Level Devil</div>
-            <button class="jugar" onclick="window.location.href='level-devil.html'">
+
+            <img
+                src="fotos/geometry-dash.jpg"
+                alt="Geometry Dash Lite"
+            >
+
+            <div class="nombre">
+                Geometry Dash Lite
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='geometry-dash.html'"
+            >
                 JUGAR
             </button>
+
         </div>
 
+
+        <!-- 16 -->
+
         <div class="card">
-            <img src="fotos/sky-riders.jpg" alt="Sky Riders">
-            <div class="nombre">Sky Riders</div>
-            <button class="jugar" onclick="window.location.href='sky-riders.html'">
+
+            <img
+                src="fotos/level-devil.jpg"
+                alt="Level Devil"
+            >
+
+            <div class="nombre">
+                Level Devil
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='level-devil.html'"
+            >
                 JUGAR
             </button>
+
+        </div>
+
+
+        <!-- 17 -->
+
+        <div class="card">
+
+            <img
+                src="fotos/sky-riders.jpg"
+                alt="Sky Riders"
+            >
+
+            <div class="nombre">
+                Sky Riders
+            </div>
+
+            <button
+                class="jugar"
+                onclick="window.location.href='sky-riders.html'"
+            >
+                JUGAR
+            </button>
+
         </div>
 
     </div>
+
 </section>
 
 </main>
 
 
-<script>
-function buscarJuego() {
+<!-- ================= JAVASCRIPT ================= -->
 
-    const texto = document
-        .getElementById("buscador")
-        .value
-        .toLowerCase();
+<script>
+
+const buscador = document.getElementById("buscador");
+
+buscador.addEventListener("input", function () {
+
+    const texto = buscador.value
+        .toLowerCase()
+        .trim();
 
     const tarjetas = document.querySelectorAll(".card");
 
-    tarjetas.forEach(function(tarjeta) {
+    tarjetas.forEach(function (tarjeta) {
 
         const nombre = tarjeta
             .querySelector(".nombre")
@@ -473,13 +907,19 @@ function buscarJuego() {
             .toLowerCase();
 
         if (nombre.includes(texto)) {
+
             tarjeta.classList.remove("oculto");
+
         } else {
+
             tarjeta.classList.add("oculto");
+
         }
 
     });
-}
+
+});
+
 </script>
 
 </body>
