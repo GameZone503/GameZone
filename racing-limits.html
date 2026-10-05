@@ -1,111 +1,375 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAMEZONE - Racing Limits</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Racing Limits - GAMEZONE</title>
 
-<style>
-* {
-    box-sizing: border-box;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-html, body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-}
+    body {
+      margin: 0;
+      background: #080810;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
 
-header {
-    height: 60px;
-    background: #111827;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
-}
+    header {
+      padding: 18px;
+      background: #11111c;
+      border-bottom: 2px solid #292943;
+    }
 
-.logo {
-    font-size: 25px;
-    font-weight: bold;
-}
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 4px;
+    }
 
-.buttons {
-    display: flex;
-    gap: 8px;
-}
+    header p {
+      margin: 5px 0 0;
+      color: #aaa;
+    }
 
-button {
-    border: none;
-    border-radius: 7px;
-    padding: 9px 12px;
-    background: #252525;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
+    .controles {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 15px;
+    }
 
-button:hover {
-    background: #3a3a3a;
-}
+    button {
+      background: #6c63ff;
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.game {
-    width: 100%;
-    height: calc(100vh - 60px);
-}
+    button:hover {
+      background: #827aff;
+    }
 
-iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    display: block;
-}
-</style>
+    #juego {
+      display: block;
+      width: min(95vw, 800px);
+      height: 500px;
+      margin: 10px auto;
+      background: #222;
+      border: 3px solid #33334d;
+      border-radius: 12px;
+      touch-action: none;
+    }
+
+    .info {
+      margin: 10px;
+      color: #ccc;
+    }
+
+    .moviles {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 15px auto 25px;
+    }
+
+    .moviles button {
+      width: 90px;
+      height: 55px;
+      font-size: 22px;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-    <div class="logo">GAMEZONE</div>
+  <header>
+    <h1>GAMEZONE</h1>
+    <p>Racing Limits</p>
+  </header>
 
-    <div class="buttons">
-        <button onclick="volver()">VOLVER</button>
-        <button onclick="reiniciar()">REINICIAR</button>
-        <button onclick="pantallaCompleta()">PANTALLA COMPLETA</button>
-    </div>
-</header>
+  <div class="controles">
+    <button onclick="volver()">VOLVER</button>
+    <button onclick="reiniciar()">REINICIAR</button>
+    <button onclick="pantallaCompleta()">PANTALLA COMPLETA</button>
+  </div>
 
-<div class="game">
-    <iframe
-        id="gameFrame"
-        src="https://html5.gamedistribution.com/"
-        allow="fullscreen; autoplay; gamepad"
-        allowfullscreen>
-    </iframe>
-</div>
+  <canvas id="juego" width="800" height="500"></canvas>
 
-<script>
-function volver() {
-    window.location.href = "index.html";
-}
+  <div class="info">
+    <span>🚗 Puntos: </span><span id="puntos">0</span>
+    &nbsp; | &nbsp;
+    <span>Velocidad: </span><span id="velocidad">0</span>
+  </div>
 
-function reiniciar() {
-    const frame = document.getElementById("gameFrame");
-    frame.src = frame.src;
-}
+  <div class="moviles">
+    <button id="izquierda">⬅️</button>
+    <button id="derecha">➡️</button>
+  </div>
 
-function pantallaCompleta() {
-    const frame = document.getElementById("gameFrame");
+  <script>
+    const canvas = document.getElementById("juego");
+    const ctx = canvas.getContext("2d");
 
-    if (frame.requestFullscreen) {
-        frame.requestFullscreen();
+    const puntosTexto = document.getElementById("puntos");
+    const velocidadTexto = document.getElementById("velocidad");
+
+    let coche;
+    let enemigos;
+    let puntos;
+    let velocidad;
+    let terminado;
+    let izquierda = false;
+    let derecha = false;
+    let lineas = 0;
+
+    function iniciar() {
+      coche = {
+        x: 375,
+        y: 405,
+        ancho: 50,
+        alto: 80
+      };
+
+      enemigos = [];
+      puntos = 0;
+      velocidad = 5;
+      terminado = false;
+      lineas = 0;
+
+      for (let i = 0; i < 4; i++) {
+        crearEnemigo(i);
+      }
+
+      actualizar();
     }
-}
-</script>
+
+    function crearEnemigo(i) {
+      enemigos.push({
+        x: 255 + Math.random() * 290,
+        y: -150 - i * 180,
+        ancho: 50,
+        alto: 80,
+        velocidad: 2 + Math.random() * 3
+      });
+    }
+
+    function dibujarCarretera() {
+      ctx.fillStyle = "#24752b";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#555";
+      ctx.fillRect(210, 0, 380, canvas.height);
+
+      ctx.fillStyle = "#ddd";
+      ctx.fillRect(205, 0, 5, canvas.height);
+      ctx.fillRect(590, 0, 5, canvas.height);
+
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 5;
+      ctx.setLineDash([35, 30]);
+
+      lineas += velocidad;
+
+      if (lineas > 65) {
+        lineas = 0;
+      }
+
+      ctx.lineDashOffset = lineas;
+
+      ctx.beginPath();
+      ctx.moveTo(400, 0);
+      ctx.lineTo(400, canvas.height);
+      ctx.stroke();
+
+      ctx.setLineDash([]);
+    }
+
+    function dibujarCoche() {
+      ctx.fillStyle = "#e63946";
+      ctx.fillRect(coche.x, coche.y, coche.ancho, coche.alto);
+
+      ctx.fillStyle = "#111";
+      ctx.fillRect(coche.x + 8, coche.y + 10, 34, 22);
+
+      ctx.fillStyle = "#8ed1fc";
+      ctx.fillRect(coche.x + 10, coche.y + 13, 30, 15);
+
+      ctx.fillStyle = "#222";
+      ctx.fillRect(coche.x - 5, coche.y + 12, 7, 22);
+      ctx.fillRect(coche.x + 48, coche.y + 12, 7, 22);
+      ctx.fillRect(coche.x - 5, coche.y + 53, 7, 22);
+      ctx.fillRect(coche.x + 48, coche.y + 53, 7, 22);
+    }
+
+    function dibujarEnemigo(e) {
+      ctx.fillStyle = "#3498db";
+      ctx.fillRect(e.x, e.y, e.ancho, e.alto);
+
+      ctx.fillStyle = "#111";
+      ctx.fillRect(e.x + 8, e.y + 10, 34, 22);
+
+      ctx.fillStyle = "#8ed1fc";
+      ctx.fillRect(e.x + 10, e.y + 13, 30, 15);
+
+      ctx.fillStyle = "#222";
+      ctx.fillRect(e.x - 5, e.y + 12, 7, 22);
+      ctx.fillRect(e.x + 48, e.y + 12, 7, 22);
+      ctx.fillRect(e.x - 5, e.y + 53, 7, 22);
+      ctx.fillRect(e.x + 48, e.y + 53, 7, 22);
+    }
+
+    function actualizar() {
+      if (terminado) {
+        dibujar();
+        return;
+      }
+
+      if (izquierda) {
+        coche.x -= 7;
+      }
+
+      if (derecha) {
+        coche.x += 7;
+      }
+
+      if (coche.x < 215) {
+        coche.x = 215;
+      }
+
+      if (coche.x > 535) {
+        coche.x = 535;
+      }
+
+      enemigos.forEach(e => {
+        e.y += e.velocidad + velocidad / 2;
+
+        if (e.y > canvas.height + 100) {
+          e.y = -100 - Math.random() * 300;
+          e.x = 225 + Math.random() * 310;
+          puntos += 10;
+
+          if (puntos % 100 === 0) {
+            velocidad += 0.5;
+          }
+        }
+
+        if (colision(coche, e)) {
+          terminado = true;
+        }
+      });
+
+      puntosTexto.textContent = puntos;
+      velocidadTexto.textContent = Math.round(velocidad * 20);
+
+      dibujar();
+
+      requestAnimationFrame(actualizar);
+    }
+
+    function dibujar() {
+      dibujarCarretera();
+
+      enemigos.forEach(dibujarEnemigo);
+
+      dibujarCoche();
+
+      if (terminado) {
+        ctx.fillStyle = "rgba(0,0,0,0.75)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 48px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("¡CHOQUE!", 400, 220);
+
+        ctx.font = "24px Arial";
+        ctx.fillText("Puntos: " + puntos, 400, 270);
+
+        ctx.font = "18px Arial";
+        ctx.fillText("Pulsa REINICIAR para jugar otra vez", 400, 315);
+      }
+    }
+
+    function colision(a, b) {
+      return (
+        a.x < b.x + b.ancho &&
+        a.x + a.ancho > b.x &&
+        a.y < b.y + b.alto &&
+        a.y + a.alto > b.y
+      );
+    }
+
+    function reiniciar() {
+      iniciar();
+    }
+
+    function volver() {
+      window.location.href = "index.html";
+    }
+
+    function pantallaCompleta() {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      }
+    }
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") {
+        izquierda = true;
+      }
+
+      if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") {
+        derecha = true;
+      }
+    });
+
+    document.addEventListener("keyup", e => {
+      if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") {
+        izquierda = false;
+      }
+
+      if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") {
+        derecha = false;
+      }
+    });
+
+    function mantenerPresionado(boton, direccion) {
+      boton.addEventListener("pointerdown", () => {
+        if (direccion === "izquierda") izquierda = true;
+        if (direccion === "derecha") derecha = true;
+      });
+
+      boton.addEventListener("pointerup", () => {
+        izquierda = false;
+        derecha = false;
+      });
+
+      boton.addEventListener("pointerleave", () => {
+        izquierda = false;
+        derecha = false;
+      });
+    }
+
+    mantenerPresionado(
+      document.getElementById("izquierda"),
+      "izquierda"
+    );
+
+    mantenerPresionado(
+      document.getElementById("derecha"),
+      "derecha"
+    );
+
+    iniciar();
+  </script>
 
 </body>
 </html>
