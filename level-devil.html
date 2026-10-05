@@ -1,1327 +1,151 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Level Devil - GameZone</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level Devil - GameZone</title>
 
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body{
-  overflow:hidden;
-  background:#111;
-  font-family:Arial,sans-serif;
-  user-select:none;
-}
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
 
-#game{
-  width:100vw;
-  height:100vh;
-  background:#f5a623;
-  position:relative;
-}
+    .controles {
+      height: 55px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 7px;
+    }
 
-#bar{
-  height:58px;
-  background:#171717;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 18px;
-  position:relative;
-  z-index:50;
-}
+    button {
+      border: 0;
+      border-radius: 7px;
+      padding: 10px 16px;
+      background: #222;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-#bar strong{
-  font-size:21px;
-}
+    button:hover {
+      background: #333;
+    }
 
-#levelName{
-  font-weight:bold;
-}
+    .juego {
+      width: 100%;
+      height: calc(100% - 55px);
+      border: 0;
+      display: block;
+      background: #000;
+    }
 
-#restart{
-  border:0;
-  background:#e53935;
-  color:white;
-  padding:10px 16px;
-  border-radius:8px;
-  font-weight:bold;
-}
+    .aviso {
+      position: fixed;
+      inset: 55px 0 0 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 18px;
+      background: #000;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
 
-#gameArea{
-  position:absolute;
-  left:0;
-  right:0;
-  top:58px;
-  bottom:0;
-  overflow:hidden;
-}
+    .aviso h2 {
+      font-size: 24px;
+    }
 
-#world{
-  position:absolute;
-  width:1100px;
-  height:620px;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  background:#f8c62d;
-  overflow:hidden;
-}
+    .aviso p {
+      max-width: 500px;
+      color: #ccc;
+    }
 
-/* PERSONAJE */
-
-#player{
-  position:absolute;
-  width:28px;
-  height:38px;
-  background:#111;
-  border-radius:5px 5px 3px 3px;
-  z-index:20;
-}
-
-#player:before{
-  content:"";
-  position:absolute;
-  width:6px;
-  height:6px;
-  background:white;
-  border-radius:50%;
-  left:6px;
-  top:8px;
-}
-
-#player:after{
-  content:"";
-  position:absolute;
-  width:6px;
-  height:6px;
-  background:white;
-  border-radius:50%;
-  right:6px;
-  top:8px;
-}
-
-/* SUELO */
-
-.block{
-  position:absolute;
-  background:#df3b32;
-  z-index:5;
-}
-
-/* PINCHOS */
-
-.spike{
-  position:absolute;
-  width:0;
-  height:0;
-  border-left:15px solid transparent;
-  border-right:15px solid transparent;
-  border-bottom:34px solid #151515;
-  z-index:15;
-}
-
-/* LLAVE */
-
-.key{
-  position:absolute;
-  width:22px;
-  height:22px;
-  border:5px solid #ffe600;
-  border-radius:50%;
-  z-index:16;
-  filter:drop-shadow(0 0 3px #fff);
-}
-
-.key:after{
-  content:"";
-  position:absolute;
-  width:18px;
-  height:5px;
-  background:#ffe600;
-  right:-17px;
-  top:4px;
-}
-
-/* PUERTA */
-
-.door{
-  position:absolute;
-  width:52px;
-  height:76px;
-  background:#eee;
-  border:5px solid #555;
-  z-index:10;
-}
-
-.door.locked{
-  background:#777;
-}
-
-.door:after{
-  content:"";
-  position:absolute;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#222;
-  right:7px;
-  top:32px;
-}
-
-/* PORTAL */
-
-#portal{
-  display:none;
-  position:absolute;
-  width:78px;
-  height:110px;
-  border-radius:50%;
-  background:#210a48;
-  border:8px solid #682cff;
-  box-shadow:
-    0 0 10px #8d5aff,
-    0 0 30px #6c35ff,
-    inset 0 0 25px #c19aff;
-  z-index:25;
-  animation:portal 1s infinite alternate;
-}
-
-@keyframes portal{
-  from{transform:scale(.94)}
-  to{transform:scale(1.08)}
-}
-
-#portalLabel{
-  position:absolute;
-  width:160px;
-  left:-49px;
-  top:-34px;
-  color:white;
-  text-align:center;
-  font-weight:bold;
-  text-shadow:0 2px 5px black;
-}
-
-/* MENSAJE */
-
-#message{
-  display:none;
-  position:absolute;
-  z-index:100;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  background:rgba(15,15,15,.95);
-  color:white;
-  padding:28px;
-  border-radius:14px;
-  text-align:center;
-  min-width:290px;
-}
-
-#message h2{
-  margin-bottom:10px;
-}
-
-#message p{
-  color:#ddd;
-}
-
-#message button{
-  margin-top:18px;
-  border:0;
-  background:#39c463;
-  color:white;
-  padding:12px 22px;
-  border-radius:8px;
-  font-weight:bold;
-}
-
-/* CONTROLES */
-
-#controls{
-  position:absolute;
-  bottom:18px;
-  left:18px;
-  z-index:60;
-  display:flex;
-  gap:9px;
-}
-
-.control{
-  width:58px;
-  height:58px;
-  border:0;
-  border-radius:12px;
-  background:rgba(0,0,0,.65);
-  color:white;
-  font-size:24px;
-}
-
-#jump{
-  margin-left:8px;
-}
-
-#mobileRestart{
-  position:absolute;
-  right:18px;
-  bottom:18px;
-  z-index:60;
-  border:0;
-  border-radius:10px;
-  background:rgba(0,0,0,.65);
-  color:white;
-  padding:14px;
-  font-weight:bold;
-}
-
-@media(max-width:700px){
-  #world{
-    transform:translate(-50%,-50%) scale(.72);
-  }
-}
-
-@media(max-width:500px){
-  #world{
-    transform:translate(-50%,-50%) scale(.58);
-  }
-}
-</style>
+    .aviso button {
+      background: #fff;
+      color: #000;
+    }
+  </style>
 </head>
 
 <body>
 
-<div id="game">
-
-  <div id="bar">
-    <strong>GAMEZONE</strong>
-    <span id="levelName">NIVEL 1</span>
-    <button id="restart">🔄 REINICIAR</button>
+  <div class="controles">
+    <button onclick="volver()">← VOLVER</button>
+    <button onclick="reiniciar()">🔄 REINICIAR</button>
+    <button onclick="pantallaCompleta()">⛶ PANTALLA COMPLETA</button>
   </div>
 
-  <div id="gameArea">
+  <iframe
+    id="juego"
+    class="juego"
+    src="https://poki.com/es/g/level-devil"
+    allow="fullscreen; autoplay"
+    allowfullscreen>
+  </iframe>
 
-    <div id="world"></div>
+  <div id="aviso" class="aviso">
+    <h2>Level Devil</h2>
+    <p>
+      El juego real no permite ser mostrado dentro de esta página.
+      Ábrelo directamente para jugar.
+    </p>
 
-    <div id="player"></div>
-
-    <div id="portal">
-      <div id="portalLabel">PORTAL</div>
-    </div>
-
-    <div id="message">
-      <h2 id="messageTitle"></h2>
-      <p id="messageText"></p>
-      <button id="messageButton"></button>
-    </div>
-
-    <div id="controls">
-      <button class="control" id="left">◀</button>
-      <button class="control" id="jump">▲</button>
-      <button class="control" id="right">▶</button>
-    </div>
-
-    <button id="mobileRestart">REINICIAR</button>
-
+    <button onclick="abrirJuego()">
+      🎮 ABRIR LEVEL DEVIL
+    </button>
   </div>
-</div>
 
-<script>
+  <script>
+    const juego = document.getElementById("juego");
+    const aviso = document.getElementById("aviso");
 
-const world=document.getElementById("world");
-const player=document.getElementById("player");
-const portal=document.getElementById("portal");
-const levelName=document.getElementById("levelName");
-
-const message=document.getElementById("message");
-const messageTitle=document.getElementById("messageTitle");
-const messageText=document.getElementById("messageText");
-const messageButton=document.getElementById("messageButton");
-
-let level=1;
-
-let x=55;
-let y=520;
-
-let vx=0;
-let vy=0;
-
-let left=false;
-let right=false;
-
-let grounded=false;
-let keyTaken=false;
-let finished=false;
-
-let jumpRequest=false;
-
-const gravity=.62;
-const moveSpeed=4.5;
-const jumpPower=12;
-
-
-/* =========================
-   NIVELES
-========================= */
-
-const levels=[
-
-/* 1 */
-{
-  key:null,
-  door:{x:1000,y:544},
-  blocks:[
-    [0,572,1100,48]
-  ],
-  spikes:[
-    [400,538],
-    [430,538],
-    [700,538]
-  ]
-},
-
-/* 2 */
-{
-  key:{x:530,y:480},
-  door:{x:1010,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [300,510,180,20],
-    [520,450,150,20],
-    [760,510,150,20]
-  ],
-  spikes:[
-    [180,538],
-    [200,538],
-    [680,538]
-  ]
-},
-
-/* 3 */
-{
-  key:{x:840,y:350},
-  door:{x:1010,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [180,510,140,20],
-    [400,430,150,20],
-    [650,350,170,20],
-    [900,450,150,20]
-  ],
-  spikes:[
-    [340,538],
-    [360,538],
-    [560,538],
-    [580,538],
-    [820,538]
-  ]
-},
-
-/* 4 */
-{
-  key:{x:480,y:300},
-  door:{x:990,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [250,500,140,20],
-    [430,400,150,20],
-    [650,300,160,20],
-    [850,400,150,20]
-  ],
-  spikes:[
-    [150,538],
-    [170,538],
-    [600,538],
-    [620,538],
-    [800,538]
-  ]
-},
-
-/* 5 */
-{
-  key:{x:760,y:480},
-  door:{x:1010,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [350,500,120,20],
-    [600,450,130,20],
-    [800,510,160,20]
-  ],
-  spikes:[
-    [250,538],
-    [270,538],
-    [480,538],
-    [500,538],
-    [740,538]
-  ]
-},
-
-/* 6 */
-{
-  key:{x:300,y:380},
-  door:{x:1000,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [180,430,150,20],
-    [430,500,150,20],
-    [650,400,160,20],
-    [850,500,130,20]
-  ],
-  spikes:[
-    [350,538],
-    [370,538],
-    [590,538],
-    [610,538],
-    [810,538]
-  ]
-},
-
-/* 7 */
-{
-  key:{x:670,y:300},
-  door:{x:1010,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [300,490,130,20],
-    [500,390,130,20],
-    [680,300,150,20],
-    [880,430,140,20]
-  ],
-  spikes:[
-    [150,538],
-    [170,538],
-    [450,538],
-    [470,538],
-    [820,538]
-  ]
-},
-
-/* 8 */
-{
-  key:{x:250,y:350},
-  door:{x:1000,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [150,450,160,20],
-    [390,350,150,20],
-    [620,450,150,20],
-    [820,350,150,20]
-  ],
-  spikes:[
-    [330,538],
-    [350,538],
-    [550,538],
-    [570,538],
-    [780,538]
-  ]
-},
-
-/* 9 */
-{
-  key:{x:900,y:280},
-  door:{x:1000,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [250,500,150,20],
-    [470,420,150,20],
-    [700,340,170,20],
-    [900,430,120,20]
-  ],
-  spikes:[
-    [420,538],
-    [440,538],
-    [640,538],
-    [660,538],
-    [870,538]
-  ]
-},
-
-/* 10 */
-{
-  key:{x:540,y:300},
-  door:{x:1010,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [200,470,140,20],
-    [400,370,160,20],
-    [620,470,140,20],
-    [820,370,150,20]
-  ],
-  spikes:[
-    [350,538],
-    [370,538],
-    [580,538],
-    [600,538],
-    [780,538]
-  ]
-},
-
-/* 11 */
-{
-  key:{x:750,y:280},
-  door:{x:1000,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [180,500,120,20],
-    [350,430,120,20],
-    [530,350,120,20],
-    [700,270,150,20],
-    [900,430,120,20]
-  ],
-  spikes:[
-    [300,538],
-    [320,538],
-    [480,538],
-    [500,538],
-    [670,538],
-    [690,538]
-  ]
-},
-
-/* 12 */
-{
-  key:{x:420,y:280},
-  door:{x:1010,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [250,450,160,20],
-    [430,350,150,20],
-    [650,450,150,20],
-    [850,350,150,20]
-  ],
-  spikes:[
-    [160,538],
-    [180,538],
-    [410,538],
-    [430,538],
-    [810,538]
-  ]
-},
-
-/* 13 */
-{
-  key:{x:780,y:380},
-  door:{x:1010,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [300,480,130,20],
-    [500,400,130,20],
-    [700,320,150,20],
-    [880,430,130,20]
-  ],
-  spikes:[
-    [220,538],
-    [240,538],
-    [450,538],
-    [470,538],
-    [650,538],
-    [670,538]
-  ]
-},
-
-/* 14 */
-{
-  key:{x:300,y:300},
-  door:{x:1000,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [150,430,140,20],
-    [350,330,140,20],
-    [550,430,140,20],
-    [750,330,160,20]
-  ],
-  spikes:[
-    [300,538],
-    [320,538],
-    [500,538],
-    [520,538],
-    [700,538]
-  ]
-},
-
-/* 15 */
-{
-  key:{x:650,y:250},
-  door:{x:1010,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [220,500,120,20],
-    [400,400,130,20],
-    [580,300,130,20],
-    [760,400,150,20]
-  ],
-  spikes:[
-    [350,538],
-    [370,538],
-    [540,538],
-    [560,538],
-    [720,538],
-    [740,538]
-  ]
-},
-
-/* 16 */
-{
-  key:{x:880,y:300},
-  door:{x:1010,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [180,450,150,20],
-    [380,350,140,20],
-    [570,450,140,20],
-    [760,350,170,20]
-  ],
-  spikes:[
-    [330,538],
-    [350,538],
-    [530,538],
-    [550,538],
-    [710,538]
-  ]
-},
-
-/* 17 */
-{
-  key:{x:500,y:250},
-  door:{x:1010,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [250,470,130,20],
-    [420,350,150,20],
-    [620,250,140,20],
-    [820,400,160,20]
-  ],
-  spikes:[
-    [170,538],
-    [190,538],
-    [390,538],
-    [410,538],
-    [580,538],
-    [600,538],
-    [780,538]
-  ]
-},
-
-/* 18 */
-{
-  key:{x:730,y:260},
-  door:{x:1010,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [160,470,140,20],
-    [360,390,140,20],
-    [550,310,140,20],
-    [730,230,150,20],
-    [900,400,120,20]
-  ],
-  spikes:[
-    [310,538],
-    [330,538],
-    [510,538],
-    [530,538],
-    [700,538],
-    [720,538]
-  ]
-},
-
-/* 19 */
-{
-  key:{x:450,y:280},
-  door:{x:1010,y:496},
-  blocks:[
-    [0,572,1100,48],
-    [220,450,150,20],
-    [400,350,150,20],
-    [600,450,150,20],
-    [800,350,160,20]
-  ],
-  spikes:[
-    [160,538],
-    [180,538],
-    [380,538],
-    [400,538],
-    [560,538],
-    [580,538],
-    [770,538]
-  ]
-},
-
-/* 20 */
-{
-  key:{x:520,y:300},
-  door:{x:900,y:400},
-  blocks:[
-    [0,572,1100,48],
-    [250,480,150,20],
-    [450,380,170,20],
-    [680,300,170,20],
-    [880,450,130,20]
-  ],
-  spikes:[
-    [150,538],
-    [170,538],
-    [420,538],
-    [440,538],
-    [630,538],
-    [650,538]
-  ]
-}
-
-];
-
-
-/* =========================
-   CARGAR NIVEL
-========================= */
-
-function loadLevel(n){
-
-  level=n;
-
-  const data=levels[(n-1)%20];
-
-  world.innerHTML="";
-
-  portal.style.display="none";
-
-  keyTaken=false;
-  finished=false;
-
-  x=55;
-  y=530;
-  vx=0;
-  vy=0;
-
-  levelName.textContent=
-    n<=20 ? "NIVEL "+n : "ZONA 2 • NIVEL "+(n-20);
-
-  /* bloques */
-
-  data.blocks.forEach(b=>{
-
-    const el=document.createElement("div");
-
-    el.className="block";
-
-    el.style.left=b[0]+"px";
-    el.style.top=b[1]+"px";
-    el.style.width=b[2]+"px";
-    el.style.height=b[3]+"px";
-
-    world.appendChild(el);
-
-  });
-
-
-  /* pinchos */
-
-  data.spikes.forEach(s=>{
-
-    const el=document.createElement("div");
-
-    el.className="spike";
-
-    el.style.left=s[0]+"px";
-    el.style.top=s[1]+"px";
-
-    world.appendChild(el);
-
-  });
-
-
-  /* llave */
-
-  if(data.key){
-
-    const key=document.createElement("div");
-
-    key.className="key";
-
-    key.id="key";
-
-    key.style.left=data.key.x+"px";
-    key.style.top=data.key.y+"px";
-
-    world.appendChild(key);
-
-  }
-
-
-  /* puerta */
-
-  const door=document.createElement("div");
-
-  door.id="door";
-
-  door.className="door";
-
-  if(data.key){
-    door.classList.add("locked");
-  }
-
-  door.style.left=data.door.x+"px";
-  door.style.top=data.door.y+"px";
-
-  world.appendChild(door);
-
-
-  player.style.left=x+"px";
-  player.style.top=y+"px";
-
-  message.style.display="none";
-}
-
-
-/* =========================
-   COLISIONES
-========================= */
-
-function collision(a,b){
-
-  return(
-    a.left<b.right &&
-    a.right>b.left &&
-    a.top<b.bottom &&
-    a.bottom>b.top
-  );
-
-}
-
-
-function playerRect(){
-
-  return{
-    left:x,
-    right:x+28,
-    top:y,
-    bottom:y+38
-  };
-
-}
-
-
-/* =========================
-   ACTUALIZAR JUEGO
-========================= */
-
-function gameLoop(){
-
-  if(!finished){
-
-    if(left){
-      vx=-moveSpeed;
-    }
-    else if(right){
-      vx=moveSpeed;
-    }
-    else{
-      vx*=.78;
+    function volver() {
+      window.location.href = "index.html";
     }
 
-    x+=vx;
+    function reiniciar() {
+      juego.src = juego.src;
+    }
 
-    if(x<0)x=0;
-    if(x>1060)x=1060;
-
-
-    vy+=gravity;
-
-    y+=vy;
-
-    grounded=false;
-
-
-    const p=playerRect();
-
-
-    /* plataformas */
-
-    document.querySelectorAll(".block").forEach(el=>{
-
-      const r={
-        left:parseFloat(el.style.left),
-        right:parseFloat(el.style.left)+el.offsetWidth,
-        top:parseFloat(el.style.top),
-        bottom:parseFloat(el.style.top)+el.offsetHeight
-      };
-
-      if(
-        p.right>r.left &&
-        p.left<r.right &&
-        p.bottom>r.top &&
-        p.bottom<r.bottom+18 &&
-        vy>=0
-      ){
-
-        y=r.top-38;
-
-        vy=0;
-
-        grounded=true;
-
+    function pantallaCompleta() {
+      if (juego.requestFullscreen) {
+        juego.requestFullscreen();
+      } else if (juego.webkitRequestFullscreen) {
+        juego.webkitRequestFullscreen();
       }
-
-    });
-
-
-    /* salto */
-
-    if(jumpRequest && grounded){
-
-      vy=-jumpPower;
-
-      grounded=false;
-
     }
 
-    jumpRequest=false;
-
-
-    /* pinchos */
-
-    document.querySelectorAll(".spike").forEach(el=>{
-
-      const s={
-        left:parseFloat(el.style.left),
-        right:parseFloat(el.style.left)+30,
-        top:parseFloat(el.style.top)+8,
-        bottom:parseFloat(el.style.top)+34
-      };
-
-      if(collision(p,s)){
-
-        loadLevel(level);
-
-      }
-
-    });
-
-
-    /* caída */
-
-    if(y>640){
-
-      loadLevel(level);
-
+    function abrirJuego() {
+      window.open(
+        "https://poki.com/es/g/level-devil",
+        "_blank"
+      );
     }
 
-
-    /* llave */
-
-    const key=document.getElementById("key");
-
-    if(key && !keyTaken){
-
-      const k={
-        left:parseFloat(key.style.left),
-        right:parseFloat(key.style.left)+22,
-        top:parseFloat(key.style.top),
-        bottom:parseFloat(key.style.top)+22
-      };
-
-      if(collision(p,k)){
-
-        keyTaken=true;
-
-        key.remove();
-
-        const door=document.getElementById("door");
-
-        if(door){
-          door.classList.remove("locked");
+    // Si la página externa no permite cargarse,
+    // el usuario puede abrir el juego directamente.
+    setTimeout(() => {
+      try {
+        if (!juego.contentWindow) {
+          aviso.style.display = "flex";
         }
-
-      }
-
-    }
-
-
-    /* puerta */
-
-    const door=document.getElementById("door");
-
-    if(door){
-
-      const d={
-        left:parseFloat(door.style.left),
-        right:parseFloat(door.style.left)+52,
-        top:parseFloat(door.style.top),
-        bottom:parseFloat(door.style.top)+76
-      };
-
-      if(collision(p,d)){
-
-        const needsKey=levels[(level-1)%20].key;
-
-        if(!needsKey || keyTaken){
-
-          completeLevel();
-
-        }
-
-      }
-
-    }
-
-
-    /* portal */
-
-    if(level===20 && keyTaken){
-
-      portal.style.display="block";
-
-      portal.style.left="930px";
-      portal.style.top="280px";
-
-      const po={
-        left:930,
-        right:1008,
-        top:280,
-        bottom:390
-      };
-
-      if(collision(p,po)){
-
-        openNextZone();
-
-      }
-
-    }
-
-
-    player.style.left=x+"px";
-    player.style.top=y+"px";
-
-  }
-
-  requestAnimationFrame(gameLoop);
-
-}
-
-
-/* =========================
-   COMPLETAR NIVEL
-========================= */
-
-function completeLevel(){
-
-  if(finished)return;
-
-  finished=true;
-
-  if(level<20){
-
-    messageTitle.textContent="¡NIVEL COMPLETADO!";
-
-    messageText.textContent=
-      "Nivel "+level+" superado.";
-
-    messageButton.textContent=
-      "SIGUIENTE NIVEL";
-
-    messageButton.onclick=()=>{
-
-      loadLevel(level+1);
-
-    };
-
-  }
-  else{
-
-    messageTitle.textContent=
-      "¡HAS COMPLETADO LOS 20 NIVELES!";
-
-    messageText.textContent=
-      "El portal se ha desbloqueado.";
-
-    messageButton.textContent=
-      "ABRIR PORTAL";
-
-    messageButton.onclick=()=>{
-
-      message.style.display="none";
-
-      finished=false;
-
-      portal.style.display="block";
-
-    };
-
-  }
-
-  message.style.display="block";
-
-}
-
-
-/* =========================
-   SIGUIENTE ZONA
-========================= */
-
-function openNextZone(){
-
-  finished=true;
-
-  messageTitle.textContent=
-    "¡PORTAL ACTIVADO!";
-
-  messageText.textContent=
-    "Has llegado a la siguiente zona.";
-
-  messageButton.textContent=
-    "CONTINUAR";
-
-  messageButton.onclick=()=>{
-
-    message.style.display="none";
-
-    loadLevel(21);
-
-  };
-
-  message.style.display="block";
-
-}
-
-
-/* =========================
-   TECLADO
-========================= */
-
-document.addEventListener("keydown",e=>{
-
-  if(
-    e.key==="ArrowLeft" ||
-    e.key.toLowerCase()==="a"
-  ){
-    left=true;
-  }
-
-  if(
-    e.key==="ArrowRight" ||
-    e.key.toLowerCase()==="d"
-  ){
-    right=true;
-  }
-
-  if(
-    e.key==="ArrowUp" ||
-    e.key===" " ||
-    e.key.toLowerCase()==="w"
-  ){
-    jumpRequest=true;
-  }
-
-  if(e.key.toLowerCase()==="r"){
-
-    loadLevel(level);
-
-  }
-
-});
-
-
-document.addEventListener("keyup",e=>{
-
-  if(
-    e.key==="ArrowLeft" ||
-    e.key.toLowerCase()==="a"
-  ){
-    left=false;
-  }
-
-  if(
-    e.key==="ArrowRight" ||
-    e.key.toLowerCase()==="d"
-  ){
-    right=false;
-  }
-
-});
-
-
-/* =========================
-   CONTROLES TÁCTILES
-========================= */
-
-function hold(button,down,up){
-
-  button.addEventListener("touchstart",e=>{
-    e.preventDefault();
-    down();
-  });
-
-  button.addEventListener("touchend",e=>{
-    e.preventDefault();
-    up();
-  });
-
-  button.addEventListener("mousedown",down);
-
-  button.addEventListener("mouseup",up);
-
-  button.addEventListener("mouseleave",up);
-
-}
-
-
-hold(
-  document.getElementById("left"),
-  ()=>left=true,
-  ()=>left=false
-);
-
-hold(
-  document.getElementById("right"),
-  ()=>right=true,
-  ()=>right=false
-);
-
-
-document.getElementById("jump").addEventListener(
-  "mousedown",
-  ()=>jumpRequest=true
-);
-
-document.getElementById("jump").addEventListener(
-  "touchstart",
-  e=>{
-    e.preventDefault();
-    jumpRequest=true;
-  }
-);
-
-
-/* reiniciar */
-
-document.getElementById("restart").onclick=()=>{
-
-  loadLevel(level);
-
-};
-
-document.getElementById("mobileRestart").onclick=()=>{
-
-  loadLevel(level);
-
-};
-
-
-/* iniciar */
-
-loadLevel(1);
-
-requestAnimationFrame(gameLoop);
-
-</script>
-
-</body>
-</html>
+      } catch (e) {
+        aviso.style.display = "flex
+```
