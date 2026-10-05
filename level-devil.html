@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Level Devil - GameZone</title>
 
 <style>
@@ -16,527 +16,966 @@ html,body{
     width:100%;
     height:100%;
     overflow:hidden;
+    background:#050505;
+    font-family:Arial,sans-serif;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#111;
-    color:white;
-}
-
-#game{
-    position:relative;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:
-        linear-gradient(#202020 0 72%,#151515 72% 100%);
-}
-
-/* TECHO */
-#techo{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:45px;
-    background:#292929;
-    border-bottom:4px solid #555;
-}
-
-/* PISO */
-#piso{
-    position:absolute;
-    left:0;
-    bottom:17%;
-    width:100%;
-    height:25px;
-    background:#eee;
-    box-shadow:0 0 0 4px #111;
-}
-
-/* BANDERA */
-#meta{
-    position:absolute;
-    bottom:calc(17% + 25px);
-    right:7%;
-    width:45px;
-    height:80px;
-}
-
-#poste{
-    position:absolute;
-    left:5px;
-    bottom:0;
-    width:5px;
-    height:80px;
-    background:#ddd;
-}
-
-#bandera{
-    position:absolute;
-    top:0;
-    left:10px;
-    width:35px;
-    height:25px;
-    background:#31e86d;
-    clip-path:polygon(0 0,100% 50%,0 100%);
-}
-
-/* JUGADOR */
-#player{
-    position:absolute;
-    width:32px;
-    height:42px;
-    background:#ffcc33;
-    border-radius:7px 7px 4px 4px;
-    bottom:calc(17% + 25px);
-    left:8%;
-    box-shadow:inset 0 -7px #e99e00;
-}
-
-/* OJOS */
-#player:before,
-#player:after{
-    content:"";
-    position:absolute;
-    top:10px;
-    width:5px;
-    height:5px;
-    background:#111;
-    border-radius:50%;
-}
-
-#player:before{
-    left:7px;
-}
-
-#player:after{
-    right:7px;
-}
-
-/* PINCHOS */
-.pincho{
-    position:absolute;
-    bottom:calc(17% + 25px);
-    width:0;
-    height:0;
-    border-left:15px solid transparent;
-    border-right:15px solid transparent;
-    border-bottom:32px solid #e33;
-    filter:drop-shadow(0 0 2px #000);
-}
-
-/* MENSAJE */
-#mensaje{
-    position:absolute;
-    top:12%;
-    width:100%;
-    text-align:center;
-    font-size:clamp(22px,4vw,40px);
-    font-weight:900;
-    opacity:.9;
-}
-
-/* HUD */
-#hud{
-    position:absolute;
-    top:58px;
-    left:20px;
-    font-size:18px;
-    font-weight:bold;
-    z-index:10;
-}
-
-/* CONTROLES */
-#controles{
-    position:absolute;
-    bottom:3%;
-    left:0;
-    width:100%;
     display:flex;
     justify-content:center;
-    gap:12px;
+    align-items:center;
+}
+
+#juego{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    max-width:1100px;
+    max-height:650px;
+    background:#080808;
+    overflow:hidden;
+}
+
+/* PARTE SUPERIOR */
+
+#barra{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:52px;
+    background:#111;
+    border-bottom:2px solid #292929;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    color:white;
     z-index:20;
 }
 
-.control{
-    width:58px;
-    height:48px;
-    border:0;
-    border-radius:12px;
-    background:#333;
-    color:white;
-    font-size:22px;
+#titulo{
+    font-size:20px;
     font-weight:bold;
-    box-shadow:0 4px 0 #111;
 }
 
-.control:active{
-    transform:translateY(3px);
-    box-shadow:0 1px 0 #111;
+#nivelTexto{
+    font-size:16px;
+    color:#bbb;
 }
 
-/* PANTALLA FINAL */
-#final{
+/* MUNDO */
+
+#mundo{
+    position:absolute;
+    left:0;
+    top:52px;
+    width:100%;
+    height:calc(100% - 52px);
+    background:#090909;
+    overflow:hidden;
+}
+
+/* TEXTO */
+
+#mensaje{
+    position:absolute;
+    top:25px;
+    left:50%;
+    transform:translateX(-50%);
+    color:#777;
+    font-size:14px;
+    z-index:10;
+    pointer-events:none;
+}
+
+/* JUGADOR */
+
+#jugador{
+    position:absolute;
+    width:24px;
+    height:30px;
+    background:#f2f2f2;
+    border-radius:4px 4px 2px 2px;
+    z-index:8;
+}
+
+#jugador::before{
+    content:"";
+    position:absolute;
+    width:5px;
+    height:5px;
+    background:#111;
+    left:5px;
+    top:7px;
+    box-shadow:9px 0 #111;
+}
+
+/* SOMBRA DEL JUGADOR */
+
+#jugador::after{
+    content:"";
+    position:absolute;
+    width:18px;
+    height:4px;
+    background:#000;
+    opacity:.5;
+    left:3px;
+    bottom:-6px;
+    border-radius:50%;
+}
+
+/* PLATAFORMAS */
+
+.plataforma{
+    position:absolute;
+    background:#eeeeee;
+    height:18px;
+    z-index:5;
+}
+
+/* SUELO */
+
+.suelo{
+    position:absolute;
+    height:22px;
+    background:#eeeeee;
+    z-index:5;
+}
+
+/* PUERTA */
+
+.puerta{
+    position:absolute;
+    width:48px;
+    height:68px;
+    background:#181818;
+    border:4px solid #eeeeee;
+    z-index:6;
+}
+
+.puerta::before{
+    content:"";
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:#eee;
+    border-radius:50%;
+    right:7px;
+    top:28px;
+}
+
+/* META */
+
+.meta{
+    position:absolute;
+    width:10px;
+    height:80px;
+    background:#ddd;
+    z-index:4;
+}
+
+.meta::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:10px;
+    width:42px;
+    height:28px;
+    background:#eee;
+    clip-path:polygon(0 0,100% 50%,0 100%);
+}
+
+/* PINCHOS */
+
+.pincho{
+    position:absolute;
+    width:0;
+    height:0;
+    border-left:13px solid transparent;
+    border-right:13px solid transparent;
+    border-bottom:28px solid #e8e8e8;
+    z-index:7;
+}
+
+/* PINCHOS AL REVÉS */
+
+.pincho.abajo{
+    border-bottom:none;
+    border-top:28px solid #e8e8e8;
+}
+
+/* BLOQUE */
+
+.bloque{
+    position:absolute;
+    background:#ddd;
+    z-index:5;
+}
+
+/* PANTALLA DE GANAR */
+
+#ganaste{
     display:none;
     position:absolute;
     inset:0;
-    z-index:100;
-    background:rgba(0,0,0,.88);
+    background:rgba(0,0,0,.92);
+    z-index:50;
     align-items:center;
     justify-content:center;
-    text-align:center;
     flex-direction:column;
-    gap:20px;
+    color:white;
+    text-align:center;
 }
 
-#final h1{
-    font-size:clamp(35px,8vw,70px);
-    color:#36ed70;
+#ganaste h1{
+    font-size:42px;
+    margin-bottom:12px;
 }
 
-#final button{
-    padding:14px 30px;
-    border:0;
-    border-radius:30px;
-    background:#00eaff;
-    color:#001018;
-    font-size:18px;
-    font-weight:900;
+#ganaste p{
+    color:#aaa;
+    margin-bottom:25px;
+}
+
+#ganaste button,
+#reiniciar{
+    border:none;
+    background:#eee;
+    color:#111;
+    padding:12px 24px;
+    font-weight:bold;
+    border-radius:6px;
     cursor:pointer;
+}
+
+#ganaste button:hover,
+#reiniciar:hover{
+    background:white;
+}
+
+/* CONTROLES */
+
+#controles{
+    position:absolute;
+    bottom:18px;
+    left:18px;
+    z-index:30;
+    display:flex;
+    gap:8px;
+}
+
+.control{
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:8px;
+    background:rgba(255,255,255,.12);
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.control:active{
+    background:rgba(255,255,255,.28);
+}
+
+#reiniciar{
+    position:absolute;
+    right:18px;
+    bottom:18px;
+    z-index:30;
+    padding:10px 16px;
+    background:rgba(255,255,255,.12);
+    color:white;
+}
+
+/* CELULAR */
+
+@media(max-width:600px){
+
+    #barra{
+        height:45px;
+    }
+
+    #titulo{
+        font-size:16px;
+    }
+
+    #nivelTexto{
+        font-size:13px;
+    }
+
+    #mundo{
+        top:45px;
+        height:calc(100% - 45px);
+    }
+
+    #controles{
+        bottom:12px;
+        left:12px;
+    }
+
+    .control{
+        width:44px;
+        height:44px;
+    }
+
+    #reiniciar{
+        right:12px;
+        bottom:12px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div id="game">
+<div id="juego">
 
-    <div id="techo"></div>
-
-    <div id="hud">
-        NIVEL <span id="nivel">1</span> / 10
+    <div id="barra">
+        <div id="titulo">LEVEL DEVIL</div>
+        <div id="nivelTexto">NIVEL <span id="numeroNivel">1</span></div>
     </div>
 
-    <div id="mensaje">
-        LLEGA A LA BANDERA
+    <div id="mundo">
+
+        <div id="mensaje">
+            Llega a la puerta
+        </div>
+
+        <div id="jugador"></div>
+
+        <div id="ganaste">
+            <h1>¡NIVEL COMPLETADO!</h1>
+            <p>Has superado este nivel.</p>
+            <button onclick="siguienteNivel()">SIGUIENTE NIVEL</button>
+        </div>
+
+        <div id="controles">
+            <button class="control" id="izquierda">◀</button>
+            <button class="control" id="derecha">▶</button>
+            <button class="control" id="salto">▲</button>
+        </div>
+
+        <button id="reiniciar" onclick="reiniciarNivel()">
+            ↻
+        </button>
+
     </div>
-
-    <div id="piso"></div>
-
-    <div id="meta">
-        <div id="poste"></div>
-        <div id="bandera"></div>
-    </div>
-
-    <div id="player"></div>
-
-    <div id="controles">
-        <button class="control" id="izq">◀</button>
-        <button class="control" id="salto">▲</button>
-        <button class="control" id="der">▶</button>
-    </div>
-
-    <div id="final">
-        <h1>¡GANASTE!</h1>
-        <p>Completaste todos los niveles.</p>
-        <button onclick="reiniciarTodo()">JUGAR DE NUEVO</button>
-    </div>
-
 </div>
 
+
 <script>
-const player = document.getElementById("player");
-const game = document.getElementById("game");
-const nivelTexto = document.getElementById("nivel");
 
-let x = 8;
-let y = 0;
-
-let velocidadX = 0;
-let velocidadY = 0;
-
-let enSuelo = true;
-let jugando = true;
+const jugador = document.getElementById("jugador");
+const mundo = document.getElementById("mundo");
+const numeroNivel = document.getElementById("numeroNivel");
+const ganaste = document.getElementById("ganaste");
 
 let nivel = 1;
 
-const gravedad = 0.75;
-const salto = 13;
-const velocidad = 4;
+let x = 80;
+let y = 350;
+
+let vx = 0;
+let vy = 0;
+
+let izquierda = false;
+let derecha = false;
+
+let enSuelo = false;
+let jugando = true;
+
+const gravedad = 0.65;
+const velocidad = 4.5;
+const salto = -12;
+
+let plataformas = [];
+let pinchos = [];
+let puertas = [];
+let bloques = [];
+
+let meta = null;
+
+
+/* ================= NIVELES ================= */
 
 const niveles = [
-    [35,55],
-    [50,70],
-    [30,60,78],
-    [45,65,82],
-    [25,48,70,88],
-    [40,58,75],
-    [32,52,68,84],
-    [45,63,78,91],
-    [28,46,64,82],
-    [40,55,70,85]
+
+/* NIVEL 1 */
+
+{
+    jugador:{x:80,y:350},
+
+    plataformas:[
+        {x:0,y:430,w:900,h:22},
+        {x:250,y:350,w:150,h:18},
+        {x:520,y:300,w:150,h:18}
+    ],
+
+    pinchos:[
+        {x:410,y:402},
+        {x:440,y:402},
+        {x:700,y:402},
+        {x:730,y:402}
+    ],
+
+    puerta:{x:820,y:362}
+},
+
+/* NIVEL 2 */
+
+{
+    jugador:{x:70,y:350},
+
+    plataformas:[
+        {x:0,y:430,w:900,h:22},
+        {x:180,y:360,w:120,h:18},
+        {x:400,y:310,w:120,h:18},
+        {x:620,y:360,w:120,h:18}
+    ],
+
+    pinchos:[
+        {x:300,y:402},
+        {x:330,y:402},
+        {x:540,y:402},
+        {x:570,y:402}
+    ],
+
+    puerta:{x:820,y:362}
+},
+
+/* NIVEL 3 */
+
+{
+    jugador:{x:70,y:350},
+
+    plataformas:[
+        {x:0,y:430,w:900,h:22},
+        {x:220,y:330,w:130,h:18},
+        {x:470,y:260,w:130,h:18},
+        {x:700,y:330,w:130,h:18}
+    ],
+
+    pinchos:[
+        {x:120,y:402},
+        {x:150,y:402},
+        {x:370,y:402},
+        {x:400,y:402},
+        {x:620,y:402},
+        {x:650,y:402}
+    ],
+
+    puerta:{x:820,y:362}
+},
+
+/* NIVEL 4 */
+
+{
+    jugador:{x:60,y:350},
+
+    plataformas:[
+        {x:0,y:430,w:900,h:22},
+        {x:300,y:350,w:120,h:18},
+        {x:500,y:280,w:120,h:18}
+    ],
+
+    pinchos:[
+        {x:170,y:402},
+        {x:200,y:402},
+        {x:230,y:402},
+        {x:650,y:402},
+        {x:680,y:402},
+        {x:710,y:402}
+    ],
+
+    puerta:{x:820,y:362}
+},
+
+/* NIVEL 5 */
+
+{
+    jugador:{x:60,y:350},
+
+    plataformas:[
+        {x:0,y:430,w:900,h:22},
+        {x:160,y:350,w:130,h:18},
+        {x:390,y:350,w:130,h:18},
+        {x:620,y:350,w:130,h:18}
+    ],
+
+    pinchos:[
+        {x:290,y:402},
+        {x:320,y:402},
+        {x:520,y:402},
+        {x:550,y:402}
+    ],
+
+    puerta:{x:820,y:362}
+},
+
+/* NIVEL 6 */
+
+{
+    jugador:{x:60,y:350},
+
+    plataformas:[
+        {x:0,y:430,w:900,h:22},
+        {x:250,y:300,w:120,h:18},
+        {x:500,y:370,w:120,h:18},
+        {x:700,y:280,w:120,h:18}
+    ],
+
+    pinchos:[
+        {x:130,y:402},
+        {x:160,y:402},
+        {x:400,y:402},
+        {x:430,y:402},
+        {x:620,y:402},
+        {x:650,y:402}
+    ],
+
+    puerta:{x:820,y:362}
+},
+
+/* NIVEL 7 */
+
+{
+    jugador:{x:60,y:350},
+
+    plataformas:[
+        {x:0,y:430,w:900,h:22},
+        {x:180,y:340,w:100,h:18},
+        {x:350,y:250,w:100,h:18},
+        {x:520,y:340,w:100,h:18},
+        {x:680,y:250,w:100,h:18}
+    ],
+
+    pinchos:[
+        {x:280,y:402},
+        {x:310,y:402},
+        {x:450,y:402},
+        {x:480,y:402},
+        {x:620,y:402},
+        {x:650,y:402}
+    ],
+
+    puerta:{x:820,y:362}
+},
+
+/* NIVEL 8 */
+
+{
+    jugador:{x:60,y:350},
+
+    plataformas:[
+        {x:0,y:430,w:900,h:22},
+        {x:300,y:330,w:150,h:18},
+        {x:600,y:330,w:150,h:18}
+    ],
+
+    pinchos:[
+        {x:150,y:402},
+        {x:180,y:402},
+        {x:210,y:402},
+        {x:470,y:402},
+        {x:500,y:402},
+        {x:530,y:402}
+    ],
+
+    puerta:{x:820,y:362}
+},
+
+/* NIVEL 9 */
+
+{
+    jugador:{x:60,y:350},
+
+    plataformas:[
+        {x:0,y:430,w:900,h:22},
+        {x:220,y:300,w:100,h:18},
+        {x:420,y:360,w:100,h:18},
+        {x:620,y:300,w:100,h:18}
+    ],
+
+    pinchos:[
+        {x:100,y:402},
+        {x:130,y:402},
+        {x:330,y:402},
+        {x:360,y:402},
+        {x:530,y:402},
+        {x:560,y:402}
+    ],
+
+    puerta:{x:820,y:362}
+},
+
+/* NIVEL 10 */
+
+{
+    jugador:{x:60,y:350},
+
+    plataformas:[
+        {x:0,y:430,w:900,h:22},
+        {x:180,y:320,w:120,h:18},
+        {x:400,y:250,w:120,h:18},
+        {x:620,y:320,w:120,h:18}
+    ],
+
+    pinchos:[
+        {x:300,y:402},
+        {x:330,y:402},
+        {x:350,y:402},
+        {x:540,y:402},
+        {x:570,y:402},
+        {x:590,y:402}
+    ],
+
+    puerta:{x:820,y:362}
+}
+
 ];
 
-let pinchos = [];
 
+/* ================= CARGAR NIVEL ================= */
 
-/* CREAR PINCHOS */
+function cargarNivel(){
 
-function crearNivel(){
+    mundo.querySelectorAll(".plataforma,.pincho,.puerta,.bloque,.meta")
+        .forEach(e => e.remove());
 
-    pinchos.forEach(p => p.remove());
-
+    plataformas = [];
     pinchos = [];
+    puertas = [];
+    bloques = [];
 
-    const posiciones = niveles[nivel-1] || [];
+    const datos = niveles[nivel - 1];
 
-    posiciones.forEach(pos => {
+    x = datos.jugador.x;
+    y = datos.jugador.y;
 
-        const p = document.createElement("div");
+    vx = 0;
+    vy = 0;
 
-        p.className = "pincho";
+    numeroNivel.textContent = nivel;
 
-        p.style.left = pos + "%";
+    datos.plataformas.forEach(p => {
 
-        game.appendChild(p);
+        const elemento = document.createElement("div");
 
-        pinchos.push(p);
+        elemento.className = "plataforma";
 
+        elemento.style.left = p.x + "px";
+        elemento.style.top = p.y + "px";
+        elemento.style.width = p.w + "px";
+        elemento.style.height = p.h + "px";
+
+        mundo.appendChild(elemento);
+
+        plataformas.push({
+            x:p.x,
+            y:p.y,
+            w:p.w,
+            h:p.h,
+            element:elemento
+        });
     });
 
-    nivelTexto.textContent = nivel;
 
-    x = 8;
-    y = 0;
+    datos.pinchos.forEach(p => {
 
-    velocidadX = 0;
-    velocidadY = 0;
+        const elemento = document.createElement("div");
 
-    enSuelo = true;
+        elemento.className = "pincho";
 
-    actualizarJugador();
+        elemento.style.left = p.x + "px";
+        elemento.style.top = p.y + "px";
+
+        mundo.appendChild(elemento);
+
+        pinchos.push({
+            x:p.x,
+            y:p.y,
+            w:26,
+            h:28,
+            element:elemento
+        });
+    });
+
+
+    const puerta = document.createElement("div");
+
+    puerta.className = "puerta";
+
+    puerta.style.left = datos.puerta.x + "px";
+    puerta.style.top = datos.puerta.y + "px";
+
+    mundo.appendChild(puerta);
+
+    puertas.push({
+        x:datos.puerta.x,
+        y:datos.puerta.y,
+        w:48,
+        h:68,
+        element:puerta
+    });
+
+
+    ganaste.style.display = "none";
+
+    jugando = true;
 }
 
 
-/* ACTUALIZAR */
+/* ================= FISICA ================= */
 
-function actualizarJugador(){
+function actualizar(){
 
-    player.style.left = x + "%";
-    player.style.bottom =
-        "calc(17% + 25px + " + y + "px)";
-}
+    if(!jugando){
+        requestAnimationFrame(actualizar);
+        return;
+    }
+
+    if(izquierda){
+        vx = -velocidad;
+    }else if(derecha){
+        vx = velocidad;
+    }else{
+        vx *= .75;
+    }
+
+    vy += gravedad;
+
+    let nuevoX = x + vx;
+    let nuevoY = y + vy;
+
+    enSuelo = false;
 
 
-/* MOVIMIENTO */
+    /* LIMITES */
 
-function mover(){
+    if(nuevoX < 0){
+        nuevoX = 0;
+        vx = 0;
+    }
 
-    if(!jugando) return;
+    if(nuevoX > mundo.clientWidth - 24){
+        nuevoX = mundo.clientWidth - 24;
+        vx = 0;
+    }
 
-    x += velocidadX;
 
-    if(x < 1) x = 1;
+    /* COLISIONES */
 
-    if(x > 95) x = 95;
+    for(const p of plataformas){
 
-    if(!enSuelo){
+        if(
+            nuevoX + 24 > p.x &&
+            nuevoX < p.x + p.w &&
+            y + 30 <= p.y &&
+            nuevoY + 30 >= p.y &&
+            vy >= 0
+        ){
 
-        y += velocidadY;
-
-        velocidadY -= gravedad;
-
-        if(y <= 0){
-
-            y = 0;
-            velocidadY = 0;
+            nuevoY = p.y - 30;
+            vy = 0;
             enSuelo = true;
-
         }
+    }
+
+
+    x = nuevoX;
+    y = nuevoY;
+
+
+    /* CAER */
+
+    if(y > mundo.clientHeight + 80){
+
+        morir();
 
     }
 
-    actualizarJugador();
 
-    comprobarPinchos();
+    /* PINCHOS */
 
-    comprobarMeta();
+    for(const p of pinchos){
 
-    requestAnimationFrame(mover);
+        if(colision(
+            x,y,24,30,
+            p.x,p.y,p.w,p.h
+        )){
+
+            morir();
+
+        }
+    }
+
+
+    /* PUERTA */
+
+    for(const p of puertas){
+
+        if(colision(
+            x,y,24,30,
+            p.x,p.y,p.w,p.h
+        )){
+
+            completarNivel();
+
+        }
+    }
+
+
+    jugador.style.left = x + "px";
+    jugador.style.top = y + "px";
+
+
+    requestAnimationFrame(actualizar);
 }
 
 
-/* IZQUIERDA */
+/* ================= COLISION ================= */
 
-function izquierda(){
+function colision(ax,ay,aw,ah,bx,by,bw,bh){
 
-    velocidadX = -velocidad;
-
+    return(
+        ax < bx + bw &&
+        ax + aw > bx &&
+        ay < by + bh &&
+        ay + ah > by
+    );
 }
 
 
-/* DERECHA */
+/* ================= MORIR ================= */
 
-function derecha(){
+function morir(){
 
-    velocidadX = velocidad;
+    jugando = false;
 
+    jugador.style.transform = "rotate(90deg)";
+
+    setTimeout(() => {
+
+        jugador.style.transform = "";
+
+        cargarNivel();
+
+    },450);
 }
 
 
-/* PARAR */
+/* ================= COMPLETAR ================= */
 
-function parar(){
+function completarNivel(){
 
-    velocidadX = 0;
+    jugando = false;
 
+    if(nivel >= niveles.length){
+
+        ganaste.querySelector("h1").textContent =
+            "¡HAS COMPLETADO EL JUEGO!";
+
+        ganaste.querySelector("p").textContent =
+            "¡Todos los niveles superados!";
+
+        ganaste.querySelector("button").textContent =
+            "JUGAR DE NUEVO";
+
+        ganaste.querySelector("button").onclick =
+            function(){
+
+                nivel = 1;
+                cargarNivel();
+
+            };
+
+    }else{
+
+        ganaste.querySelector("h1").textContent =
+            "¡NIVEL COMPLETADO!";
+
+        ganaste.querySelector("p").textContent =
+            "Prepárate para el siguiente nivel.";
+
+        ganaste.querySelector("button").textContent =
+            "SIGUIENTE NIVEL";
+
+        ganaste.querySelector("button").onclick =
+            siguienteNivel;
+    }
+
+    ganaste.style.display = "flex";
 }
 
 
-/* SALTAR */
+/* ================= SIGUIENTE ================= */
+
+function siguienteNivel(){
+
+    nivel++;
+
+    if(nivel > niveles.length){
+        nivel = 1;
+    }
+
+    cargarNivel();
+}
+
+
+/* ================= REINICIAR ================= */
+
+function reiniciarNivel(){
+
+    cargarNivel();
+}
+
+
+/* ================= SALTAR ================= */
 
 function saltar(){
 
-    if(enSuelo){
+    if(enSuelo && jugando){
 
-        velocidadY = salto;
+        vy = salto;
 
         enSuelo = false;
 
     }
-
 }
 
 
-/* PINCHOS */
-
-function comprobarPinchos(){
-
-    const pr = player.getBoundingClientRect();
-
-    for(const p of pinchos){
-
-        const r = p.getBoundingClientRect();
-
-        if(
-
-            pr.left < r.right - 5 &&
-            pr.right > r.left + 5 &&
-            pr.top < r.bottom &&
-            pr.bottom > r.top + 8
-
-        ){
-
-            morir();
-
-            return;
-
-        }
-
-    }
-
-}
-
-
-/* META */
-
-function comprobarMeta(){
-
-    if(x >= 90){
-
-        siguienteNivel();
-
-    }
-
-}
-
-
-/* MORIR */
-
-function morir(){
-
-    x = 8;
-    y = 0;
-
-    velocidadX = 0;
-    velocidadY = 0;
-
-    enSuelo = true;
-
-    actualizarJugador();
-
-}
-
-
-/* SIGUIENTE NIVEL */
-
-function siguienteNivel(){
-
-    if(nivel >= 10){
-
-        ganar();
-
-        return;
-
-    }
-
-    nivel++;
-
-    crearNivel();
-
-}
-
-
-/* GANAR */
-
-function ganar(){
-
-    jugando = false;
-
-    document.getElementById("final").style.display="flex";
-
-}
-
-
-/* REINICIAR TODO */
-
-function reiniciarTodo(){
-
-    document.getElementById("final").style.display="none";
-
-    nivel = 1;
-
-    jugando = true;
-
-    crearNivel();
-
-    requestAnimationFrame(mover);
-
-}
-
-
-/* TECLADO */
+/* ================= TECLADO ================= */
 
 document.addEventListener("keydown",function(e){
 
-    if(e.key==="ArrowLeft" || e.key==="a"){
+    if(
+        e.key === "ArrowLeft" ||
+        e.key.toLowerCase() === "a"
+    ){
 
-        izquierda();
-
-    }
-
-    if(e.key==="ArrowRight" || e.key==="d"){
-
-        derecha();
+        izquierda = true;
 
     }
+
 
     if(
-        e.key==="ArrowUp" ||
-        e.key==="w" ||
-        e.key===" "
+        e.key === "ArrowRight" ||
+        e.key.toLowerCase() === "d"
+    ){
+
+        derecha = true;
+
+    }
+
+
+    if(
+        e.key === "ArrowUp" ||
+        e.key === " " ||
+        e.key.toLowerCase() === "w"
     ){
 
         e.preventDefault();
@@ -551,40 +990,71 @@ document.addEventListener("keydown",function(e){
 document.addEventListener("keyup",function(e){
 
     if(
-        e.key==="ArrowLeft" ||
-        e.key==="ArrowRight" ||
-        e.key==="a" ||
-        e.key==="d"
+        e.key === "ArrowLeft" ||
+        e.key.toLowerCase() === "a"
     ){
 
-        parar();
+        izquierda = false;
+
+    }
+
+
+    if(
+        e.key === "ArrowRight" ||
+        e.key.toLowerCase() === "d"
+    ){
+
+        derecha = false;
 
     }
 
 });
 
 
-/* BOTONES */
+/* ================= BOTONES ================= */
 
-const botonIzq = document.getElementById("izq");
-const botonDer = document.getElementById("der");
+const botonIzq = document.getElementById("izquierda");
+const botonDer = document.getElementById("derecha");
 const botonSalto = document.getElementById("salto");
 
-botonIzq.addEventListener("pointerdown",izquierda);
-botonDer.addEventListener("pointerdown",derecha);
-botonSalto.addEventListener("pointerdown",saltar);
 
-botonIzq.addEventListener("pointerup",parar);
-botonDer.addEventListener("pointerup",parar);
+botonIzq.addEventListener("pointerdown",function(){
+    izquierda = true;
+});
 
-botonIzq.addEventListener("pointerleave",parar);
-botonDer.addEventListener("pointerleave",parar);
+botonIzq.addEventListener("pointerup",function(){
+    izquierda = false;
+});
+
+botonIzq.addEventListener("pointerleave",function(){
+    izquierda = false;
+});
 
 
-/* INICIAR */
+botonDer.addEventListener("pointerdown",function(){
+    derecha = true;
+});
 
-crearNivel();
-requestAnimationFrame(mover);
+botonDer.addEventListener("pointerup",function(){
+    derecha = false;
+});
+
+botonDer.addEventListener("pointerleave",function(){
+    derecha = false;
+});
+
+
+botonSalto.addEventListener("pointerdown",function(){
+    saltar();
+});
+
+
+/* ================= INICIO ================= */
+
+cargarNivel();
+
+actualizar();
+
 </script>
 
 </body>
