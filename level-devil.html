@@ -2,150 +2,191 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Level Devil - GameZone</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level Devil - GameZone</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      background: #000;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-    }
+html,body{
+    width:100%;
+    height:100%;
+    background:#000;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
 
-    .controles {
-      height: 55px;
-      background: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 7px;
-    }
+.barra{
+    height:55px;
+    background:#111;
+    border-bottom:1px solid #333;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:7px;
+}
 
-    button {
-      border: 0;
-      border-radius: 7px;
-      padding: 10px 16px;
-      background: #222;
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.barra button{
+    border:1px solid #444;
+    border-radius:7px;
+    padding:10px 16px;
+    background:#222;
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-    button:hover {
-      background: #333;
-    }
+.barra button:hover{
+    background:#333;
+}
 
-    .juego {
-      width: 100%;
-      height: calc(100% - 55px);
-      border: 0;
-      display: block;
-      background: #000;
-    }
+.juego{
+    width:100%;
+    height:calc(100vh - 55px);
+    border:0;
+    display:block;
+    background:#000;
+}
 
-    .aviso {
-      position: fixed;
-      inset: 55px 0 0 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 18px;
-      background: #000;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
+.mensaje{
+    position:absolute;
+    top:55px;
+    left:0;
+    right:0;
+    bottom:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    padding:25px;
+    background:#080808;
+    color:white;
+}
 
-    .aviso h2 {
-      font-size: 24px;
-    }
+.mensaje h1{
+    font-size:30px;
+    margin-bottom:12px;
+}
 
-    .aviso p {
-      max-width: 500px;
-      color: #ccc;
-    }
+.mensaje p{
+    color:#aaa;
+    max-width:500px;
+    line-height:1.5;
+}
 
-    .aviso button {
-      background: #fff;
-      color: #000;
-    }
-  </style>
+.mensaje button{
+    margin-top:20px;
+    padding:12px 20px;
+    border:0;
+    border-radius:8px;
+    background:white;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.oculto{
+    display:none;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="controles">
-    <button onclick="volver()">← VOLVER</button>
-    <button onclick="reiniciar()">🔄 REINICIAR</button>
-    <button onclick="pantallaCompleta()">⛶ PANTALLA COMPLETA</button>
-  </div>
+<div class="barra">
 
-  <iframe
-    id="juego"
-    class="juego"
-    src="https://poki.com/es/g/level-devil"
-    allow="fullscreen; autoplay"
-    allowfullscreen>
-  </iframe>
+<button onclick="volver()">
+← VOLVER
+</button>
 
-  <div id="aviso" class="aviso">
-    <h2>Level Devil</h2>
-    <p>
-      El juego real no permite ser mostrado dentro de esta página.
-      Ábrelo directamente para jugar.
-    </p>
+<button onclick="reiniciar()">
+🔄 REINICIAR
+</button>
 
-    <button onclick="abrirJuego()">
-      🎮 ABRIR LEVEL DEVIL
-    </button>
-  </div>
+<button onclick="pantallaCompleta()">
+⛶ PANTALLA COMPLETA
+</button>
 
-  <script>
-    const juego = document.getElementById("juego");
-    const aviso = document.getElementById("aviso");
+</div>
 
-    function volver() {
-      window.location.href = "index.html";
-    }
+<iframe
+id="juego"
+class="juego"
+src="https://poki.com/es/g/level-devil"
+allow="fullscreen; autoplay; gamepad"
+allowfullscreen>
+</iframe>
 
-    function reiniciar() {
-      juego.src = juego.src;
-    }
+<div id="mensaje" class="mensaje oculto">
 
-    function pantallaCompleta() {
-      if (juego.requestFullscreen) {
-        juego.requestFullscreen();
-      } else if (juego.webkitRequestFullscreen) {
-        juego.webkitRequestFullscreen();
-      }
-    }
+<h1>Level Devil</h1>
 
-    function abrirJuego() {
-      window.open(
-        "https://poki.com/es/g/level-devil",
-        "_blank"
-      );
-    }
+<p>
+Este juego externo no permite que Poki se muestre dentro de GameZone.
+</p>
 
-    // Si la página externa no permite cargarse,
-    // el usuario puede abrir el juego directamente.
-    setTimeout(() => {
-      try {
-        if (!juego.contentWindow) {
-          aviso.style.display = "flex";
-        }
-      } catch (e) {
-        aviso.style.display = "flex
+<button onclick="abrirJuego()">
+🎮 ABRIR JUEGO
+</button>
+
+</div>
+
+<script>
+
+const juego=document.getElementById("juego");
+const mensaje=document.getElementById("mensaje");
+
+function volver(){
+
+window.location.href="index.html";
+
+}
+
+function reiniciar(){
+
+juego.src="";
+
+setTimeout(function(){
+
+juego.src="https://poki.com/es/g/level-devil";
+
+},100);
+
+}
+
+function pantallaCompleta(){
+
+if(juego.requestFullscreen){
+
+juego.requestFullscreen();
+
+}else if(juego.webkitRequestFullscreen){
+
+juego.webkitRequestFullscreen();
+
+}
+
+}
+
+function abrirJuego(){
+
+window.open(
+"https://poki.com/es/g/level-devil",
+"_blank"
+);
+
+}
+
+</script>
+
+</body>
+</html>
 ```
