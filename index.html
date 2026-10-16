@@ -1,5 +1,5 @@
+```html
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -7,742 +7,633 @@
 <title>GAMEZONE - Todos tus juegos en un solo lugar</title>
 
 <style>
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-html{
-scroll-behavior:smooth;
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Arial, sans-serif;
+  background: #080808;
+  color: white;
 }
 
-body{
-font-family:Arial,sans-serif;
-background:#080808;
-color:white;
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #080808;
+  border-bottom: 1px solid #333;
 }
 
-header{
-position:sticky;
-top:0;
-z-index:1000;
-background:#080808;
-border-bottom:1px solid #333;
+.header-contenido {
+  width: 94%;
+  max-width: 1450px;
+  margin: auto;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 
-.header-contenido{
-width:94%;
-max-width:1450px;
-margin:auto;
-min-height:80px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:20px;
+.logo {
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 4px;
 }
 
-.logo{
-font-size:34px;
-font-weight:900;
-letter-spacing:4px;
+.logo span { color: #999; }
+
+.nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.logo span{
-color:#999;
+.nav button {
+  background: #191919;
+  border: 1px solid #333;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-.nav{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
+.hero {
+  width: 94%;
+  max-width: 1450px;
+  margin: 30px auto;
+  padding: 60px 20px;
+  text-align: center;
+  border-radius: 18px;
+  border: 1px solid #333;
+  background: linear-gradient(135deg, #1b1b1b, #080808);
 }
 
-.nav button{
-background:#191919;
-border:1px solid #333;
-color:white;
-padding:10px 14px;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
+.hero h1 {
+  font-size: 58px;
+  letter-spacing: 7px;
+  margin-bottom: 12px;
 }
 
-.hero{
-width:94%;
-max-width:1450px;
-margin:30px auto;
-padding:60px 20px;
-text-align:center;
-border-radius:18px;
-border:1px solid #333;
-background:linear-gradient(135deg,#1b1b1b,#080808);
+.hero p {
+  color: #bbb;
+  font-size: 20px;
 }
 
-.hero h1{
-font-size:58px;
-letter-spacing:7px;
-margin-bottom:12px;
+.busqueda {
+  width: 94%;
+  max-width: 850px;
+  margin: 0 auto 35px;
 }
 
-.hero p{
-color:#bbb;
-font-size:20px;
+#buscador {
+  width: 100%;
+  padding: 17px 20px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  background: #151515;
+  color: white;
+  font-size: 17px;
+  outline: none;
 }
 
-.busqueda{
-width:94%;
-max-width:850px;
-margin:0 auto 35px;
+.contenedor {
+  width: 94%;
+  max-width: 1450px;
+  margin: auto;
+  padding-bottom: 60px;
 }
 
-#buscador{
-width:100%;
-padding:17px 20px;
-border-radius:12px;
-border:1px solid #333;
-background:#151515;
-color:white;
-font-size:17px;
-outline:none;
+.categoria { margin-top: 45px; }
+
+.titulo-categoria {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
 }
 
-.contenedor{
-width:94%;
-max-width:1450px;
-margin:auto;
-padding-bottom:60px;
+.titulo-categoria h2 { font-size: 28px; }
+
+.contador { color: #777; }
+
+.juegos {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
 }
 
-.categoria{
-margin-top:45px;
+.card {
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 13px;
+  overflow: hidden;
+  transition: .2s;
 }
 
-.titulo-categoria{
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-bottom:1px solid #333;
-padding-bottom:12px;
-margin-bottom:18px;
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #666;
 }
 
-.titulo-categoria h2{
-font-size:28px;
+.portada {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  background: #222;
 }
 
-.contador{
-color:#777;
+.info { padding: 14px; }
+
+.nombre {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 12px;
 }
 
-.juegos{
-display:grid;
-grid-template-columns:repeat(5,minmax(0,1fr));
-gap:18px;
+.jugar {
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: white;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.card{
-background:#151515;
-border:1px solid #292929;
-border-radius:13px;
-overflow:hidden;
-transition:.2s;
+.jugar:hover { background: #ddd; }
+
+footer {
+  text-align: center;
+  padding: 30px;
+  border-top: 1px solid #333;
+  color: #777;
 }
 
-.card:hover{
-transform:translateY(-5px);
-border-color:#666;
+#ventanaJuego {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: none;
+  flex-direction: column;
+  background: #000;
 }
 
-.portada{
-width:100%;
-height:220px;
-object-fit:cover;
-display:block;
-background:#222;
+.barra-juego {
+  height: 58px;
+  min-height: 58px;
+  background: #111;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
 }
 
-.info{
-padding:14px;
+.barra-juego button {
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: #222;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.nombre{
-min-height:42px;
-display:flex;
-align-items:center;
-font-weight:bold;
-margin-bottom:12px;
+.barra-juego button:hover { background: #333; }
+
+.boton-volver {
+  background: white !important;
+  color: black !important;
 }
 
-.jugar{
-width:100%;
-padding:12px;
-border:0;
-border-radius:8px;
-background:white;
-color:black;
-font-weight:bold;
-cursor:pointer;
+#tituloJuego {
+  margin-left: auto;
+  color: #aaa;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
-.jugar:hover{
-background:#ddd;
+#zonaJuego {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  background: #000;
 }
 
-footer{
-text-align:center;
-padding:30px;
-border-top:1px solid #333;
-color:#777;
+#juegoFrame {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  display: block;
+  background: #000;
 }
 
-#ventanaJuego{
-position:fixed;
-inset:0;
-z-index:999999;
-display:none;
-flex-direction:column;
-background:#000;
+#errorJuego {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background: #080808;
+  padding: 25px;
 }
 
-.barra-juego{
-height:58px;
-min-height:58px;
-background:#111;
-border-bottom:1px solid #333;
-display:flex;
-align-items:center;
-gap:8px;
-padding:8px 10px;
+#errorJuego h2 { margin-bottom: 12px; }
+
+#errorJuego p {
+  color: #aaa;
+  max-width: 500px;
 }
 
-.barra-juego button{
-border:1px solid #444;
-border-radius:8px;
-padding:10px 14px;
-background:#222;
-color:white;
-font-weight:bold;
-cursor:pointer;
+@media (max-width: 1200px) {
+  .juegos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
-.barra-juego button:hover{
-background:#333;
+@media (max-width: 900px) {
+  .header-contenido {
+    flex-direction: column;
+    padding: 18px 0;
+  }
+
+  .hero h1 { font-size: 45px; }
+
+  .juegos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .portada { height: 200px; }
 }
 
-.boton-volver{
-background:white !important;
-color:black !important;
+@media (max-width: 650px) {
+  .juegos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .portada { height: 180px; }
+
+  #tituloJuego { display: none; }
+
+  .barra-juego {
+    gap: 5px;
+    padding: 6px;
+  }
+
+  .barra-juego button {
+    padding: 9px 7px;
+    font-size: 11px;
+  }
 }
 
-#tituloJuego{
-margin-left:auto;
-color:#aaa;
-font-size:14px;
-white-space:nowrap;
-}
-
-#zonaJuego{
-position:relative;
-flex:1;
-width:100%;
-min-height:0;
-background:#000;
-}
-
-#juegoFrame{
-width:100%;
-height:100%;
-min-height:0;
-border:0;
-display:block;
-background:#000;
-}
-
-#errorJuego{
-position:absolute;
-inset:0;
-display:none;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-text-align:center;
-background:#080808;
-padding:25px;
-}
-
-#errorJuego h2{
-margin-bottom:12px;
-}
-
-#errorJuego p{
-color:#aaa;
-max-width:500px;
-}
-
-@media(max-width:1200px){
-
-.juegos{
-grid-template-columns:repeat(4,minmax(0,1fr));
-}
-
-}
-
-@media(max-width:900px){
-
-.header-contenido{
-flex-direction:column;
-padding:18px 0;
-}
-
-.hero h1{
-font-size:45px;
-}
-
-.juegos{
-grid-template-columns:repeat(3,minmax(0,1fr));
-}
-
-.portada{
-height:200px;
-}
-
-}
-
-@media(max-width:650px){
-
-.juegos{
-grid-template-columns:repeat(2,minmax(0,1fr));
-}
-
-.portada{
-height:180px;
-}
-
-#tituloJuego{
-display:none;
-}
-
-}
-
-@media(max-width:400px){
-
-.juegos{
-grid-template-columns:1fr;
-}
-
-.portada{
-height:220px;
-}
-
+@media (max-width: 400px) {
+  .juegos { grid-template-columns: 1fr; }
+  .portada { height: 220px; }
 }
 </style>
-
 </head>
 
 <body>
 
 <header>
+  <div class="header-contenido">
+    <div class="logo">GAME<span>ZONE</span></div>
 
-<div class="header-contenido">
-
-<div class="logo">
-GAME<span>ZONE</span>
-</div>
-
-<div class="nav">
-<button onclick="irCategoria('motos')">🏍️ Motos</button>
-<button onclick="irCategoria('carros')">🚗 Carros</button>
-<button onclick="irCategoria('futbol')">⚽ Fútbol</button>
-<button onclick="irCategoria('plataformas')">🎮 Plataformas</button>
-</div>
-
-</div>
-
+    <div class="nav">
+      <button onclick="irCategoria('motos')">🏍️ Motos</button>
+      <button onclick="irCategoria('carros')">🚗 Carros</button>
+      <button onclick="irCategoria('futbol')">⚽ Fútbol</button>
+      <button onclick="irCategoria('plataformas')">🎮 Plataformas</button>
+    </div>
+  </div>
 </header>
 
 <section class="hero">
-
-<h1>GAMEZONE</h1>
-
-<p>
-Todos tus juegos en un solo lugar
-</p>
-
+  <h1>GAMEZONE</h1>
+  <p>Todos tus juegos en un solo lugar</p>
 </section>
 
 <div class="busqueda">
-
-<input
-id="buscador"
-type="text"
-placeholder="🔎 Buscar un juego..."
-oninput="buscarJuego()">
-
+  <input
+    id="buscador"
+    type="text"
+    placeholder="🔎 Buscar un juego..."
+    oninput="buscarJuego()">
 </div>
 
 <main class="contenedor">
 
-<section class="categoria" id="motos">
+  <!-- MOTOS -->
+  <section class="categoria" id="motos">
+    <div class="titulo-categoria">
+      <h2>🏍️ MOTOS</h2>
+      <span class="contador">7 juegos</span>
+    </div>
 
-<div class="titulo-categoria">
-<h2>🏍️ MOTOS</h2>
-<span class="contador">6 juegos</span>
-</div>
+    <div class="juegos">
 
-<div class="juegos">
+      <div class="card">
+        <img class="portada" src="2-player-moto-racing.jpg" alt="2 Player Moto Racing">
+        <div class="info">
+          <div class="nombre">2 Player Moto Racing</div>
+          <button class="jugar" onclick="abrirJuego('2-player-moto-racing.html','2 Player Moto Racing')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="2-player-moto-racing.jpg">
-<div class="info">
-<div class="nombre">2 Player Moto Racing</div>
-<button class="jugar" onclick="abrirJuego('2-player-moto-racing.html','2 Player Moto Racing')">JUGAR</button>
-</div>
-</div>
+      <div class="card">
+        <img class="portada" src="gp-moto-racing-2.jpg" alt="GP Moto Racing 2">
+        <div class="info">
+          <div class="nombre">GP Moto Racing 2</div>
+          <button class="jugar" onclick="abrirJuego('gp-moto-racing-2.html','GP Moto Racing 2')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="gp-moto-racing-2.jpg">
-<div class="info">
-<div class="nombre">GP Moto Racing 2</div>
-<button class="jugar" onclick="abrirJuego('gp-moto-racing-2.html','GP Moto Racing 2')">JUGAR</button>
-</div>
-</div>
+      <div class="card">
+        <img class="portada" src="moto-racing.jpg" alt="Moto Racing">
+        <div class="info">
+          <div class="nombre">Moto Racing</div>
+          <button class="jugar" onclick="abrirJuego('moto-racing.html','Moto Racing')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="moto-racing.jpg">
-<div class="info">
-<div class="nombre">Moto Racing</div>
-<button class="jugar" onclick="abrirJuego('moto-racing.html','Moto Racing')">JUGAR</button>
-</div>
-</div>
+      <div class="card">
+        <img class="portada" src="moto-x3m.jpg" alt="Moto X3M">
+        <div class="info">
+          <div class="nombre">Moto X3M</div>
+          <button class="jugar" onclick="abrirJuego('moto-x3m.html','Moto X3M')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="moto-x3m.jpg">
-<div class="info">
-<div class="nombre">Moto X3M</div>
-<button class="jugar" onclick="abrirJuego('moto-x3m.html','Moto X3M')">JUGAR</button>
-</div>
-</div>
+      <div class="card">
+        <img class="portada" src="motorbike.jpg" alt="Motorbike">
+        <div class="info">
+          <div class="nombre">Motorbike</div>
+          <button class="jugar" onclick="abrirJuego('motorbike.html','Motorbike')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="motorbike.jpg">
-<div class="info">
-<div class="nombre">Motorbike</div>
-<button class="jugar" onclick="abrirJuego('motorbike.html','Motorbike')">JUGAR</button>
-</div>
-</div>
+      <div class="card">
+        <img class="portada" src="super-bike-wild-race.jpg" alt="Super Bike Wild Race">
+        <div class="info">
+          <div class="nombre">Super Bike Wild Race</div>
+          <button class="jugar" onclick="abrirJuego('super-bike-wild-race.html','Super Bike Wild Race')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="super-bike-wild-race.jpg">
-<div class="info">
-<div class="nombre">Super Bike Wild Race</div>
-<button class="jugar" onclick="abrirJuego('super-bike-wild-race.html','Super Bike Wild Race')">JUGAR</button>
-</div>
-</div>
+      <div class="card">
+        <img class="portada" src="traffic-rider.jpg" alt="Traffic Rider">
+        <div class="info">
+          <div class="nombre">Traffic Rider</div>
+          <button class="jugar" onclick="abrirJuego('traffic-rider.html','Traffic Rider')">JUGAR</button>
+        </div>
+      </div>
 
-</div>
-</section>
+    </div>
+  </section>
 
-<section class="categoria" id="carros">
+  <!-- CARROS -->
+  <section class="categoria" id="carros">
+    <div class="titulo-categoria">
+      <h2>🚗 CARROS</h2>
+      <span class="contador">5 juegos</span>
+    </div>
 
-<div class="titulo-categoria">
-<h2>🚗 CARROS</h2>
-<span class="contador">5 juegos</span>
-</div>
+    <div class="juegos">
 
-<div class="juegos">
+      <div class="card">
+        <img class="portada" src="car-racing.jpg" alt="Car Racing">
+        <div class="info">
+          <div class="nombre">Car Racing</div>
+          <button class="jugar" onclick="abrirJuego('car-racing.html','Car Racing')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="car-racing.jpg">
-<div class="info">
-<div class="nombre">Car Racing</div>
-<button class="jugar" onclick="abrirJuego('car-racing.html','Car Racing')">JUGAR</button>
-</div>
-</div>
+      <div class="card">
+        <img class="portada" src="city-car-driving.jpg" alt="City Car Driving">
+        <div class="info">
+          <div class="nombre">City Car Driving</div>
+          <button class="jugar" onclick="abrirJuego('city-car-driving.html','City Car Driving')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="city-car-driving.jpg">
-<div class="info">
-<div class="nombre">City Car Driving</div>
-<button class="jugar" onclick="abrirJuego('city-car-driving.html','City Car Driving')">JUGAR</button>
-</div>
-</div>
+      <div class="card">
+        <img class="portada" src="highway-racing.jpg" alt="Highway Racing">
+        <div class="info">
+          <div class="nombre">Highway Racing</div>
+          <button class="jugar" onclick="abrirJuego('highway-racing.html','Highway Racing')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="highway-racing.jpg">
-<div class="info">
-<div class="nombre">Highway Racing</div>
-<button class="jugar" onclick="abrirJuego('highway-racing.html','Highway Racing')">JUGAR</button>
-</div>
-</div>
+      <div class="card">
+        <img class="portada" src="racing-limits.jpg" alt="Racing Limits">
+        <div class="info">
+          <div class="nombre">Racing Limits</div>
+          <button class="jugar" onclick="abrirJuego('racing-limits.html','Racing Limits')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="racing-limits.jpg">
-<div class="info">
-<div class="nombre">Racing Limits</div>
-<button class="jugar" onclick="abrirJuego('racing-limits.html','Racing Limits')">JUGAR</button>
-</div>
-</div>
+      <div class="card">
+        <img class="portada" src="traffic-racer.jpg" alt="Traffic Racer">
+        <div class="info">
+          <div class="nombre">Traffic Racer</div>
+          <button class="jugar" onclick="abrirJuego('traffic-racer.html','Traffic Racer')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="traffic-racer.jpg">
-<div class="info">
-<div class="nombre">Traffic Racer</div>
-<button class="jugar" onclick="abrirJuego('traffic-racer.html','Traffic Racer')">JUGAR</button>
-</div>
-</div>
+    </div>
+  </section>
 
-</div>
-</section>
+  <!-- FÚTBOL -->
+  <section class="categoria" id="futbol">
+    <div class="titulo-categoria">
+      <h2>⚽ FÚTBOL</h2>
+      <span class="contador">4 juegos</span>
+    </div>
 
-<section class="categoria" id="futbol">
+    <div class="juegos">
 
-<div class="titulo-categoria">
-<h2>⚽ FÚTBOL</h2>
-<span class="contador">4 juegos</span>
-</div>
+      <div class="card">
+        <img class="portada" src="3d-soccer-champions.jpg" alt="3D Soccer Champions">
+        <div class="info">
+          <div class="nombre">3D Soccer Champions</div>
+          <button class="jugar" onclick="abrirJuego('3d-soccer-champions.html','3D Soccer Champions')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="juegos">
+      <div class="card">
+        <img class="portada" src="football-legends.jpg" alt="Football Legends">
+        <div class="info">
+          <div class="nombre">Football Legends</div>
+          <button class="jugar" onclick="abrirJuego('football-legends.html','Football Legends')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="3d-soccer-champions.jpg">
-<div class="info">
-<div class="nombre">3D Soccer Champions</div>
-<button class="jugar" onclick="abrirJuego('3d-soccer-champions.html','3D Soccer Champions')">JUGAR</button>
-</div>
-</div>
+      <div class="card">
+        <img class="portada" src="penalty-shootout.jpg" alt="Penalty Shootout">
+        <div class="info">
+          <div class="nombre">Penalty Shootout</div>
+          <button class="jugar" onclick="abrirJuego('penalty-shootout.html','Penalty Shootout')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="football-legends.jpg">
-<div class="info">
-<div class="nombre">Football Legends</div>
-<button class="jugar" onclick="abrirJuego('football-legends.html','Football Legends')">JUGAR</button>
-</div>
-</div>
+      <div class="card">
+        <img class="portada" src="world-soccer.jpg" alt="World Soccer">
+        <div class="info">
+          <div class="nombre">World Soccer</div>
+          <button class="jugar" onclick="abrirJuego('world-soccer.html','World Soccer')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="card">
-<img class="portada" src="penalty-shootout.jpg">
-<div class="info">
-<div class="nombre">Penalty Shootout</div>
-<button class="jugar" onclick="abrirJuego('penalty-shootout.html','Penalty Shootout')">JUGAR</button>
-</div>
-</div>
+    </div>
+  </section>
 
-<div class="card">
-<img class="portada" src="world-soccer.jpg">
-<div class="info">
-<div class="nombre">World Soccer</div>
-<button class="jugar" onclick="abrirJuego('world-soccer.html','World Soccer')">JUGAR</button>
-</div>
-</div>
+  <!-- PLATAFORMAS -->
+  <section class="categoria" id="plataformas">
+    <div class="titulo-categoria">
+      <h2>🎮 PLATAFORMAS</h2>
+      <span class="contador">2 juegos</span>
+    </div>
 
-</div>
-</section>
+    <div class="juegos">
 
-<section class="categoria" id="plataformas">
+      <div class="card">
+        <img class="portada" src="geometry-dash.jpg" alt="Geometry Dash">
+        <div class="info">
+          <div class="nombre">Geometry Dash</div>
+          <button class="jugar" onclick="abrirJuego('geometry-dash.html','Geometry Dash')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="titulo-categoria">
-<h2>🎮 PLATAFORMAS</h2>
-<span class="contador">2 juegos</span>
-</div>
+      <div class="card">
+        <img class="portada" src="level-devil.jpg" alt="Level Devil">
+        <div class="info">
+          <div class="nombre">Level Devil</div>
+          <button class="jugar" onclick="abrirJuego('level-devil.html','Level Devil')">JUGAR</button>
+        </div>
+      </div>
 
-<div class="juegos">
-
-<div class="card">
-<img class="portada" src="geometry-dash.jpg">
-<div class="info">
-<div class="nombre">Geometry Dash</div>
-<button class="jugar" onclick="abrirJuego('geometry-dash.html','Geometry Dash')">JUGAR</button>
-</div>
-</div>
-
-<div class="card">
-<img class="portada" src="level-devil.jpg">
-<div class="info">
-<div class="nombre">Level Devil</div>
-<button class="jugar" onclick="abrirJuego('level-devil.html','Level Devil')">JUGAR</button>
-</div>
-</div>
-
-</div>
-</section>
+    </div>
+  </section>
 
 </main>
 
 <footer>
-<strong>GAMEZONE</strong>
-<p style="margin-top:8px;">Todos tus juegos en un solo lugar</p>
+  <strong>GAMEZONE</strong>
+  <p style="margin-top:8px;">Todos tus juegos en un solo lugar</p>
 </footer>
 
 <div id="ventanaJuego">
+  <div class="barra-juego">
+    <button class="boton-volver" onclick="volverAlMenu()">← VOLVER</button>
+    <button onclick="reiniciarJuego()">🔄 REINICIAR</button>
+    <button onclick="pantallaCompleta()">⛶ PANTALLA COMPLETA</button>
+    <span id="tituloJuego">GAMEZONE</span>
+  </div>
 
-<div class="barra-juego">
+  <div id="zonaJuego">
+    <iframe
+      id="juegoFrame"
+      allow="fullscreen; autoplay; gamepad"
+      allowfullscreen>
+    </iframe>
 
-<button class="boton-volver" onclick="volverAlMenu()">
-← VOLVER
-</button>
-
-<button onclick="reiniciarJuego()">
-🔄 REINICIAR
-</button>
-
-<button onclick="pantallaCompleta()">
-⛶ PANTALLA COMPLETA
-</button>
-
-<span id="tituloJuego">
-GAMEZONE
-</span>
-
-</div>
-
-<div id="zonaJuego">
-
-<iframe
-id="juegoFrame"
-allow="fullscreen; autoplay; gamepad"
-allowfullscreen>
-</iframe>
-
-<div id="errorJuego">
-
-<h2>El juego no puede mostrarse aquí</h2>
-
-<p>
-Este juego utiliza una página externa que no permite
-ser mostrada dentro de GameZone.
-</p>
-
-</div>
-
-</div>
-
+    <div id="errorJuego">
+      <h2>El juego no puede mostrarse aquí</h2>
+      <p>Este juego utiliza una página externa que no permite ser mostrada dentro de GameZone.</p>
+    </div>
+  </div>
 </div>
 
 <script>
+let juegoActual = "";
 
-let juegoActual="";
+function abrirJuego(archivo, nombre) {
+  juegoActual = archivo;
 
-function abrirJuego(archivo,nombre){
-
-juegoActual=archivo;
-
-document.getElementById("tituloJuego").textContent=
-"GAMEZONE • "+nombre;
-
-document.getElementById("errorJuego").style.display="none";
-
-document.getElementById("juegoFrame").src=archivo;
-
-document.getElementById("ventanaJuego").style.display="flex";
-
-document.body.style.overflow="hidden";
-
+  document.getElementById("tituloJuego").textContent = "GAMEZONE • " + nombre;
+  document.getElementById("errorJuego").style.display = "none";
+  document.getElementById("juegoFrame").src = archivo;
+  document.getElementById("ventanaJuego").style.display = "flex";
+  document.body.style.overflow = "hidden";
 }
 
-function volverAlMenu(){
-
-document.getElementById("juegoFrame").src="";
-
-document.getElementById("ventanaJuego").style.display="none";
-
-document.body.style.overflow="auto";
-
-juegoActual="";
-
+function volverAlMenu() {
+  document.getElementById("juegoFrame").src = "";
+  document.getElementById("ventanaJuego").style.display = "none";
+  document.body.style.overflow = "auto";
+  juegoActual = "";
 }
 
-function reiniciarJuego(){
+function reiniciarJuego() {
+  if (!juegoActual) return;
 
-if(!juegoActual)return;
+  const frame = document.getElementById("juegoFrame");
+  frame.src = "";
 
-const frame=document.getElementById("juegoFrame");
-
-frame.src="";
-
-setTimeout(function(){
-
-frame.src=juegoActual;
-
-},100);
-
+  setTimeout(function() {
+    frame.src = juegoActual;
+  }, 100);
 }
 
-function pantallaCompleta(){
+function pantallaCompleta() {
+  const frame = document.getElementById("juegoFrame");
 
-const frame=document.getElementById("juegoFrame");
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+    return;
+  }
 
-if(document.fullscreenElement){
-
-document.exitFullscreen();
-
-return;
-
+  if (frame.requestFullscreen) {
+    frame.requestFullscreen();
+  }
 }
 
-if(frame.requestFullscreen){
+function irCategoria(id) {
+  const elemento = document.getElementById(id);
 
-frame.requestFullscreen();
-
+  if (elemento) {
+    elemento.scrollIntoView({ behavior: "smooth" });
+  }
 }
 
+function buscarJuego() {
+  const texto = document.getElementById("buscador").value.toLowerCase().trim();
+  const tarjetas = document.querySelectorAll(".card");
+
+  tarjetas.forEach(function(card) {
+    const nombre = card.querySelector(".nombre").textContent.toLowerCase();
+    card.style.display = nombre.includes(texto) ? "" : "none";
+  });
 }
 
-function irCategoria(id){
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    const ventana = document.getElementById("ventanaJuego");
 
-const elemento=document.getElementById(id);
-
-if(elemento){
-
-elemento.scrollIntoView({
-behavior:"smooth"
+    if (ventana.style.display === "flex") {
+      volverAlMenu();
+    }
+  }
 });
-
-}
-
-}
-
-function buscarJuego(){
-
-const texto=document.getElementById("buscador").value.toLowerCase().trim();
-
-const tarjetas=document.querySelectorAll(".card");
-
-tarjetas.forEach(function(card){
-
-const nombre=card.querySelector(".nombre").textContent.toLowerCase();
-
-if(nombre.includes(texto)){
-
-card.style.display="";
-
-}else{
-
-card.style.display="none";
-
-}
-
-});
-
-}
-
-document.addEventListener("keydown",function(e){
-
-if(e.key==="Escape"){
-
-const ventana=document.getElementById("ventanaJuego");
-
-if(ventana.style.display==="flex"){
-
-volverAlMenu();
-
-}
-
-}
-
-});
-
 </script>
 
 </body>
 </html>
+```
