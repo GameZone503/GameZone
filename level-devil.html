@@ -1,192 +1,32 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Level Devil - GameZone</title>
-
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html,body{
-    width:100%;
-    height:100%;
-    background:#000;
-    font-family:Arial,sans-serif;
-    overflow:hidden;
-}
-
-.barra{
-    height:55px;
-    background:#111;
-    border-bottom:1px solid #333;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    padding:7px;
-}
-
-.barra button{
-    border:1px solid #444;
-    border-radius:7px;
-    padding:10px 16px;
-    background:#222;
-    color:white;
-    font-size:14px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.barra button:hover{
-    background:#333;
-}
-
-.juego{
-    width:100%;
-    height:calc(100vh - 55px);
-    border:0;
-    display:block;
-    background:#000;
-}
-
-.mensaje{
-    position:absolute;
-    top:55px;
-    left:0;
-    right:0;
-    bottom:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    text-align:center;
-    padding:25px;
-    background:#080808;
-    color:white;
-}
-
-.mensaje h1{
-    font-size:30px;
-    margin-bottom:12px;
-}
-
-.mensaje p{
-    color:#aaa;
-    max-width:500px;
-    line-height:1.5;
-}
-
-.mensaje button{
-    margin-top:20px;
-    padding:12px 20px;
-    border:0;
-    border-radius:8px;
-    background:white;
-    color:black;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.oculto{
-    display:none;
-}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#080812;color:white;font-family:Arial,sans-serif}
+body{min-height:100vh;display:flex;flex-direction:column}
+header{height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:#111;border-bottom:1px solid #333}
+.logo{font-size:24px;font-weight:bold;color:#ff5252}
+button{border:0;border-radius:8px;padding:11px 16px;font-weight:bold;cursor:pointer}
+.volver{background:#292929;color:white}
+main{flex:1;display:grid;place-items:center;padding:24px}
+.caja{width:min(620px,100%);padding:38px 24px;text-align:center;background:#151525;border:1px solid #543434;border-radius:18px}
+h1{font-size:clamp(30px,6vw,44px);margin-bottom:14px}
+p{color:#c4c4d4;line-height:1.6}
+.jugar{display:inline-block;margin-top:24px;background:#ff5252;color:#160606;text-decoration:none;padding:15px 24px;border-radius:9px;font-weight:bold}
+.nota{display:block;margin-top:16px;color:#9292a8;font-size:13px}
 </style>
 </head>
-
 <body>
-
-<div class="barra">
-
-<button onclick="volver()">
-← VOLVER
-</button>
-
-<button onclick="reiniciar()">
-🔄 REINICIAR
-</button>
-
-<button onclick="pantallaCompleta()">
-⛶ PANTALLA COMPLETA
-</button>
-
-</div>
-
-<iframe
-id="juego"
-class="juego"
-src="https://poki.com/es/g/level-devil"
-allow="fullscreen; autoplay; gamepad"
-allowfullscreen>
-</iframe>
-
-<div id="mensaje" class="mensaje oculto">
-
-<h1>Level Devil</h1>
-
-<p>
-Este juego externo no permite que Poki se muestre dentro de GameZone.
-</p>
-
-<button onclick="abrirJuego()">
-🎮 ABRIR JUEGO
-</button>
-
-</div>
-
-<script>
-
-const juego=document.getElementById("juego");
-const mensaje=document.getElementById("mensaje");
-
-function volver(){
-
-window.location.href="index.html";
-
-}
-
-function reiniciar(){
-
-juego.src="";
-
-setTimeout(function(){
-
-juego.src="https://poki.com/es/g/level-devil";
-
-},100);
-
-}
-
-function pantallaCompleta(){
-
-if(juego.requestFullscreen){
-
-juego.requestFullscreen();
-
-}else if(juego.webkitRequestFullscreen){
-
-juego.webkitRequestFullscreen();
-
-}
-
-}
-
-function abrirJuego(){
-
-window.open(
-"https://poki.com/es/g/level-devil",
-"_blank"
-);
-
-}
-
-</script>
-
+<header><div class="logo">GAMEZONE</div><button class="volver" onclick="location.href='index.html'">← VOLVER</button></header>
+<main><section class="caja">
+<h1>😈 Level Devil</h1>
+<p>El juego se abrirá en una pestaña nueva porque Poki no permite mostrarlo dentro de GameZone.</p>
+<a class="jugar" href="https://poki.com/es/g/level-devil" target="_blank" rel="noopener noreferrer">▶ JUGAR LEVEL DEVIL</a>
+<span class="nota">GameZone • Level Devil</span>
+</section></main>
 </body>
 </html>
-```
