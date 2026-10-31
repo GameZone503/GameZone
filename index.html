@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -152,6 +151,7 @@ header {
   background: #222;
 }
 
+.portada.sin-portada { display:flex; align-items:center; justify-content:center; color:#888; font-size:14px; object-fit:contain; }
 .info { padding: 14px; }
 
 .nombre {
@@ -344,7 +344,7 @@ footer {
   <section class="categoria" id="motos">
     <div class="titulo-categoria">
       <h2>🏍️ MOTOS</h2>
-      <span class="contador">7 juegos</span>
+      <span class="contador">6 juegos</span>
     </div>
 
     <div class="juegos">
@@ -366,7 +366,7 @@ footer {
       </div>
 
       <div class="card">
-        <img class="portada" src="moto-racing.jpg" alt="Moto Racing">
+        <img class="portada" src="moto-x3m.jpg" alt="Moto Racing">
         <div class="info">
           <div class="nombre">Moto Racing</div>
           <button class="jugar" onclick="abrirJuego('moto-racing.html','Moto Racing')">JUGAR</button>
@@ -398,10 +398,10 @@ footer {
       </div>
 
       <div class="card">
-        <img class="portada" src="traffic-rider.jpg" alt="Traffic Rider">
+        <img class="portada" src="moto-x3m.jpg" alt="Moto Racing">
         <div class="info">
-          <div class="nombre">Traffic Rider</div>
-          <button class="jugar" onclick="abrirJuego('traffic-rider.html','Traffic Rider')">JUGAR</button>
+          <div class="nombre">Moto Racing</div>
+          <button class="jugar" onclick="abrirJuego('moto-racing.html','Moto Racing')">JUGAR</button>
         </div>
       </div>
 
@@ -508,7 +508,7 @@ footer {
   <section class="categoria" id="plataformas">
     <div class="titulo-categoria">
       <h2>🎮 PLATAFORMAS</h2>
-      <span class="contador">2 juegos</span>
+      <span class="contador">4 juegos</span>
     </div>
 
     <div class="juegos">
@@ -526,6 +526,21 @@ footer {
         <div class="info">
           <div class="nombre">Level Devil</div>
           <button class="jugar" onclick="abrirJuego('level-devil.html','Level Devil')">JUGAR</button>
+        </div>
+      </div>
+      <div class="card">
+        <img class="portada" src="sky-riders.jpg" alt="Sky Riders">
+        <div class="info">
+          <div class="nombre">Sky Riders</div>
+          <button class="jugar" onclick="abrirJuego('sky-riders.html','Sky Riders')">JUGAR</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img class="portada sin-portada" src="portada-no-disponible.jpg" alt="Portada no disponible">
+        <div class="info">
+          <div class="nombre">Build and Run</div>
+          <button class="jugar" onclick="abrirJuego('uild-and-run.html','Build and Run')">JUGAR</button>
         </div>
       </div>
 
